@@ -1,10 +1,12 @@
 import { Typography } from '@mui/material'
 import './App.css'
+import LoginForm from './componets/LoginForm/LoginForm'
+
 
 function App() {
   return (
     <>
-      <Typography variant='h1'>Welcome to Take a Fly!</Typography>
+      <LoginForm/>
     </>
   )
 }
