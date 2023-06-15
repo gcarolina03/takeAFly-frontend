@@ -1,59 +1,84 @@
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
+
+import { SignUpAPI } from "../../services/auth.services";
+
 import {
   Card,
   CardActions,
   CardContent,
   CardHeader,
   TextField,
+  Typography,
   Button,
   IconButton,
 } from "@mui/material";
-import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState } from "react";
-import Stack from "@mui/material/Stack";
-import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-
-import "./signup.css";
+import { ArrowCircleLeft, CalendarMonth, Close, Done, Email, Person, Visibility, VisibilityOff } from "@mui/icons-material";
+import { useTheme } from '@mui/material/styles';
 
 function SignUp() {
-  const [isPassVisible, setIPassVisible] = useState(false);
-  const [email, setEmail] = useState("");
+  const theme = useTheme();
+  const navigate = useNavigate()
+  // DATA
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [birth, setBirth] = useState("");
+  const [isPassVisible, setIPassVisible] = useState(false);
+  const [isPassRepVisible, setIPasRepVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [birth, setBirth] = useState('');
+  const [showError, setShowError] = useState(false)
 
+  // USERNAME
+  function handleUsername(e) {
+    setUsername(e.target.value);
+  }
+  
+  function usernameVerification() {
+    return (username.length < 5)
+  }
+
+  // PASSWORD
+  function handlePassword(e) {
+    setPassword(e.target.value);
+  }
+
+  function passwordVerification() {
+    return !(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/.test(password))
+  }
+
+  function handleClickPass() {
+    setIPassVisible(!isPassVisible);
+  }
+
+  // REPEAT PASSWORD
+   function handleRepeatPassword(e) {
+    setRepeatPassword(e.target.value);
+  }
+
+  function repeatPasswordVerification() {
+    return repeatPassword !== password;
+  }
+
+  function handleClickPassRep() {
+    setIPasRepVisible(!isPassRepVisible);
+  }
+
+  // ------ EMAIL
   function handleEmail(e) {
     setEmail(e.target.value);
   }
 
   function emailVerification() {
     var reg = /^([A-Za-z0-9-.])+@([A-Za-z0-9-.])+.([A-Za-z]{2,4})$/;
-    return reg.test(email);
+    return !(reg.test(email));
   }
 
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
-
-  function passwordVerification() {
-    return password.length > 5 && password.search(/[A-Z]/) > 0;
-  }
-
-  function repeatPasswordVerification() {
-    return repeatPassword == password;
-  }
-
-  function handleRepeatPassword(e) {
-    setRepeatPassword(e.target.value);
-  }
-
+  // BIRTH
   function handleBirth(e) {
     setBirth(e.target.value);
   }
-
-  function handleClick() {
-    setIPassVisible(!isPassVisible);
-  }
-
+  
   const calculateAge = (birthday) => {
     const today = new Date();
     const birthDate = new Date(birthday);
@@ -66,28 +91,38 @@ function SignUp() {
     ) {
       age--;
     }
-
     return age;
   };
 
   function validateAge() {
-    return calculateAge(birth) >= 18;
+    return calculateAge(birth) > 18;
   }
 
+  const SignUpService = async () => {
+    await SignUpAPI(username, email, password, birth)
+    if (!localStorage.getItem('token')) handleError()
+    else navigate('/createProfile')
+  }
+
+  // ERROR 
+  const handleError = () => {
+    setShowError(!showError)
+  }
+
+  // SUBMIT
   function submitForm(e) {
     e.preventDefault();
+     console.log(validateAge())
     if (
-      passwordVerification() &&
-      emailVerification() &&
-      repeatPasswordVerification()
+      !usernameVerification() &&
+      !passwordVerification() &&
+      !emailVerification() &&
+      !repeatPasswordVerification() &&
+      validateAge()
     ) {
-      if (validateAge()) {
-        alert("Signup complete");
-      } else {
-        alert("You are under age");
-      }
+      SignUpService()
     } else {
-      alert("Invalid email or password");
+      handleError()
     }
   }
 
@@ -102,100 +137,118 @@ function SignUp() {
       }}
       raised={true}
     >
+      <IconButton sx={{position:'fixed'}} href="/">
+        <ArrowCircleLeft 
+          sx={{ 
+          marginTop:'20px',
+          fontSize: '50px', 
+          color:'lightgray',
+          }} 
+        />
+      </IconButton>
       <CardHeader
         sx={{ marginLeft: "35%", marginTop: "35%", paddingBottom: "50px" }}
-        title="Signup"
+        title="Sign Up"
       />
-      <IconButton style={{position: 'fixed'}} href="/">
-        <ArrowBackOutlinedIcon style={{ fontSize: '35px', paddingLeft: '20px', paddingTop: '50px'}} />
-      </IconButton>
+      {showError && 
+      <CardContent sx={{display:'flex', flexDirection:'row', alignItems:'center', border:'red solid 1px', mx:2, borderRadius:2}}>
+        <Typography fontSize='15px' fontWeight='bold' color='red' textAlign='center'>Error! algunos campos no son correctos</Typography>
+        <IconButton onClick={() => {handleError()}}>
+          <Close 
+            sx={{ 
+            color:'red'
+            }} 
+          />
+        </IconButton>
+      </CardContent>}
+      
       <CardContent>
         <TextField
           fullWidth
           margin="dense"
           label="Username"
           variant="standard"
-        ></TextField>
+          onChange={handleUsername}
+          error={ usernameVerification() && username !== ''}
+          InputProps={{
+            endAdornment: <IconButton>{ usernameVerification() ? <Person /> : <Done /> }</IconButton>
+          }}
+        />
         <TextField
           fullWidth
-          type={isPassVisible ? "text" : "password"}
-          className={passwordVerification() ? "valid" : "invalid"}
-          onChange={(e) => {
-            handlePassword(e);
-          }}
           margin="dense"
           label="Password"
           variant="standard"
-          sx={{ marginTop: "10%" }}
+          sx={{ marginTop: "20px" }}
+          type={isPassVisible ? "text" : "password"}
+          onChange={handlePassword}
+          error={ passwordVerification() && password !== ''}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => handleClick()}>
-                {isPassVisible ? <Visibility /> : <VisibilityOff />}
+              <IconButton onClick={() => handleClickPass()}>
+                { passwordVerification() ? (isPassVisible ? <Visibility /> : <VisibilityOff />)  : <Done /> }
               </IconButton>
             ),
           }}
-        ></TextField>
+        />
         <TextField
           fullWidth
-          type={isPassVisible ? "text" : "password"}
-          className={repeatPasswordVerification() ? "valid" : "invalid"}
-          onChange={(e) => {
-            handleRepeatPassword(e);
-          }}
           margin="dense"
-          label="Password"
+          label="Repeat Password"
           variant="standard"
-          sx={{ marginTop: "10%" }}
+          sx={{ marginTop: "20px" }}
+          type={isPassRepVisible ? "text" : "password"}
+          onChange={handleRepeatPassword}
+          error={repeatPasswordVerification() && repeatPassword !== ''}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={() => handleClick()}>
-                {isPassVisible ? <Visibility /> : <VisibilityOff />}
+              <IconButton onClick={() => handleClickPassRep()}>
+                { repeatPasswordVerification() || password === '' ? (isPassRepVisible ? <Visibility /> : <VisibilityOff />) : <Done />}
               </IconButton>
             ),
           }}
-        ></TextField>
+        />
         <TextField
-          className={emailVerification() ? "valid" : "invalid"}
-          onChange={(e) => {
-            handleEmail(e);
-          }}
           fullWidth
           margin="dense"
           label="Email"
           variant="standard"
-          sx={{ marginTop: "10%" }}
+          type='email'
+          sx={{ marginTop: "20px" }}
+          onChange={handleEmail}
+          error={emailVerification() && email !== ''}
           InputProps={{
-            endAdornment: <Email />,
+            endAdornment: <IconButton>{ emailVerification() ? <Email /> : <Done /> }</IconButton>
           }}
-        ></TextField>
-        <Stack component="form" noValidate spacing={3}>
-          <TextField
-            onChange={(e) => {
-              handleBirth(e);
-            }}
-            id="date"
-            type="date"
-            defaultValue=""
-            variant="standard"
-            sx={{ marginTop: "10%" }}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-        </Stack>
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          variant="standard"
+          label='Date'
+          type="date"
+          sx={{ marginTop: "20px" }}
+          onChange={handleBirth}
+          error={!validateAge() && birth !== ''}
+          InputProps={{
+            endAdornment: <IconButton>{ !validateAge() ? <CalendarMonth /> : <Done /> }</IconButton>
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
       </CardContent>
 
       <CardActions
-        style={{
+        sx={{
           width: "100%",
           position: "fixed",
-          bottom: "0px",
+          bottom:0,
           display: "flex",
           justifyItems: "center",
           justifyContent: "center",
-          backgroundColor: "#1a936F",
-          textTransform: "none",
-          color: "white",
+          backgroundColor:theme.palette.primary.main,
+          color:theme.palette.primary.contrastText,
         }}
       >
         <Button
@@ -207,7 +260,7 @@ function SignUp() {
           sx={{ height: "7vh", color: "whitesmoke" }}
           variant="text"
         >
-          Signup
+          Sign up
         </Button>
       </CardActions>
     </Card>
