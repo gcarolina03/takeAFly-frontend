@@ -1,12 +1,12 @@
 import { Typography } from '@mui/material'
 import './App.css'
-import LoginForm from './componets/LoginForm/LoginForm'
+import Header from './componets/Header/Header'
 
 
 function App() {
   return (
     <>
-      <LoginForm/>
+      <Header/>
     </>
   )
 }
