@@ -1,12 +1,13 @@
-import { Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import './App.css'
-import SignUp from './components/signup/signup'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   return (
     <>
-      <Typography variant='h1'></Typography>
-      <SignUp />
+      <Grid container sx={{height:'100vh', width:'100vw'}}>
+        <Outlet />
+      </Grid>
     </>
   )
 }
