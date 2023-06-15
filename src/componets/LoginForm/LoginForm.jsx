@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Button, Card, CardContent, CardActions, Typography, Box, IconButton} from '@mui/material'
 import { grey } from '@mui/material/colors'
+import { Email, Lock, Visibility, VisibilityOff} from '@mui/icons-material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CustomTextField from '../CustomTextField/CustomTextField'
 import './LoginForm.css'
@@ -11,7 +12,9 @@ import './LoginForm.css'
 function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const[isPassVisible, setIsPassVisible] = useState(false)
   const navigate = useNavigate()
+  const[isEmailValid, setIsEmailValid] = useState(true)
 
   const handleEmail = (value) => {
     setEmail(value)
@@ -19,7 +22,13 @@ function LoginForm() {
 
   const handlePassword = (value) => {
     setPassword(value)
-  }
+  } 
+
+  const validateEmailFormat = (email) => {
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
 
   const logIn = async () => {
     await login(email, password)
@@ -50,8 +59,8 @@ function LoginForm() {
           Please enter your data to continue
         </Typography>
         <Box sx={{height:'200px', marginTop: '50px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding:'8px'}}>
-          <CustomTextField fullWidth label="Email" variant="standard" onChange={handleEmail}/>
-          <CustomTextField fullWidth label="Password" variant="standard" onChange={handlePassword}/>
+          <CustomTextField fullWidth label="email" variant="standard" onChange={handleEmail}  icon={<Email />}/>
+          <CustomTextField fullWidth label="Password" variant="standard" onChange={handlePassword} icon = {<Lock/>}/>
             <Typography variant="body"color={grey[700]} sx={{padding:'10px', marginLeft: '170px'}}>
         <span> <Link to= '/resetpassword'>Forgot your Password?</Link></span>
       </Typography>
