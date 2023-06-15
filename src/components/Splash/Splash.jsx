@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import PropTypes from 'prop-types'
 import { Grid} from "@mui/material"
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -8,21 +10,28 @@ function Splash({hidden}) {
   const isTablet = useMediaQuery('(min-width:600px)');
   const isDesktop = useMediaQuery('(min-width:1200px)');
   const heighLogo = (isDesktop) ? '50%' : isTablet ? '40%' : '30%'
+  const [indexSplash, setIndexSplash] = useState(10)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIndexSplash(-1);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Grid 
       container
       className="splash-screen" 
       sx={{
-        position:'sticky',
-        zIndex:!hidden ? -1 : 10,
-        height:'100vh',
+        zIndex:indexSplash,
         backgroundColor:theme.palette.primary.main, 
         display:'flex', 
         justifyContent:'center', 
         alignItems:'center',
         opacity: !hidden ? 0 : 1,  // Hide the component initially with opacity
-        transition: 'opacity 1.5s ease-in-out'
+        transition: 'opacity 0.5s ease-out'
       }}
     >
       <Grid 
@@ -41,6 +50,11 @@ function Splash({hidden}) {
     </Grid>
     
   )
+}
+
+// props validations
+Splash.propTypes = {
+  hidden: PropTypes.bool,
 }
 
 export default Splash

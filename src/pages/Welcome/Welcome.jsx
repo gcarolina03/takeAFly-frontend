@@ -5,7 +5,7 @@ import Splash from "../../components/Splash/Splash"
 import WelcomePage from '../../components/WelcomePage/WelcomePage';
 
 function Welcome() {
-    const [showSplash, setShowSplash] = useState(true)
+  const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,9 +20,7 @@ function Welcome() {
       <Grid 
         container
       >
-          {!showSplash &&
-          <WelcomePage/>
-        }
+        <WelcomePage/>
         <Splash hidden={showSplash}/>
       </Grid>
       
