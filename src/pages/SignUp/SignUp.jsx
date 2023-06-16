@@ -206,7 +206,7 @@ function SignUp() {
                 color="red"
                 textAlign="center"
               >
-                Error! algunos campos no son correctos
+                {errorMsg}
               </Typography>
               <IconButton
                 onClick={() => {

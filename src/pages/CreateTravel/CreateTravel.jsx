@@ -8,19 +8,50 @@ import {
   Button,
   IconButton,
   Grid,
-  Checkbox,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
 import {
   ArrowCircleLeft,
   CalendarMonth,
-  Label,
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import EuroIcon from "@mui/icons-material/Euro";
 import './CreateTravel.css'
+import { useState } from "react";
 
 function CreateTravel() {
+   const [budget, setBudget] = useState("");
+   const [departureDate, setDepartureDate] = useState("");
+   const [returnDate, setReturnDate] = useState("");
+   const [airport, setAirport] = useState("");
+   const [visibility, setVisibility] =useState("")
+
+   function handleBudget(e){
+    setBudget(e.target.value)
+   }
+
+   function handleDeparture(e){
+    setDepartureDate(e.target.value)
+   }
+
+   function handleReturn(e){
+    setReturnDate(e.target.value)
+   }
+
+   function handleAirport(e){
+    setAirport(e.target.value)
+   }
+
+   function handleVisibility(e){
+    setVisibility(e.target.value)
+   }
+
+
+
+
     const theme = useTheme()
   return (
     <Box className="box1">
@@ -59,7 +90,7 @@ function CreateTravel() {
             />
           </IconButton>
           <CardHeader
-            sx={{ marginLeft: "40%", marginTop: "20%", paddingBottom: "40px" }}
+            sx={{ marginLeft: "35%", marginTop: "20%", paddingBottom: "40px" }}
             title="Create a travel"
           />
           <CardContent>
@@ -105,7 +136,6 @@ function CreateTravel() {
               variant="standard"
               label="Return Date"
               type="date"
-              required
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
@@ -127,9 +157,31 @@ function CreateTravel() {
               required
               sx={{ marginTop: "20px" }}
             ></TextField>
-            <div>
-              <Checkbox {...Label} /> Private
-              <Checkbox {...Label} defaultChecked /> Public
+            <div style={{ marginTop: "20px" }}>
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                value={value}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  onChange={(e) => {
+                    handleVisibility(e);
+                  }}
+                  value="private"
+                  control={<Radio />}
+                  label="Private"
+                  checked
+                />
+                <FormControlLabel
+                  onChange={(e) => {
+                    handleVisibility(e);
+                  }}
+                  value="public"
+                  control={<Radio />}
+                  label="Public"
+                />
+              </RadioGroup>
             </div>
           </CardContent>
           <CardActions
