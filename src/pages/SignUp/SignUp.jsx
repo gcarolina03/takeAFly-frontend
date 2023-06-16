@@ -100,6 +100,7 @@ function SignUp() {
     return calculateAge(birth) > 18;
   }
 
+  // SIGN UP SERVICE
   const SignUpService = async () => {
     const res = await SignUpAPI(username, email, password, birth)
     if (res === 'error') {

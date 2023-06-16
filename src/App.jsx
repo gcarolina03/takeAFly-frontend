@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 
 import { Grid } from '@mui/material'
 
-import Header from './componets/Header/Header'
+import Header from './components/Header/Header'
 
 import './App.css'
 
@@ -12,7 +12,7 @@ function App() {
       <Grid container sx={{height:'100vh', width:'100vw'}}>
         <Outlet />
       </Grid>
-      <Header/>
+      {/* <Header/> */}
     </>
   )
 }

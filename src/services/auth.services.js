@@ -25,8 +25,10 @@ export const CreateProfileAPI = async (first_name, last_name, address, descripti
 
 export const LoginAPI = async (email, password) => {
   try {
-    const { data } = await api.post('/login', { email, password })
+    console.log(email,password)
+    const { data } = await api.post('/auth/login', { email, password })
     localStorage.setItem('token', data.token)
+    return data === 'incorrect' && 'error'
   } catch (error) {
     console.error('Cannot Sign up', error)
   }
