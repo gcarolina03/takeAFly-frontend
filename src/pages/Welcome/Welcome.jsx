@@ -3,15 +3,13 @@ import { Link } from "react-router-dom"
 
 import { Button, Grid, Typography } from "@mui/material"
 import { useTheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
 import Splash from "../../components/Splash/Splash"
-import bg_image from '../../assets/img/bg.jpg'
+import './Welcome.css'
 
 function Welcome() {
   const theme = useTheme();
-  const isDesktop = useMediaQuery('(min-width:1200px)');
   const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
@@ -24,39 +22,11 @@ function Welcome() {
 
   return (
     <>
-      <Grid
-        container
-        className="welcome-page"
-        sx={{
-          position:'absolute',
-          height:'100%',
-          backgroundImage:`url(${bg_image})`,
-          backgroundPosition:'45%',
-          backgroundRepeat:'no-repeat',
-          backgroundSize:'cover',
-          display:'flex',
-          justifyContent:'center',
-          alignItems:'center',
-        }}>
-          
-          <Typography 
-            sx={{
-              position:'absolute',
-              top:36,
-              width:(isDesktop ? '300px' : '200px'),
-              left: 60,
-              fontWeight:'bold',
-              fontSize:`calc(25px + 2vw)`,
-            }}
-          >
-            Let&apos;s Get Started
+      <Grid container className="welcome-page">
+          <Typography variant='h4'>
+            <span className='welcome-msg'>Let&apos;s Get Started</span>
           </Typography>
-          <Grid
-            item
-            sx={{
-
-            }}
-          >
+          <Grid item >
             <Button 
               href="/signup"
               variant="text"
@@ -70,26 +40,9 @@ function Welcome() {
               <PersonAddIcon/>Create Account
             </Button>
           </Grid>
-          <Grid
-            item
-            sx={{
-              backgroundColor:'black',
-              display:'flex',
-              gap:'10px',
-              position:'absolute',
-              bottom:0,
-              width:'100%',
-              justifyContent:'center',
-              py:2
-            }}
-          >
-            <Typography 
-              sx={{
-                color:'white',
-                fontSize:`min(calc(10px + 1vw), 30px)`,
-              }}
-            >
-              Already have an account? 
+          <Grid item className='login-banner'>
+            <Typography sx={{  }} >
+              <span className='account-msg'>Already have an account?</span>
             </Typography>
             <Typography 
               sx={{

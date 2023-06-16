@@ -1,0 +1,48 @@
+.welcome-page {
+  position:absolute;
+  height:100%;
+  background-image:url('../../assets/img/bg.jpg');
+  background-position: 45%;
+  background-repeat:no-repeat;
+  background-size:cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.welcome-msg {
+  position: absolute;
+  top: 36px;
+  width:200px;
+  left:60px;
+  font-weight:bold;
+  font-size:calc(25px + 2vw);
+}
+
+.login-banner {
+  background-color: black;
+  display:flex;
+  gap:10px;
+  position:absolute;
+  bottom:0;
+  width:100%;
+  justify-content:center;
+  padding: 8px 0;
+}
+
+.account-msg {
+  color:white;
+  font-size:min(calc(10px + 1vw), 30px)
+}
+
+/* --------------TABLET */
+@media screen and (min-width:600px) {
+
+}
+
+/* --------------DESKTOP */
+@media screen and (min-width:1200px) {
+  .welcome-msg {
+      width:300px;
+    }
+}

@@ -6,6 +6,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import CreateProfile from "../pages/CreateProfile/CreateProfile";
 import Login from "../pages/Login/Login";
 import { Dashboard } from "@mui/icons-material";
+import Profile from "../components/Profile/Profile";
 
 export const router = createBrowserRouter([
   { path: '/',
@@ -17,5 +18,7 @@ export const router = createBrowserRouter([
       { path: '/login', element: <Login/> },
       { path: '/dashboard', element: <Dashboard/> },
     ]
-  }
+  },
+  { path: '/profile', 
+    element: <Profile />}
 ])
