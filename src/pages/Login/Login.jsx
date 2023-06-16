@@ -1,7 +1,7 @@
 import { useLocation } from "react-router"
 import { Grid } from "@mui/material"
 import WelcomePage from "../../components/WelcomePage/WelcomePage";
-import SignUp from "../../components/Signup/signup";
+import SignUp from "../../components/SignUp/SignUp";
 import CreateProfile from "../../components/CreateProfile/CreateProfile";
 
 function Login() {
@@ -10,7 +10,7 @@ function Login() {
 
   console.log(location)
   return (
-    <Grid container>
+    <Grid container sx={{justifyContent:'center'}}>
       {(pathname === '/') && <WelcomePage />}
       {(pathname === '/signup') && <SignUp />}
       {(pathname === '/createProfile') && <CreateProfile />}
