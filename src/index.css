@@ -3,3 +3,14 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
