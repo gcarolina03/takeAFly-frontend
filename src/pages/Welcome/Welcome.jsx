@@ -9,7 +9,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Splash from "../../components/Splash/Splash"
 import bg_image from '../../assets/img/bg.jpg'
 
-function WelcomePage() {
+function Welcome() {
   const theme = useTheme();
   const isDesktop = useMediaQuery('(min-width:1200px)');
   const [showSplash, setShowSplash] = useState(true)
@@ -97,7 +97,7 @@ function WelcomePage() {
                 fontSize:`min(calc(10px + 1vw), 30px)`,
               }}
             >
-              <Link to='/signin'>Sign in</Link>
+              <Link to='/login'>Sign in</Link>
             </Typography>
           </Grid>
       </Grid>
@@ -107,4 +107,4 @@ function WelcomePage() {
   )
 }
 
-export default WelcomePage
+export default Welcome
