@@ -228,6 +228,7 @@ function SignUp() {
               margin="dense"
               label="Username"
               variant="standard"
+              required
               onChange={handleUsername}
               error={usernameVerification() && username !== ""}
               InputProps={{
@@ -243,6 +244,7 @@ function SignUp() {
               margin="dense"
               label="Password"
               variant="standard"
+              required
               sx={{ marginTop: "20px" }}
               type={isPassVisible ? "text" : "password"}
               onChange={handlePassword}
@@ -268,6 +270,7 @@ function SignUp() {
               margin="dense"
               label="Repeat Password"
               variant="standard"
+              required
               sx={{ marginTop: "20px" }}
               type={isPassRepVisible ? "text" : "password"}
               onChange={handleRepeatPassword}
@@ -294,6 +297,7 @@ function SignUp() {
               label="Email"
               variant="standard"
               type="email"
+              required
               sx={{ marginTop: "20px" }}
               onChange={handleEmail}
               error={emailVerification() && email !== ""}
@@ -311,6 +315,7 @@ function SignUp() {
               variant="standard"
               label="Date"
               type="date"
+              required
               sx={{ marginTop: "20px" }}
               onChange={handleBirth}
               error={!validateAge() && birth !== ""}
