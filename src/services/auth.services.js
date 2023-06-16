@@ -28,6 +28,7 @@ export const LoginAPI = async (email, password) => {
     console.log(email,password)
     const { data } = await api.post('/auth/login', { email, password })
     localStorage.setItem('token', data.token)
+    console.log(data)
     return data === 'incorrect' && 'error'
   } catch (error) {
     console.error('Cannot Sign up', error)

@@ -116,6 +116,7 @@ function SignUp() {
   // SIGN UP SERVICE
   const SignUpService = async () => {
     const res = await SignUpAPI(username, email, password, birth)
+    console.log(res)
     if (res === 'error') {
       setErrorMsg('Error! Email already exists')
       handleError()
@@ -176,6 +177,7 @@ function SignUp() {
           }}
           raised={true}
         >
+          
           <IconButton sx={{ position: "fixed" }} href="/">
             <ArrowCircleLeft
               sx={{
@@ -186,7 +188,7 @@ function SignUp() {
             />
           </IconButton>
           <CardHeader
-            sx={{ marginLeft: "40%", marginTop: "20%", paddingBottom: "40px" }}
+            sx={{ alignSelf:'center', marginTop: {sm:"10%",  xs: '20%'}, paddingBottom: { sm: "10px", xs: '40px' } }}
             title="Sign Up"
           />
           {showError && (
@@ -195,6 +197,7 @@ function SignUp() {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
+                justifyContent:'space-between',
                 border: "red solid 1px",
                 mx: 2,
                 borderRadius: 2,
@@ -206,7 +209,7 @@ function SignUp() {
                 color="red"
                 textAlign="center"
               >
-                Error! algunos campos no son correctos
+                {errorMsg}
               </Typography>
               <IconButton
                 onClick={() => {
