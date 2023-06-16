@@ -27,7 +27,9 @@ function SignUp() {
   const [isPassRepVisible, setIPasRepVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [birth, setBirth] = useState('');
+  const [errorMsg, setErrorMsg] = useState('')
   const [showError, setShowError] = useState(false)
+
 
   // USERNAME
   function handleUsername(e) {
@@ -99,9 +101,16 @@ function SignUp() {
   }
 
   const SignUpService = async () => {
-    await SignUpAPI(username, email, password, birth)
-    if (!localStorage.getItem('token')) handleError()
-    else navigate('/createProfile')
+    const res = await SignUpAPI(username, email, password, birth)
+    if (res === 'error') {
+      setErrorMsg('Error! Email already exists')
+      handleError()
+    } else if (!localStorage.getItem('token')) {
+      setErrorMsg('Warning! Some fields are incorrect or empty.')
+      handleError()
+    } else {
+      navigate('/createProfile')
+    }
   }
 
   // ERROR 
@@ -112,7 +121,6 @@ function SignUp() {
   // SUBMIT
   function submitForm(e) {
     e.preventDefault();
-     console.log(validateAge())
     if (
       !usernameVerification() &&
       !passwordVerification() &&
@@ -122,6 +130,7 @@ function SignUp() {
     ) {
       SignUpService()
     } else {
+      setErrorMsg('Warning! Some fields are incorrect or empty.')
       handleError()
     }
   }
@@ -133,7 +142,7 @@ function SignUp() {
         flexDirection: "column",
         alignItems: "space-around",
         height: "100vh",
-        maxWidth: "400px",
+        width: "400px",
       }}
       raised={true}
     >
@@ -151,8 +160,8 @@ function SignUp() {
         title="Sign Up"
       />
       {showError && 
-      <CardContent sx={{display:'flex', flexDirection:'row', alignItems:'center', border:'red solid 1px', mx:2, borderRadius:2}}>
-        <Typography fontSize='15px' fontWeight='bold' color='red' textAlign='center'>Error! algunos campos no son correctos</Typography>
+      <CardContent sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center', border:'red solid 1px', mx:2, borderRadius:2}}>
+        <Typography fontSize='15px' fontWeight='bold' color='red' textAlign='center'>{errorMsg}</Typography>
         <IconButton onClick={() => {handleError()}}>
           <Close 
             sx={{ 

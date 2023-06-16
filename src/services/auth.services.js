@@ -4,6 +4,7 @@ export const SignUpAPI = async (username, email, password, birth_date) => {
   try {
     const { data } = await api.post('/auth/signup', { username, email, password, birth_date })
     localStorage.setItem('token', data.token)
+    return data === 'exist' && 'error'
   } catch (error) {
     console.error('Cannot Sign up', error)
   }
