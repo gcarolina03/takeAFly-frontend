@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 import { SignUpAPI } from "../../services/auth.services";
 
@@ -12,9 +12,22 @@ import {
   Typography,
   Button,
   IconButton,
+  Grid,
+  Box,
 } from "@mui/material";
-import { ArrowCircleLeft, CalendarMonth, Close, Done, Email, Person, Visibility, VisibilityOff } from "@mui/icons-material";
-import { useTheme } from '@mui/material/styles';
+import {
+  ArrowCircleLeft,
+  CalendarMonth,
+  Close,
+  Done,
+  Email,
+  Person,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
+
+import "./SignUp.css";
 
 function SignUp() {
   const theme = useTheme();
@@ -137,143 +150,210 @@ function SignUp() {
   }
 
   return (
-    <Card
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "space-around",
-        height: "100vh",
-        width: "400px",
-      }}
-      raised={true}
-    >
-      <IconButton sx={{position:'fixed'}} href="/">
-        <ArrowCircleLeft 
-          sx={{ 
-          marginTop:'20px',
-          fontSize: '50px', 
-          color:'lightgray',
-          }} 
-        />
-      </IconButton>
-      <CardHeader
-        sx={{ marginLeft: "35%", marginTop: "35%", paddingBottom: "50px" }}
-        title="Sign Up"
-      />
-      {showError && 
-      <CardContent sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center', border:'red solid 1px', mx:2, borderRadius:2}}>
-        <Typography fontSize='15px' fontWeight='bold' color='red' textAlign='center'>{errorMsg}</Typography>
-        <IconButton onClick={() => {handleError()}}>
-          <Close 
-            sx={{ 
-            color:'red'
-            }} 
-          />
-        </IconButton>
-      </CardContent>}
-      
-      <CardContent>
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Username"
-          variant="standard"
-          onChange={handleUsername}
-          error={ usernameVerification() && username !== ''}
-          InputProps={{
-            endAdornment: <IconButton>{ usernameVerification() ? <Person /> : <Done /> }</IconButton>
-          }}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Password"
-          variant="standard"
-          sx={{ marginTop: "20px" }}
-          type={isPassVisible ? "text" : "password"}
-          onChange={handlePassword}
-          error={ passwordVerification() && password !== ''}
-          InputProps={{
-            endAdornment: (
-              <IconButton onClick={() => handleClickPass()}>
-                { passwordVerification() ? (isPassVisible ? <Visibility /> : <VisibilityOff />)  : <Done /> }
-              </IconButton>
-            ),
-          }}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Repeat Password"
-          variant="standard"
-          sx={{ marginTop: "20px" }}
-          type={isPassRepVisible ? "text" : "password"}
-          onChange={handleRepeatPassword}
-          error={repeatPasswordVerification() && repeatPassword !== ''}
-          InputProps={{
-            endAdornment: (
-              <IconButton onClick={() => handleClickPassRep()}>
-                { repeatPasswordVerification() || password === '' ? (isPassRepVisible ? <Visibility /> : <VisibilityOff />) : <Done />}
-              </IconButton>
-            ),
-          }}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Email"
-          variant="standard"
-          type='email'
-          sx={{ marginTop: "20px" }}
-          onChange={handleEmail}
-          error={emailVerification() && email !== ''}
-          InputProps={{
-            endAdornment: <IconButton>{ emailVerification() ? <Email /> : <Done /> }</IconButton>
-          }}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          variant="standard"
-          label='Date'
-          type="date"
-          sx={{ marginTop: "20px" }}
-          onChange={handleBirth}
-          error={!validateAge() && birth !== ''}
-          InputProps={{
-            endAdornment: <IconButton>{ !validateAge() ? <CalendarMonth /> : <Done /> }</IconButton>
-          }}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-      </CardContent>
-
-      <CardActions
+    <Box className="box">
+      <Grid
+        xs={12}
+        sm={12}
+        lg={5}
         sx={{
-          width: "100%",
-          position: "fixed",
-          bottom:0,
+          position: "absolute",
           display: "flex",
-          justifyItems: "center",
           justifyContent: "center",
-          backgroundColor:theme.palette.primary.main,
-          color:theme.palette.primary.contrastText,
+          alignItems: "center",
+          width: "100%",
+          padding: { lg: "60px" },
+          height: "100%",
         }}
       >
-        <Button
-          href="/createprofile"
-          onClick={(e) => {
-            submitForm(e);
+        <Card
+          sx={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "space-around",
+            height: "100%",
+            width: "100%",
           }}
-          size="large"
-          sx={{ height: "7vh", color: "whitesmoke" }}
-          variant="text"
+          raised={true}
         >
-          Sign up
-        </Button>
-      </CardActions>
-    </Card>
+          <IconButton sx={{ position: "fixed" }} href="/">
+            <ArrowCircleLeft
+              sx={{
+                marginTop: "20px",
+                fontSize: "50px",
+                color: "lightgray",
+              }}
+            />
+          </IconButton>
+          <CardHeader
+            sx={{ marginLeft: "40%", marginTop: "20%", paddingBottom: "40px" }}
+            title="Sign Up"
+          />
+          {showError && (
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                border: "red solid 1px",
+                mx: 2,
+                borderRadius: 2,
+              }}
+            >
+              <Typography
+                fontSize="15px"
+                fontWeight="bold"
+                color="red"
+                textAlign="center"
+              >
+                Error! algunos campos no son correctos
+              </Typography>
+              <IconButton
+                onClick={() => {
+                  handleError();
+                }}
+              >
+                <Close
+                  sx={{
+                    color: "red",
+                  }}
+                />
+              </IconButton>
+            </CardContent>
+          )}
+
+          <CardContent>
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Username"
+              variant="standard"
+              onChange={handleUsername}
+              error={usernameVerification() && username !== ""}
+              InputProps={{
+                endAdornment: (
+                  <IconButton>
+                    {usernameVerification() ? <Person /> : <Done />}
+                  </IconButton>
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Password"
+              variant="standard"
+              sx={{ marginTop: "20px" }}
+              type={isPassVisible ? "text" : "password"}
+              onChange={handlePassword}
+              error={passwordVerification() && password !== ""}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={() => handleClickPass()}>
+                    {passwordVerification() ? (
+                      isPassVisible ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )
+                    ) : (
+                      <Done />
+                    )}
+                  </IconButton>
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Repeat Password"
+              variant="standard"
+              sx={{ marginTop: "20px" }}
+              type={isPassRepVisible ? "text" : "password"}
+              onChange={handleRepeatPassword}
+              error={repeatPasswordVerification() && repeatPassword !== ""}
+              InputProps={{
+                endAdornment: (
+                  <IconButton onClick={() => handleClickPassRep()}>
+                    {repeatPasswordVerification() || password === "" ? (
+                      isPassRepVisible ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )
+                    ) : (
+                      <Done />
+                    )}
+                  </IconButton>
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              margin="dense"
+              label="Email"
+              variant="standard"
+              type="email"
+              sx={{ marginTop: "20px" }}
+              onChange={handleEmail}
+              error={emailVerification() && email !== ""}
+              InputProps={{
+                endAdornment: (
+                  <IconButton>
+                    {emailVerification() ? <Email /> : <Done />}
+                  </IconButton>
+                ),
+              }}
+            />
+            <TextField
+              fullWidth
+              margin="dense"
+              variant="standard"
+              label="Date"
+              type="date"
+              sx={{ marginTop: "20px" }}
+              onChange={handleBirth}
+              error={!validateAge() && birth !== ""}
+              InputProps={{
+                endAdornment: (
+                  <IconButton>
+                    {!validateAge() ? <CalendarMonth /> : <Done />}
+                  </IconButton>
+                ),
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </CardContent>
+
+          <CardActions
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              width: "100%",
+              display: "flex",
+              justifyItems: "center",
+              justifyContent: "center",
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            <Button
+              href="/createprofile"
+              onClick={(e) => {
+                submitForm(e);
+              }}
+              size="large"
+              sx={{ color: "whitesmoke" }}
+              variant="text"
+            >
+              Sign up
+            </Button>
+          </CardActions>
+        </Card>
+      </Grid>
+    </Box>
   );
 }
 
