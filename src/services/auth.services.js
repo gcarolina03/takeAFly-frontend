@@ -22,3 +22,12 @@ export const CreateProfileAPI = async (first_name, last_name, address, descripti
     console.error('Cannot Sign up', error)
   }
 }
+
+export const LoginAPI = async (email, password) => {
+  try {
+    const { data } = await api.post('/login', { email, password })
+    localStorage.setItem('token', data.token)
+  } catch (error) {
+    console.error('Cannot Sign up', error)
+  }
+}

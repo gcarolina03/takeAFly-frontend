@@ -1,37 +1,41 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+
+import { LoginAPI } from '../../services/auth.services'
+
 import { Button, Card, CardContent, CardActions, Typography, Box, IconButton} from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Email, Lock, Visibility, VisibilityOff} from '@mui/icons-material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CustomTextField from '../CustomTextField/CustomTextField'
-import './LoginForm.css'
 
+import CustomTextField from '../../componets/CustomTextField/CustomTextField'
+import './Login.css'
 
-
-function LoginForm() {
+function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const[isPassVisible, setIsPassVisible] = useState(false)
   const navigate = useNavigate()
   const[isEmailValid, setIsEmailValid] = useState(true)
 
+  // ------ EMAIL
   const handleEmail = (value) => {
     setEmail(value)
   }
 
+  function emailVerification() {
+    var reg = /^([A-Za-z0-9-.])+@([A-Za-z0-9-.])+.([A-Za-z]{2,4})$/;
+    return !(reg.test(email));
+  }
+
+  // PASSWORD
   const handlePassword = (value) => {
     setPassword(value)
   } 
 
-  const validateEmailFormat = (email) => {
-   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
 
   const logIn = async () => {
-    await login(email, password)
+    await LoginAPI(email, password)
     if (!localStorage.getItem('token')) alert('Error: Usario o contraseña invalidos')
     else navigate('/dashboard')
   }
@@ -78,4 +82,4 @@ function LoginForm() {
   )
 }
 
-export default LoginForm
+export default Login

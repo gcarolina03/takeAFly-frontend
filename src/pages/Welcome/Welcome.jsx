@@ -97,7 +97,7 @@ function Welcome() {
                 fontSize:`min(calc(10px + 1vw), 30px)`,
               }}
             >
-              <Link to='/signin'>Sign in</Link>
+              <Link to='/login'>Sign in</Link>
             </Typography>
           </Grid>
       </Grid>
