@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { Button, Card, CardContent, CardActions, Typography, Box, IconButton} from '@mui/material'
 import { grey } from '@mui/material/colors'
 import { Email, Lock, Visibility, VisibilityOff} from '@mui/icons-material'
+import { useTheme } from '@mui/material/styles';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CustomTextField from '../CustomTextField/CustomTextField'
 import './LoginForm.css'
@@ -10,6 +11,7 @@ import './LoginForm.css'
 
 
 function LoginForm() {
+   const theme = useTheme();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const[isPassVisible, setIsPassVisible] = useState(false)
@@ -37,15 +39,16 @@ function LoginForm() {
   }
 
   return (
-    <Card sx={{
+    <Box  sx={{
       height: '100vh',
       width: '100vw',
       margin: '0',
       backgroundColor: 'white',
       display: 'flex',
-      flexDirection: 'column',
-      justifyContent:'space-between'
+      flexDirection: 'row',
+      justifyContent:'center'
      }}>
+    <Card sx={{ width: '90%', maxWidth: '400px',maxHeight: '600px' }} >
       <CardContent >
       <IconButton edge = 'start' color='inherit' aria-label='ArrowBack' sx={{ marginLeft: '0' }}>
         <Link to ='/yo'>
@@ -66,15 +69,14 @@ function LoginForm() {
       </Typography>
         </Box>
       </CardContent>
+    </Card>
       <CardActions className='singin' sx={{display: 'flex', flexDirection:'column', justifyContent: 'center' }}>
       <Typography variant="body"color={grey[700]} sx={{padding:'15px'}}>
         <span>¿You don&apos;t have an account?  <Link to= '/singup'>Sign Up</Link></span>
       </Typography>
-        <Button variant="contained" color="error"  sx={{ width: '100vw', marginLeft: 0, height:'95px' }} onClick={logIn}>Sign In</Button>
+        <Button variant="contained"  sx={{ width: '90%', maxWidth: '400px', marginLeft: 0, height:'95px' }} onClick={logIn}>Sign In</Button>
       </CardActions>
-
-
-    </Card>
+    </Box>
   )
 }
 
