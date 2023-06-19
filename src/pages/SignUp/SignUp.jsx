@@ -208,6 +208,7 @@ function SignUp() {
               margin="dense"
               label="Username"
               variant="standard"
+              required
               onChange={handleUsername}
               sx={{ mt:0 }}
               error={usernameVerification() && username !== ""}

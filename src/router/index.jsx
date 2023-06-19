@@ -5,8 +5,11 @@ import Welcome from "../pages/Welcome/Welcome";
 import SignUp from "../pages/SignUp/SignUp";
 import CreateProfile from "../pages/CreateProfile/CreateProfile";
 import Login from "../pages/Login/Login";
-import { Dashboard } from "@mui/icons-material";
+import Dashboard from '../pages/Dashboard/Dashboard'
 import Profile from "../components/Profile/Profile";
+import CreateTravel from "../pages/CreateTravel/CreateTravel";
+import JoinTravel from "../pages/JoinTravel/JoinTravel";
+import DestinationProfile from "../components/DestinationProfile/DestinationProfile";
 
 const isAuthenticated = () => (!localStorage.getItem('token'))
 console.log(isAuthenticated())
@@ -24,6 +27,9 @@ export const router = createBrowserRouter([
       { path: '/dashboard',
         element: isAuthenticated() ? <Navigate to="/login" /> : <Dashboard />
       },
+      { path: '/createTravel', element: <CreateTravel />},
+      { path: '/JoinTravel', element: <JoinTravel />},
+      { path: '/DestinationProfile', element: <DestinationProfile />},
     ]
   },
   { path: '/profile', 
