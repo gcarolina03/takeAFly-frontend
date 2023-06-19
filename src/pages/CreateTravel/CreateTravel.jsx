@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -12,12 +12,14 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  Autocomplete,
 } from "@mui/material";
 import { ArrowCircleLeft, CalendarMonth } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import EuroIcon from "@mui/icons-material/Euro";
 import "./CreateTravel.css";
+import { ListAirportsAPI } from "../../services/airport.services";
 
 function CreateTravel() {
   const [budget, setBudget] = useState("");
@@ -25,6 +27,16 @@ function CreateTravel() {
   const [returnDate, setReturnDate] = useState("");
   const [airport, setAirport] = useState("");
   const [visibility, setVisibility] = useState("private");
+  const [airports, setAirports] = useState("");
+
+  const getAirports= async () => {
+    const res = await ListAirportsAPI()
+    setAirports(res)
+  }
+
+  useEffect(() => {
+    getAirports()
+  }, [])
 
   function handleBudget(e) {
     setBudget(e.target.value);
@@ -187,23 +199,24 @@ function CreateTravel() {
               value={returnDate}
               onChange={handleReturn}
             ></TextField>
-            <TextField
-              fullWidth
-              margin="dense"
-              label="Origin Airport"
-              variant="standard"
-              type="text"
-              required
-              sx={{ marginTop: "20px" }}
+            <Autocomplete
+              options={airports}
+              getOptionLabel={(option) => option.name}
               value={airport}
               onChange={handleAirport}
-              error={airport.length < 3 && airport !== ""}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Origin Airport"
+                  variant="standard"
+                  sx={{ marginTop: "20px" }}
+                />
+              )}
               helperText={
-                airport.length < 3 &&
                 airport !== "" &&
                 "Introduce a valid airport"
               }
-            ></TextField>
+          />
             <div style={{ marginTop: "20px" }}>
               <RadioGroup
                 aria-labelledby="demo-controlled-radio-buttons-group"
