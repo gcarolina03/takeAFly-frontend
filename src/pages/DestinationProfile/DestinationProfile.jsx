@@ -3,7 +3,7 @@ import { ArrowCircleLeft } from "@mui/icons-material";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 import './DestinationProfile.css'
-import Categories from "../Categories/Categories";
+import Categories from "../../components/Categories/Categories";
 
 function DestinationProfile() {
   return (

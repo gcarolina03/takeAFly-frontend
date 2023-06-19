@@ -1,10 +1,10 @@
 import { Box, Avatar, Typography, Grid } from '@mui/material'
 import { ArrowCircleLeft } from '@mui/icons-material';
 import { grey } from '@mui/material/colors'
-import MiniList from '../MiniList/MiniList';
+import MiniList from '../../components/MiniList/MiniList';
 import { Link } from 'react-router-dom';
 
-function Profile() {
+function UserProfile() {
   return (
     <Box
       sx={{
@@ -81,4 +81,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default UserProfile

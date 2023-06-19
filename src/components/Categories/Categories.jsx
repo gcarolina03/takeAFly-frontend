@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { GetCategoriesAPI } from '../../services/category.service'
-import { Button, Grid } from '@mui/material'
+import { Button } from '@mui/material'
 
 function Categories() {
     const [categories, setCategories] = useState([])

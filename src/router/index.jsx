@@ -6,10 +6,10 @@ import SignUp from "../pages/SignUp/SignUp";
 import CreateProfile from "../pages/CreateProfile/CreateProfile";
 import Login from "../pages/Login/Login";
 import Dashboard from '../pages/Dashboard/Dashboard'
-import Profile from "../components/Profile/Profile";
+import UserProfile from "../pages/UserProfile/UserProfile";
 import CreateTravel from "../pages/CreateTravel/CreateTravel";
 import JoinTravel from "../pages/JoinTravel/JoinTravel";
-import DestinationProfile from "../components/DestinationProfile/DestinationProfile";
+import DestinationProfile from "../pages/DestinationProfile/DestinationProfile";
 
 const isAuthenticated = () => (!localStorage.getItem('token'))
 console.log(isAuthenticated())
@@ -30,8 +30,8 @@ export const router = createBrowserRouter([
       { path: '/createTravel', element: <CreateTravel />},
       { path: '/JoinTravel', element: <JoinTravel />},
       { path: '/DestinationProfile', element: <DestinationProfile />},
+      { path: '/profile', element: <UserProfile />}
     ]
   },
-  { path: '/profile', 
-    element: <Profile />}
+  
 ])

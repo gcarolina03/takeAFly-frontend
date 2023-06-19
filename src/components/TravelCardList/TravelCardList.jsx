@@ -1,5 +1,5 @@
-import React from 'react'
 import { useMediaQuery } from 'react-responsive'
+import PropTypes from 'prop-types'
 import TravelCard from '../TravelCard/TravelCard'
 import './TravelCardList.css'
 import { Grid } from '@mui/material';
@@ -22,8 +22,6 @@ function TravelCardList({ travels }) {
   const numTravels = gridColumns * 2;
   const selectedTravels = travels.slice(0, numTravels);
 
-  
-
   return (
 
       <Grid container spacing={1} >
@@ -43,5 +41,9 @@ function TravelCardList({ travels }) {
   )
 }
 
+// props validations
+TravelCardList.propTypes = {
+  travels: PropTypes.object,
+}
 
 export default TravelCardList
