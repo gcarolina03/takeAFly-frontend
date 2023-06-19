@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
-import { Button, Card, CardContent, CardActions, Grid, TextField, Typography, Box, IconButton } from '@mui/material'
+import { Button, Card, CardContent, CardActions, Grid, TextField, Typography, Box, IconButton, CardHeader } from '@mui/material'
 import { grey } from '@mui/material/colors'
-import { Close, Email, Visibility, VisibilityOff } from '@mui/icons-material'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { ArrowCircleLeft, Email, Visibility, VisibilityOff } from '@mui/icons-material'
+import { useTheme } from "@mui/material/styles";
+
 
 import { LoginAPI } from '../../services/auth.services'
-import bg_image from '../../assets/img/bg.jpg'
+import ErrorMsgComp from '../../components/ErrorMsg/ErrorMsg'
 import './Login.css'
 
 function Login() {
+  const theme = useTheme();
   const navigate = useNavigate()
   // DATA
   const [email, setEmail] = useState('')
@@ -42,8 +44,13 @@ function Login() {
   };
 
   // ERROR 
-  const handleError = (val) => {
-    setShowError(val)
+   const showErrorMsg = () => {
+    setShowError(true)
+    setTimeout(() => { setShowError(false) }, 4000);
+  }
+
+  const hideErrorMsg = () => {
+    setShowError(false)
   }
 
   // LOG IN SERVICE
@@ -52,11 +59,10 @@ function Login() {
     console.log(res)
     if (res === 'error' || !localStorage.getItem('token')) {
       setErrorMsg('Email or password incorrect')
-      handleError(true)
+      showErrorMsg()
     } else {
       navigate('/dashboard')
     }
-    
   }
 
   // SUBMIT
@@ -69,63 +75,73 @@ function Login() {
       logIn()
     } else {
       setErrorMsg('Warning! Some fields are incorrect or empty.')
-      handleError(true)
+      showErrorMsg()
     }
   }
 
   return (
-    <Grid xs={12}
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        backgroundImage: `url(${bg_image})`,
-        backgroundPosition: "45%",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        alignItems: "center",
-        width: '100%',
-        padding: {lg: '100px'}
-      }}>
-    <Card sx={{ width: '90%', maxWidth: '400px', maxHeight: '1000px', backgroundColor: 'white' }} >
-      <CardContent >
-      <IconButton edge = 'start' color='inherit' aria-label='ArrowBack' sx={{ marginLeft: '0' }}>
-        <Link to ='/'>
-        <ArrowBackIcon />
-        </Link>
-      </IconButton>
-        <Typography variant="h4" component="div" sx={{ display:'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '98px'}} color={'black'}>
-          Welcome
-        </Typography>
-        <Typography variant='subtitule1' component='div' color={grey [700]} sx={{display: 'flex', justifyContent: 'center', padding: '28px' }}>
-          Please enter your data to continue
-        </Typography>
-        <Box sx={{height:'200px', marginTop: '50px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding:'8px'}}>
-          {showError && 
-          <CardContent sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', alignItems:'center', border:'red solid 1px', mx:2, borderRadius:2}}>
-            <Typography fontSize='15px' fontWeight='bold' color='red' textAlign='center'>{errorMsg}</Typography>
-            <IconButton onClick={() => {handleError(false)}}>
-              <Close 
-                sx={{ 
-                color:'red'
-                }} 
-              />
-            </IconButton>
-          </CardContent>}
+    <Box className="box">
+      <Grid
+      item
+        xs={12}
+        sm={12}
+        lg={5}
+        sx={{
+          position: "absolute",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          padding: { lg: "60px" },
+          height: "100%",
+        }}
+      >
+      <Card
+        sx={{
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "space-around",
+          height: "100%",
+          width: "100%",
+        }}
+        raised={true}
+      >
+        <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/">
+          <ArrowCircleLeft className="btn-back"
+          />
+        </IconButton>
+        <CardHeader 
+        sx={{
+          textAlign:'center',
+          mt: {xs: '30%', sm:"20%"}, 
+          mb: {xs: '20%', sm:"20%", lg:'10%'},
+        }}
+          title="Welcome"
+          subheader='Please enter your data to continue'
+        />
+        {showError && (
+          <ErrorMsgComp errorMsg={errorMsg} show={showError} hideErrorMsg={hideErrorMsg} />
+        )}
+        <CardContent>           
           <TextField 
             fullWidth 
-            label='email'
+            label='Email'
             variant='standard'
-            sx={{ backgroundColor: 'white', margin: '10px 0' }} 
             onChange={handleEmail}
-            InputProps={
-              { endAdornment: <Email /> }
-            }
+            InputProps={{
+              endAdornment:(
+                <IconButton disabled>
+                  <Email />
+                </IconButton>
+              )
+            }}
           />
           <TextField 
             fullWidth 
             label='Password'
             variant='standard'
-            sx={{ backgroundColor: 'white', margin: '10px 0' }} 
+            sx={{ mt: '20px', mb:2 }} 
             onChange={handlePassword}
             type={isPassVisible ? "text" : "password"}
             InputProps={{
@@ -136,22 +152,43 @@ function Login() {
               ),
             }}
           />
-          <Typography variant="body"color={grey[700]} sx={{padding:'10px', marginLeft: '170px'}}>
-            <span> <Link to= '/resetpassword'>Forgot your Password?</Link></span>
+          <Typography 
+            color={grey[700]}
+            sx={{ display:'flex', justifyContent:'end', textDecoration:'underline'}}
+          >
+            <Link to='/'>Forgot your Password?</Link>
           </Typography>
+          
+        </CardContent>
+        <Box textAlign='center' sx={{position:'absolute', width:'100%',
+        bottom:0}}>
+          <Typography sx={{color:theme.palette.secondary.light}}>
+            <span>Don&apos;t have an account? </span>
+            <Link to= '/signup'>
+              <span style={{color:theme.palette.primary.dark}}>Sign Up</span>
+            </Link>
+          </Typography>
+          <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
+            <Button
+              onClick={(e) => {
+                submitForm(e);
+              }}
+              variant="text"
+              size="large"
+              className='btn'
+              sx={{ 
+                borderRadius:0,
+                backgroundColor:theme.palette.primary.main,
+                color:theme.palette.primary.contrastText,
+              }}
+            >
+              Sign in
+            </Button>
+          </CardActions>
         </Box>
-      </CardContent>
-      <CardActions sx={{display: 'flex', flexDirection: 'column', justifyContent:'center',margin:'0' }}>
-      <Typography variant="body"color={grey[700]} sx={{padding:'15px' }}>
-        <span>¿You don&apos;t have an account?</span>
-        <Link to= '/singup'>
-          <span style={{textDecoration:'underline'}}>SingUp</span>
-        </Link>
-      </Typography>
-        <Button variant="contained"  sx={{ width: '100%', maxWidth: '400px', marginLeft: 0, height:'95px',  }} onClick={logIn}>Sign In</Button>
-      </CardActions>
-    </Card>
+      </Card>
     </Grid>
+    </Box>
   )
 }
 

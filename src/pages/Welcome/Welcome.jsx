@@ -41,16 +41,11 @@ function Welcome() {
             </Button>
           </Grid>
           <Grid item className='login-banner'>
-            <Typography sx={{  }} >
+            <Typography>
               <span className='account-msg'>Already have an account?</span>
             </Typography>
-            <Typography 
-              sx={{
-                color:`${theme.palette.primary.main}`,
-                fontSize:`min(calc(10px + 1vw), 30px)`,
-              }}
-            >
-              <Link to='/login'>Sign in</Link>
+            <Typography>
+              <span className='sign-in-msg'><Link to='/login'>Sign in</Link></span>
             </Typography>
           </Grid>
       </Grid>

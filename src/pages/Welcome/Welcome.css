@@ -35,6 +35,11 @@
   font-size:min(calc(10px + 1vw), 30px)
 }
 
+.sign-in-msg {
+  color: var(--main-color);
+  font-size: min(calc(10px + 1vw), 30px)
+}
+
 /* --------------TABLET */
 @media screen and (min-width:600px) {
 

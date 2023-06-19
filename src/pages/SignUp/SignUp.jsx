@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { SignUpAPI } from "../../services/auth.services";
 
 import {
+  Box,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   TextField,
-  Typography,
   Button,
   IconButton,
   Grid,
-  Box,
+  Typography,
 } from "@mui/material";
 import {
   ArrowCircleLeft,
   CalendarMonth,
-  Close,
   Done,
   Email,
   Person,
@@ -27,6 +26,7 @@ import {
 } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 
+import ErrorMsgComp from "../../components/ErrorMsg/ErrorMsg";
 import "./SignUp.css";
 
 function SignUp() {
@@ -119,18 +119,23 @@ function SignUp() {
     console.log(res)
     if (res === 'error') {
       setErrorMsg('Error! Email already exists')
-      handleError()
+      showErrorMsg()
     } else if (!localStorage.getItem('token')) {
       setErrorMsg('Warning! Some fields are incorrect or empty.')
-      handleError()
+      showErrorMsg()
     } else {
       navigate('/createProfile')
     }
   }
 
   // ERROR 
-  const handleError = () => {
-    setShowError(!showError)
+  const showErrorMsg = () => {
+    setShowError(true)
+    setTimeout(() => { setShowError(false) }, 4000);
+  }
+
+  const hideErrorMsg = () => {
+    setShowError(false)
   }
 
   // SUBMIT
@@ -146,9 +151,11 @@ function SignUp() {
       SignUpService()
     } else {
       setErrorMsg('Warning! Some fields are incorrect or empty.')
-      handleError()
+      showErrorMsg()
     }
   }
+
+  // GOOGLE
 
   return (
     <Box className="box">
@@ -178,51 +185,21 @@ function SignUp() {
           raised={true}
         >
           
-          <IconButton sx={{ position: "fixed" }} href="/">
-            <ArrowCircleLeft
-              sx={{
-                marginTop: "20px",
-                fontSize: "50px",
-                color: "lightgray",
-              }}
+          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/">
+            <ArrowCircleLeft className="btn-back"
             />
           </IconButton>
           <CardHeader
-            sx={{ alignSelf:'center', marginTop: {sm:"10%",  xs: '20%'}, paddingBottom: { sm: "10px", xs: '40px' } }}
+            sx={{ 
+              textAlign:'center',
+              mt: {xs: '30%', sm:"20%"}, 
+              mb: {xs: '20%', sm:"20%", lg:'0'}, 
+              pb:0
+            }}
             title="Sign Up"
           />
           {showError && (
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent:'space-between',
-                border: "red solid 1px",
-                mx: 2,
-                borderRadius: 2,
-              }}
-            >
-              <Typography
-                fontSize="15px"
-                fontWeight="bold"
-                color="red"
-                textAlign="center"
-              >
-                {errorMsg}
-              </Typography>
-              <IconButton
-                onClick={() => {
-                  handleError();
-                }}
-              >
-                <Close
-                  sx={{
-                    color: "red",
-                  }}
-                />
-              </IconButton>
-            </CardContent>
+            <ErrorMsgComp errorMsg={errorMsg} show={showError} hideErrorMsg={hideErrorMsg} />
           )}
 
           <CardContent>
@@ -232,10 +209,11 @@ function SignUp() {
               label="Username"
               variant="standard"
               onChange={handleUsername}
+              sx={{ mt:0 }}
               error={usernameVerification() && username !== ""}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     {usernameVerification() ? <Person /> : <Done />}
                   </IconButton>
                 ),
@@ -246,7 +224,7 @@ function SignUp() {
               margin="dense"
               label="Password"
               variant="standard"
-              sx={{ marginTop: "20px" }}
+              sx={{ mt: {xs: "20px", sm:'10px', lg:'5px'} }}
               type={isPassVisible ? "text" : "password"}
               onChange={handlePassword}
               error={passwordVerification() && password !== ""}
@@ -271,7 +249,7 @@ function SignUp() {
               margin="dense"
               label="Repeat Password"
               variant="standard"
-              sx={{ marginTop: "20px" }}
+              sx={{ mt: {xs: "20px", sm:'10px', lg:'5px'} }}
               type={isPassRepVisible ? "text" : "password"}
               onChange={handleRepeatPassword}
               error={repeatPasswordVerification() && repeatPassword !== ""}
@@ -297,12 +275,12 @@ function SignUp() {
               label="Email"
               variant="standard"
               type="email"
-              sx={{ marginTop: "20px" }}
+              sx={{ mt: {xs: "20px", sm:'10px', lg:'5px'} }}
               onChange={handleEmail}
               error={emailVerification() && email !== ""}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     {emailVerification() ? <Email /> : <Done />}
                   </IconButton>
                 ),
@@ -314,12 +292,12 @@ function SignUp() {
               variant="standard"
               label="Date"
               type="date"
-              sx={{ marginTop: "20px" }}
+              sx={{ mt: {xs: "20px", sm:'10px', lg:'5px'} }}
               onChange={handleBirth}
               error={!validateAge() && birth !== ""}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     {!validateAge() ? <CalendarMonth /> : <Done />}
                   </IconButton>
                 ),
@@ -329,31 +307,33 @@ function SignUp() {
               }}
             />
           </CardContent>
-
-          <CardActions
-            sx={{
-              position: "absolute",
-              bottom: 0,
-              width: "100%",
-              display: "flex",
-              justifyItems: "center",
-              justifyContent: "center",
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.primary.contrastText,
-            }}
-          >
-            <Button
-              href="/createprofile"
-              onClick={(e) => {
-                submitForm(e);
-              }}
-              size="large"
-              sx={{ color: "whitesmoke" }}
-              variant="text"
-            >
-              Sign up
-            </Button>
-          </CardActions>
+          
+          <Box textAlign='center' sx={{position:'absolute', width:'100%',
+        bottom:0}}>
+            <Typography sx={{color:theme.palette.secondary.light}}>
+              <span>Have an account already? </span>
+              <Link to= '/login'>
+                <span style={{color:theme.palette.primary.dark}}>Log In</span>
+              </Link>
+            </Typography>
+            <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
+              <Button
+                onClick={(e) => {
+                  submitForm(e);
+                }}
+                variant="text"
+                size="large"
+                className="btn"
+                sx={{ 
+                  borderRadius:0,
+                  backgroundColor:theme.palette.primary.main,
+                  color:theme.palette.primary.contrastText,
+                }}
+              >
+                Sign up
+              </Button>
+            </CardActions>
+          </Box>
         </Card>
       </Grid>
     </Box>
