@@ -8,6 +8,7 @@ import Login from "../pages/Login/Login";
 import { Dashboard } from "@mui/icons-material";
 import CreateTravel from "../pages/CreateTravel/CreateTravel";
 import JoinTravel from "../pages/JoinTravel/JoinTravel";
+import DestinationProfile from "../components/DestinationProfile/DestinationProfile";
 
 export const router = createBrowserRouter([
   { path: '/',
@@ -19,7 +20,8 @@ export const router = createBrowserRouter([
       { path: '/login', element: <Login/> },
       { path: '/dashboard', element: <Dashboard/> },
       { path: '/createTravel', element: <CreateTravel />},
-      { path: '/JoinTravel', element: <JoinTravel />}
+      { path: '/JoinTravel', element: <JoinTravel />},
+      { path: '/DestinationProfile', element: <DestinationProfile />},
     ]
   }
 ])
