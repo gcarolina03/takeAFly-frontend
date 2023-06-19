@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Card,
@@ -12,47 +13,71 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import {
-  ArrowCircleLeft,
-  CalendarMonth,
-} from "@mui/icons-material";
+import { ArrowCircleLeft, CalendarMonth } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import EuroIcon from "@mui/icons-material/Euro";
-import './CreateTravel.css'
-import { useState } from "react";
+import "./CreateTravel.css";
 
 function CreateTravel() {
-   const [budget, setBudget] = useState("");
-   const [departureDate, setDepartureDate] = useState("");
-   const [returnDate, setReturnDate] = useState("");
-   const [airport, setAirport] = useState("");
-   const [visibility, setVisibility] =useState("")
+  const [budget, setBudget] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [airport, setAirport] = useState("");
+  const [visibility, setVisibility] = useState("private");
 
-   function handleBudget(e){
-    setBudget(e.target.value)
-   }
+  function handleBudget(e) {
+    setBudget(e.target.value);
+  }
 
-   function handleDeparture(e){
-    setDepartureDate(e.target.value)
-   }
+  function handleDeparture(e) {
+    setDepartureDate(e.target.value);
+  }
 
-   function handleReturn(e){
-    setReturnDate(e.target.value)
-   }
+  function handleReturn(e) {
+    setReturnDate(e.target.value);
+  }
 
-   function handleAirport(e){
-    setAirport(e.target.value)
-   }
+  function handleAirport(e) {
+    setAirport(e.target.value);
+  }
 
-   function handleVisibility(e){
-    setVisibility(e.target.value)
-   }
+  function handleVisibility(e) {
+    setVisibility(e.target.value);
+  }
+
+  function validateForm() {
+    if (Number(budget) < 0) {
+      alert("Budget cannot be less than 0");
+      return false;
+    }
+
+    const departure = new Date(departureDate);
+    const returnD = new Date(returnDate);
+
+    if (departure >= returnD) {
+      alert("Return date must be greater than departure date");
+      return false;
+    }
+
+    if (airport.length < 3) {
+      alert("Introduce a valid airport");
+      return false;
+    }
 
 
+    return true;
+  }
 
+  function submitForm(e) {
+    e.preventDefault();
+    if (validateForm()) {
+      // Perform form submission
+      console.log("Form submitted successfully!");
+    }
+  }
 
-    const theme = useTheme()
+  const theme = useTheme();
   return (
     <Box className="box1">
       <Grid
@@ -98,6 +123,8 @@ function CreateTravel() {
               fullWidth
               margin="dense"
               label="Budget"
+              error={budget == 0}
+              helperText={budget == 0 ? "Introduce valid budget" : ""}
               variant="standard"
               type="number"
               placeholder="30"
@@ -110,6 +137,8 @@ function CreateTravel() {
                   </IconButton>
                 ),
               }}
+              value={budget}
+              onChange={handleBudget}
             ></TextField>
             <TextField
               fullWidth
@@ -129,12 +158,20 @@ function CreateTravel() {
               InputLabelProps={{
                 shrink: true,
               }}
+              value={departureDate}
+              onChange={handleDeparture}
             ></TextField>
             <TextField
               fullWidth
               margin="dense"
               variant="standard"
               label="Return Date"
+              error={new Date(returnDate) <= new Date(departureDate)}
+              helperText={
+                new Date(returnDate) <= new Date(departureDate)
+                  ? "Introduce a valid date"
+                  : ""
+              }
               type="date"
               sx={{ marginTop: "20px" }}
               InputProps={{
@@ -147,6 +184,8 @@ function CreateTravel() {
               InputLabelProps={{
                 shrink: true,
               }}
+              value={returnDate}
+              onChange={handleReturn}
             ></TextField>
             <TextField
               fullWidth
@@ -156,30 +195,33 @@ function CreateTravel() {
               type="text"
               required
               sx={{ marginTop: "20px" }}
+              value={airport}
+              onChange={handleAirport}
+              error={airport.length < 3 && airport !== ""}
+              helperText={
+                airport.length < 3 &&
+                airport !== "" &&
+                "Introduce a valid airport"
+              }
             ></TextField>
             <div style={{ marginTop: "20px" }}>
               <RadioGroup
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
-                value={value}
-                onChange={handleChange}
+                value={visibility}
+                onChange={handleVisibility}
               >
                 <FormControlLabel
-                  onChange={(e) => {
-                    handleVisibility(e);
-                  }}
                   value="private"
                   control={<Radio />}
                   label="Private"
-                  checked
+                  checked={visibility === "private"}
                 />
                 <FormControlLabel
-                  onChange={(e) => {
-                    handleVisibility(e);
-                  }}
                   value="public"
                   control={<Radio />}
                   label="Public"
+                  checked={visibility === "public"}
                 />
               </RadioGroup>
             </div>
@@ -198,9 +240,7 @@ function CreateTravel() {
           >
             <Button
               href="/destination"
-              onClick={(e) => {
-                submitForm(e);
-              }}
+              onClick={submitForm}
               size="large"
               sx={{ color: "whitesmoke" }}
               variant="text"
