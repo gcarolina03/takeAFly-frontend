@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 
-function CardTravel({data, type}) {
+function CardTravel({data}) {
   const navigate = useNavigate()
   console.log(data)
   return (

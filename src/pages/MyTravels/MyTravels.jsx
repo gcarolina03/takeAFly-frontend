@@ -30,7 +30,7 @@ function MyTravels() {
         
         <CardHeader
           sx={{ textAlign:'center', pt:0, mt:0, paddingBottom: "10px" }}
-          title="Destination"
+          title="My Travels"
         />
     
         {travels.length > 0 && <CardList data={travels} type='travel'/> } 
