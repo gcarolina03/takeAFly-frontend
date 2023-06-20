@@ -1,8 +1,0 @@
-.carta{
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  width: 225px;
-  height: 300px;
-  max-width: 345px;
-}

@@ -2,7 +2,6 @@ import { api } from "./api";
 
 export const CreateTravelAPI = async (budget, departure_date, return_date, airportId, visibility) => {
   try {
-    console.log(budget, departure_date, return_date, airportId, visibility)
     const { data } = await api.post('/travels', {budget, departure_date, return_date, airportId, visibility},  {
         headers: {
         token: localStorage.getItem('token')
@@ -14,3 +13,15 @@ export const CreateTravelAPI = async (budget, departure_date, return_date, airpo
   }
 }
 
+export const GetTravelsAPI = async () => {
+  try {
+    const { data } = await api.get('/travels',  {
+        headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+    return data
+  } catch (error) {
+    console.error('Cannot get travels', error)
+  }
+}

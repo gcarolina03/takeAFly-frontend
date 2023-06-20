@@ -13,12 +13,31 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../../assets/logo/white.png";
+import { Link } from "react-router-dom";
 
-const settings = ["Profile", "Plan a Travel", "Wishlist", "My Travels"];
+
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const settings = [
+    {
+      label: 'Profile',
+      link: '/profile'
+    },
+    {
+      label: 'Plan a Travel',
+      link: '/createTravel'
+    },
+    {
+      label: 'Wishlist',
+      link: '/wishlist'
+    },
+    {
+      label: 'My Travels',
+      link: '/profile/travels'
+    }
+  ]
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -99,8 +118,10 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.label}>
+                  <Link to={setting.link}>
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>

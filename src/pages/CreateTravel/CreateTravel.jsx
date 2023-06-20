@@ -100,7 +100,7 @@ function CreateTravel() {
       setErrorMsg('Error! Cannot create travel')
       showErrorMsg()
     } else {
-      navigate('/profile/myTravels')
+      navigate('/selectDestination')
     }
   }
 
@@ -117,15 +117,15 @@ function CreateTravel() {
   function submitForm(e) {
     e.preventDefault();
      if (
-      !validateBudget() &&
+      !validateBudget() && 
       !validateDeparture() &&
-      !validateReturn() &&
-      !validateAirport()
-      ) {
+      !validateReturn() && 
+      !validateAirport() 
+    ) {
+      CreateTravelService()
+    } else {
       setErrorMsg('Warning! Some fields are incorrect or empty.')
       showErrorMsg()
-    } else {
-      CreateTravelService()
     }
   }
 
@@ -156,7 +156,7 @@ function CreateTravel() {
           }}
           raised={true}
         >
-          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/">
+          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/dashboard">
             <ArrowCircleLeft className="btn-back"
             />
           </IconButton>
@@ -182,7 +182,7 @@ function CreateTravel() {
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     <EuroIcon />
                   </IconButton>
                 ),
@@ -202,7 +202,7 @@ function CreateTravel() {
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     <CalendarMonth />
                   </IconButton>
                 ),
@@ -224,7 +224,7 @@ function CreateTravel() {
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     <CalendarMonth />
                   </IconButton>
                 ),

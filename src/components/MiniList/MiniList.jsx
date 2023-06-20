@@ -1,8 +1,9 @@
 import { Grid } from '@mui/material'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import PropTypes from 'prop-types'
 
-function MiniList() {
+function MiniList({data}) {
   return (
     <Grid container>
       <ImageList
@@ -79,5 +80,10 @@ const itemData = [
     title: "Bike",
   },
 ];
+
+// props validations
+MiniList.propTypes = {
+  data: PropTypes.object,
+}
 
 export default MiniList;

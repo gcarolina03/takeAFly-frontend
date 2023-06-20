@@ -1,10 +1,44 @@
-import { Box, Avatar, Typography, Grid } from '@mui/material'
+import { Box, Avatar, Typography, Grid, IconButton } from '@mui/material'
 import { ArrowCircleLeft } from '@mui/icons-material';
 import { grey } from '@mui/material/colors'
 import MiniList from '../../components/MiniList/MiniList';
-import { Link } from 'react-router-dom';
+import { GetMyTravelsAPI, GetProfileAPI } from '../../services/user.services';
+import { useEffect, useState } from 'react';
 
 function UserProfile() {
+  const [user, setUser] = useState("");
+  const [travels, setTravels] = useState('')
+
+  const getUser = async () => {
+    const res = await GetProfileAPI()
+    setUser(res)
+  }
+
+  const getTravels = async () => {
+    const res = await GetMyTravelsAPI()
+    setTravels(res)
+  }
+
+  useEffect(() => {
+    getUser()
+    getTravels()
+  }, [])
+
+  const calculateAge = (birthday) => {
+    const today = new Date();
+    const birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+
   return (
     <Box
       sx={{
@@ -13,17 +47,10 @@ function UserProfile() {
         height:'100%'
       }}
     > 
-      <Link to='dashboard'>
-        <ArrowCircleLeft
-            sx={{
-              fontSize: "50px",
-              top:10,
-              left:10,
-              color: "lightgray",
-              position: "absolute"
-            }}
-          />
-      </Link>
+      <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/dashboard">
+        <ArrowCircleLeft className="btn-back"
+        />
+      </IconButton>
       <Grid item
         xs={12}
         sm={8}
@@ -47,10 +74,10 @@ function UserProfile() {
         </Grid>
         <Grid item sx={{mb:5}}>
           <Typography variant="h4" align="center">
-            John Doe
+            {user.username}
           </Typography>
           <Typography variant="body1" align="center">
-            Country, City
+            {calculateAge(user.birth_date)} years.
           </Typography>
         </Grid>
         <Grid container sx={{gap:'30px', flexDirection:'column'}}>
@@ -59,22 +86,21 @@ function UserProfile() {
               Description
             </Typography>
             <Typography variant="body2" align='justify' sx={{fontSize:{xs:'15px', sm: '20px'}}}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper odio eget mi iaculis dignissim.
-              Aliquam sollicitudin varius metus, id pulvinar tellus facilisis sed. Duis vitae odio ullamcorper, convallis
+              {(user.description !== null) ? user.description : 'no description :('}
             </Typography>
           </Grid>
           <Grid item alignSelf='center'>
             <Typography variant="h6" align="center" color={grey[600]}>
               Your Travels
             </Typography>
-            <MiniList />
+            {travels.length > 0 && <MiniList data={travels} />}
           </Grid>
-          <Grid item sx={{mt:2}} alignSelf='center' >
+          {/* <Grid item sx={{mt:2}} alignSelf='center' >
             <Typography variant="h6" align="center" color={grey[600]}>
               Wishlist
             </Typography>
             <MiniList />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     </Box>
