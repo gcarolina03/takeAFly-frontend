@@ -1,10 +1,10 @@
 import { useMediaQuery } from 'react-responsive'
 import PropTypes from 'prop-types'
 import TravelCard from '../TravelCard/TravelCard'
-import './TravelCardList.css'
+import './CardList.css'
 import { Grid } from '@mui/material';
 
-function TravelCardList({ travels }) {
+function CardList({ travels }) {
  const isDesktop = useMediaQuery({ minWidth: 1280 });
   const isTablet = useMediaQuery({ minWidth: 960 });
 
@@ -42,8 +42,8 @@ function TravelCardList({ travels }) {
 }
 
 // props validations
-TravelCardList.propTypes = {
+CardList.propTypes = {
   travels: PropTypes.object,
 }
 
-export default TravelCardList
+export default CardList

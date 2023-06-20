@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 
-import TravelCardList from '../../components/TravelCardList/TravelCardList'
+import CardList from '../../components/TravelCardList/CardList'
 function Dashboard() {
   const travels = [
     {
@@ -59,7 +59,7 @@ function Dashboard() {
 
   return (
    <> <Header/>
-    <TravelCardList travels={ travels }/>
+    <CardList travels={ travels }/>
   </>
   )
 }
