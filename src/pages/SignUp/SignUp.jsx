@@ -116,7 +116,6 @@ function SignUp() {
   // SIGN UP SERVICE
   const SignUpService = async () => {
     const res = await SignUpAPI(username, email, password, birth)
-    console.log(res)
     if (res === 'error') {
       setErrorMsg('Error! Email already exists')
       showErrorMsg()

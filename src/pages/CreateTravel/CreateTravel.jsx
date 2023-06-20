@@ -20,14 +20,21 @@ import { useNavigate } from "react-router-dom";
 import EuroIcon from "@mui/icons-material/Euro";
 import "./CreateTravel.css";
 import { ListAirportsAPI } from "../../services/airport.services";
+import { CreateTravelAPI } from "../../services/travel.services";
+import ErrorMsgComp from "../../components/ErrorMsg/ErrorMsg";
 
 function CreateTravel() {
-  const [budget, setBudget] = useState("");
+  const theme = useTheme();
+  const navigate = useNavigate()
+  // DATA
+  const [budget, setBudget] = useState('');
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [airport, setAirport] = useState("");
   const [visibility, setVisibility] = useState("private");
   const [airports, setAirports] = useState("");
+  const [errorMsg, setErrorMsg] = useState('')
+  const [showError, setShowError] = useState(false)
 
   const getAirports= async () => {
     const res = await ListAirportsAPI()
@@ -38,58 +45,90 @@ function CreateTravel() {
     getAirports()
   }, [])
 
+  // BUDGET
   function handleBudget(e) {
     setBudget(e.target.value);
   }
 
+  function validateBudget() {
+    return budget <= 0
+  }
+
+  // DATE DEPARTURE
   function handleDeparture(e) {
     setDepartureDate(e.target.value);
   }
 
+  function validateDeparture() {
+    const today = new Date();
+    const departure = new Date(departureDate)
+
+    return (departure < today)
+  }
+
+  // DATE RETURN
   function handleReturn(e) {
     setReturnDate(e.target.value);
   }
 
-  function handleAirport(e) {
-    setAirport(e.target.value);
+  function validateReturn() {
+    const departure = new Date(departureDate);
+    const returnD = new Date(returnDate);
+
+    return (departure >= returnD)
   }
 
+  // AIRPORT
+  function handleAirport(e, value) {
+    setAirport(value)
+  }
+
+  function validateAirport() {
+    return airport === ''
+  }
+
+  // VISIBILITY
   function handleVisibility(e) {
     setVisibility(e.target.value);
   }
 
-  function validateForm() {
-    if (Number(budget) < 0) {
-      alert("Budget cannot be less than 0");
-      return false;
+  // CREATE TRAVEL SERVICE
+  const CreateTravelService = async () => {
+    const res = await CreateTravelAPI(budget, departureDate, returnDate, airport.id, visibility)
+    console.log(res)
+    if (res === 'error') {
+      setErrorMsg('Error! Cannot create travel')
+      showErrorMsg()
+    } else {
+      navigate('/profile/myTravels')
     }
+  }
 
-    const departure = new Date(departureDate);
-    const returnD = new Date(returnDate);
+  // ERROR 
+  const showErrorMsg = () => {
+    setShowError(true)
+    setTimeout(() => { setShowError(false) }, 4000);
+  }
 
-    if (departure >= returnD) {
-      alert("Return date must be greater than departure date");
-      return false;
-    }
-
-    if (airport.length < 3) {
-      alert("Introduce a valid airport");
-      return false;
-    }
-
-
-    return true;
+  const hideErrorMsg = () => {
+    setShowError(false)
   }
 
   function submitForm(e) {
     e.preventDefault();
-    if (validateForm()) {
-      // Perform form submission
-      console.log("Form submitted successfully!");
+     if (
+      !validateBudget() &&
+      !validateDeparture() &&
+      !validateReturn() &&
+      !validateAirport()
+      ) {
+      setErrorMsg('Warning! Some fields are incorrect or empty.')
+      showErrorMsg()
+    } else {
+      CreateTravelService()
     }
   }
 
-  const theme = useTheme();
   return (
     <Box className="box1">
       <Grid
@@ -117,26 +156,25 @@ function CreateTravel() {
           }}
           raised={true}
         >
-          <IconButton sx={{ position: "fixed" }} href="/">
-            <ArrowCircleLeft
-              sx={{
-                marginTop: "20px",
-                fontSize: "50px",
-                color: "lightgray",
-              }}
+          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/">
+            <ArrowCircleLeft className="btn-back"
             />
           </IconButton>
+          
           <CardHeader
             sx={{ marginLeft: "35%", marginTop: "20%", paddingBottom: "40px" }}
             title="Create a travel"
           />
+          {showError && (
+            <ErrorMsgComp errorMsg={errorMsg} show={showError} hideErrorMsg={hideErrorMsg} />
+          )}
           <CardContent>
             <TextField
               fullWidth
               margin="dense"
               label="Budget"
-              error={budget == 0}
-              helperText={budget == 0 ? "Introduce valid budget" : ""}
+              error={validateBudget() && budget !== ''}
+              helperText={validateBudget()  && budget !== '' ? "Introduce valid budget" : ""}
               variant="standard"
               type="number"
               placeholder="30"
@@ -159,6 +197,8 @@ function CreateTravel() {
               label="Departure Date"
               type="date"
               required
+              error={validateDeparture()}
+              helperText={validateDeparture() ? "Introduce valid departure date" : ""}
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
@@ -178,12 +218,8 @@ function CreateTravel() {
               margin="dense"
               variant="standard"
               label="Return Date"
-              error={new Date(returnDate) <= new Date(departureDate)}
-              helperText={
-                new Date(returnDate) <= new Date(departureDate)
-                  ? "Introduce a valid date"
-                  : ""
-              }
+              error={validateReturn()}
+              helperText={validateReturn() ? "Return date must be greater than departure date" : ""}
               type="date"
               sx={{ marginTop: "20px" }}
               InputProps={{
@@ -201,9 +237,12 @@ function CreateTravel() {
             ></TextField>
             <Autocomplete
               options={airports}
-              getOptionLabel={(option) => option.name}
-              value={airport}
+              getOptionLabel={(option) => `${option.name} (${option.code})`}
+              value={airport || null}
               onChange={handleAirport}
+              error={validateAirport()}
+              helperText={validateAirport() ? "Introduce a valid airport" : ""}
+              isOptionEqualToValue={(option, value) => option.id === value.id}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -212,10 +251,6 @@ function CreateTravel() {
                   sx={{ marginTop: "20px" }}
                 />
               )}
-              helperText={
-                airport !== "" &&
-                "Introduce a valid airport"
-              }
           />
             <div style={{ marginTop: "20px" }}>
               <RadioGroup
@@ -239,28 +274,26 @@ function CreateTravel() {
               </RadioGroup>
             </div>
           </CardContent>
-          <CardActions
-            sx={{
-              position: "absolute",
-              bottom: 0,
-              width: "100%",
-              display: "flex",
-              justifyItems: "center",
-              justifyContent: "center",
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.primary.contrastText,
-            }}
-          >
-            <Button
-              href="/destination"
-              onClick={submitForm}
-              size="large"
-              sx={{ color: "whitesmoke" }}
-              variant="text"
-            >
-              Create
-            </Button>
-          </CardActions>
+          <Box sx={{position:'absolute', width:'100%',
+        bottom:0}}>
+            <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
+              <Button
+                onClick={(e) => {
+                  submitForm(e);
+                }}
+                variant="text"
+                size="large"
+                className="btn"
+                sx={{ 
+                  borderRadius:0,
+                  backgroundColor:theme.palette.primary.main,
+                  color:theme.palette.primary.contrastText,
+                }}
+              >
+                Create
+              </Button>
+            </CardActions>
+          </Box>
         </Card>
       </Grid>
     </Box>
