@@ -1,8 +1,13 @@
 import React from 'react'
+import Header from '../../components/Header/Header'
+import CategoriesButtonGroup from '../../components/CategoriesButtonGroup/CategoriesButtonGroup'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div>
+      <Header/>
+      <CategoriesButtonGroup/>
+    </div>
   )
 }
 
