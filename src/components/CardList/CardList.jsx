@@ -5,10 +5,11 @@ import './CardList.css'
 import { Grid } from '@mui/material';
 
 function CardList({ data, type, travel }) {
+  console.log(data)
   return (
     <Grid className='cardlist-container' container>
       {data.map((item) => {
-        if (type === 'travel') return <CardTravel data={item} key={item.id} />
+        if (type === 'travel' || type === 'dashboard' ) return <CardTravel type={type} data={item} key={item.id} />
         if (type === 'destination') return <CardDestination data={item} travel={travel} key={item.id} />
       })}
     </Grid>
@@ -17,7 +18,7 @@ function CardList({ data, type, travel }) {
 
 // props validations
 CardList.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
   type: PropTypes.string,
   travel: PropTypes.number
 }

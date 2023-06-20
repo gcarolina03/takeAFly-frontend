@@ -12,6 +12,8 @@ import JoinTravel from "../pages/JoinTravel/JoinTravel";
 import DestinationProfile from "../pages/DestinationProfile/DestinationProfile";
 import Test from "../pages/test";
 import SelectDestination from "../pages/SelectDestination/SelectDestination";
+import TravelCreated from "../pages/TravelCreated/TravelCreated";
+import MyTravels from "../pages/MyTravels/MyTravels";
 
 const isAuthenticated = () => (!localStorage.getItem('token'))
 console.log(isAuthenticated())
@@ -33,7 +35,9 @@ export const router = createBrowserRouter([
       { path: '/selectDestination/:travel', element: <SelectDestination />},
       { path: '/joinTravel', element: <JoinTravel />},
       { path: '/destinationProfile/:id/:travelId', element: <DestinationProfile />},
-      { path: '/profile', element: <UserProfile />}
+      { path: '/profile', element: <UserProfile />},
+      { path: '/myTravels', element: <MyTravels />},
+      { path: '/travelCreated', element: <TravelCreated />},
     ]
   },
   { path: '/test', element: <Test />}

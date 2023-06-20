@@ -4,6 +4,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import PropTypes from 'prop-types'
 
 function MiniList({data}) {
+  console.log(data)
   return (
     <Grid container>
       <ImageList
@@ -14,9 +15,9 @@ function MiniList({data}) {
         cols={8}
       >
         {data.map((item) => (
-          <ImageListItem key={item}>
+          <ImageListItem key={item.id}>
             <img
-              src={`${item.imgUrl}`}
+              src={`${item.destination.imgUrl}`}
               alt={item.city}
               loading="lazy"
               style={{
@@ -32,7 +33,7 @@ function MiniList({data}) {
 
 // props validations
 MiniList.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.array,
 }
 
 export default MiniList;

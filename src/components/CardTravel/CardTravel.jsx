@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 
-function CardTravel({data}) {
+function CardTravel({data, type}) {
   const navigate = useNavigate()
   console.log(data)
   return (
@@ -16,8 +16,7 @@ function CardTravel({data}) {
           <span className="travel-destination"> {data.destination.city}</span>
           <span className="travel-info">{data.departure_date} / {data.return_date}</span>
           <span className="travel-info">Budget: {data.budget} &euro;</span>
-{/*             <Grid className='start' onClick={() => handleFavorites(character)}><i className={`${checkFav(character.id) ? 'fa-solid' : 'fa-regular'} fa-star`}></i></Grid>
-*/}        </Grid>
+        </Grid>
       </Grid>
     </Grid>
   )
@@ -26,6 +25,7 @@ function CardTravel({data}) {
 // props validations
 CardTravel.propTypes = {
   data: PropTypes.object,
+  type: PropTypes.string,
 }
 
 export default CardTravel

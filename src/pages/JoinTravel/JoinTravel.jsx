@@ -78,7 +78,8 @@ function JoinTravel() {
 
   const theme = useTheme();
   return (
-    <Box className="box1">
+    <Box 
+    className="box1">
       <Grid
         xs={12}
         sm={12}

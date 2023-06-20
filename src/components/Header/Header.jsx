@@ -35,7 +35,7 @@ function Header() {
     },
     {
       label: 'My Travels',
-      link: '/profile/travels'
+      link: '/myTravels'
     }
   ]
 
