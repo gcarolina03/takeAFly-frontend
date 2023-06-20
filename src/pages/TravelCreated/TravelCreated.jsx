@@ -1,28 +1,22 @@
-import {
-  Box,
-  Avatar,
-  Typography,
-  Grid,
-  Button,
-} from "@mui/material";
+import { Box, Avatar, Typography, Grid, Button } from "@mui/material";
 import { ArrowCircleLeft } from "@mui/icons-material";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
-import "./DestinationProfile.css";
+import "./TravelCreated.css";
 import Categories from "../../components/Categories/Categories";
 import { useTheme } from "@emotion/react";
 
-function DestinationProfile() {
+function TravelCreated() {
   const theme = useTheme();
   return (
     <Box
-      id="boxDestination"
+      id="boxCreatedTravel"
       sx={{
         margin: "0",
         display: "flex",
         flexDirection: "column",
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Link to="dashboard">
@@ -52,40 +46,40 @@ function DestinationProfile() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: 'center'
+            alignItems: "center",
           }}
         >
           <Avatar
-            src="https://www.timeoutabudhabi.com/cloud/timeoutabudhabi/2021/11/30/Dreamy-beaches-in-middle-east.jpg"
+            src="https://www.allianz-partners.com/home-relaunch/products/travel/_jcr_content/root/parsys/stage_copy/stageimage.img.82.3360.jpeg/1656764032001/adobestock-274341667.jpeg"
             alt="Destination Avatar"
+            variant="square"
             sx={{
-              width: { xs: 150, sm: 200 },
-              height: { xs: 150, sm: 200 },
+              width: { xs: 210, sm: 600 },
+              height: { xs: 120, sm: 200 },
               my: 1,
             }}
           />
         </Grid>
 
-        <Grid item sx={{ mb: 5 }}>
-          <Typography variant="h4" align="center">
-            Palma de Mallorca
+        <Grid item sx={{ mb: 7, padding: "20PX" }}>
+          <Typography variant="h2" align="center">
+            TRAVEL CREATED!
           </Typography>
-          <Typography variant="body1" align="center">
-            España
+          <Typography variant="h5" align="center">
+            Enjoy your adventure, traveler!
           </Typography>
         </Grid>
 
         <Grid container sx={{ display: "flex", flexDirection: "column" }}>
           <Grid item>
             <Typography variant="h6" align="left" sx={{ mb: 1 }}>
-              Description
             </Typography>
             <Typography
               variant="body2"
               align="justify"
               sx={{ fontSize: { xs: "15px", sm: "20px" } }}
-              padding='30px'
-              justifyContent='center'
+              padding="30px"
+              justifyContent="center"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
               semper odio eget mi iaculis dignissim. Aliquam sollicitudin varius
@@ -95,16 +89,6 @@ function DestinationProfile() {
           </Grid>
 
           <Grid item>
-            <Typography
-              align="center"
-              variant="h6"
-              sx={{ mb: 1 }}
-              color={grey[600]}
-              padding='30px'
-            >
-              Categories
-            </Typography>
-
             <Grid
               container
               justifyContent="center"
@@ -114,11 +98,9 @@ function DestinationProfile() {
                 flexWrap: "wrap",
                 width: "100%",
                 flexDirection: "row",
-                justifyContent: 'center'
+                justifyContent: "center",
               }}
-            >
-              <Categories />
-            </Grid>
+            ></Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -126,11 +108,11 @@ function DestinationProfile() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: '30%'
+          width: {xs: '100%', sm: '30%'},
         }}
       >
         <Button
-          href="/travelResume"
+          href="/profile"
           variant="text"
           size="large"
           className="btn"
@@ -142,11 +124,11 @@ function DestinationProfile() {
             padding: "0 !important",
           }}
         >
-          Select Destination
+          Back to Profile
         </Button>
       </Grid>
     </Box>
   );
 }
 
-export default DestinationProfile;
+export default TravelCreated;
