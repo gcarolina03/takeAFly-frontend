@@ -7,7 +7,7 @@ export const CreateTravelAPI = async (budget, departure_date, return_date, airpo
         token: localStorage.getItem('token')
       }
     })
-    return data.message !== 'Success' && 'Error'
+    return data
   } catch (error) {
     console.error('Cannot create travel', error)
   }
@@ -23,5 +23,19 @@ export const GetTravelsAPI = async () => {
     return data
   } catch (error) {
     console.error('Cannot get travels', error)
+  }
+}
+
+export const UpdateTravelDestinationAPI = async (travelId, destinationId) => {
+  try {
+    console.log(travelId, destinationId)
+    const { data } = await api.put(`/profile/travel/${travelId}`, { destinationId },  {
+        headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+    return data
+  } catch (error) {
+    console.error('Cannot update travel', error)
   }
 }

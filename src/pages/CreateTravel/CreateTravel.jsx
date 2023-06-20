@@ -100,7 +100,7 @@ function CreateTravel() {
       setErrorMsg('Error! Cannot create travel')
       showErrorMsg()
     } else {
-      navigate('/selectDestination')
+      navigate(`/selectDestination/${res.travel.id}`)
     }
   }
 

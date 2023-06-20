@@ -19,8 +19,8 @@ function Dashboard() {
 
   return (
    <>
-    <Header/>
-     {travels.length > 0 && <CardList travels={ travels }/> } 
+      <Header/>
+     {travels.length > 0 && <CardList travels={ travels } type='travel'/> } 
   </>
   )
 }

@@ -1,21 +1,25 @@
 import PropTypes from 'prop-types'
-import Card from '../Card/Card'
+import CardTravel from '../CardTravel/CardTravel'
+import CardDestination from '../CardDestination/CardDestination';
 import './CardList.css'
 import { Grid } from '@mui/material';
 
-function CardList({ travels }) {
+function CardList({ data, type, travel }) {
   return (
-    <Grid className='cardlist-container' item xs={12} sm={6} md={4} lg={3} xl={3}>
-      {travels.map((travel) => (
-        <Card travel={travel} key={travel.id} />
-      ))}
+    <Grid className='cardlist-container' container>
+      {data.map((item) => {
+        if (type === 'travel') return <CardTravel data={item} key={item.id} />
+        if (type === 'destination') return <CardDestination data={item} travel={travel} key={item.id} />
+      })}
     </Grid>
     )
 }
 
 // props validations
 CardList.propTypes = {
-  travels: PropTypes.object,
+  data: PropTypes.object,
+  type: PropTypes.string,
+  travel: PropTypes.number
 }
 
 export default CardList

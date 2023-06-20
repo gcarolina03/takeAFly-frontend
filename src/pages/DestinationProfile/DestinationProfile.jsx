@@ -1,31 +1,51 @@
-import { Box, Avatar, Typography, Grid } from "@mui/material";
-import { ArrowCircleLeft } from "@mui/icons-material";
-import { grey } from "@mui/material/colors";
-import { Link } from "react-router-dom";
+import { Box, Avatar, Typography, Grid, IconButton, CardActions, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import './DestinationProfile.css'
 import Categories from "../../components/Categories/Categories";
+import { useEffect, useState } from "react";
+import { GetDestinationAPI } from "../../services/destination.services";
+import { UpdateTravelDestinationAPI } from "../../services/travel.services";
+import { useParams } from "react-router-dom";
+import { ArrowCircleLeft } from "@mui/icons-material";
 
 function DestinationProfile() {
+  const theme = useTheme();
+  const { id, travelId } = useParams()
+  const [destination, setDestination] = useState('')
+
+  const getDestination = async () => {
+    const res = await GetDestinationAPI(id)
+    setDestination(res)
+  }
+
+  const UpdateDestination = async () => {
+    const res = await UpdateTravelDestinationAPI(travelId, id)
+    console.log(res)
+    return res
+  }
+
+  useEffect(() => {
+    getDestination()
+  }, [])
+
+  // SUBMIT
+  function submitForm(e) {
+    e.preventDefault();
+    UpdateDestination()
+  }
+  
+
   return (
     <Box
       className="box1"
       sx={{
         justifyContent: "center",
-        backgroundColor: grey[100],
         height: "100%",
       }}
     >
-      <Link to="dashboard">
-        <ArrowCircleLeft
-          sx={{
-            fontSize: "50px",
-            top: 10,
-            left: 10,
-            color: "lightgray",
-            position: "absolute",
-          }}
-        />
-      </Link>
+      <IconButton  sx={{ p:'0 !important', m:1, alignSelf:'start' }} href={`/selectDestination/${travelId}`} >
+        <ArrowCircleLeft className="btn-back"/>
+      </IconButton>
       <Grid
         item
         xs={12}
@@ -39,7 +59,7 @@ function DestinationProfile() {
       >
         <Grid item sx={{ display: "flex", justifyContent: "center" }}>
           <Avatar
-            src="https://www.timeoutabudhabi.com/cloud/timeoutabudhabi/2021/11/30/Dreamy-beaches-in-middle-east.jpg"
+            src={destination.imgUrl}
             alt="Destination Avatar"
             sx={{
               width: { xs: 150, sm: 200 },
@@ -50,10 +70,10 @@ function DestinationProfile() {
         </Grid>
         <Grid item sx={{ mb: 5 }}>
           <Typography variant="h4" align="center">
-            Palma de Mallorca
+            {destination.city}
           </Typography>
           <Typography variant="body1" align="center">
-            España
+            {destination.country}
           </Typography>
         </Grid>
         <Grid container sx={{ gap: "30px", flexDirection: "column" }}>
@@ -66,17 +86,13 @@ function DestinationProfile() {
               align="justify"
               sx={{ fontSize: { xs: "15px", sm: "20px" } }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-              semper odio eget mi iaculis dignissim. Aliquam sollicitudin varius
-              metus, id pulvinar tellus facilisis sed. Duis vitae odio
-              ullamcorper, convallis
+              {destination.description}
             </Typography>
           </Grid>
           <Typography
             align="center"
             variant="h6"
             sx={{ mb: 1 }}
-            color={grey[600]}
           >
             Categories
           </Typography>
@@ -95,6 +111,23 @@ function DestinationProfile() {
           </Grid>
         </Grid>
       </Grid>
+      <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
+        <Button
+          onClick={(e) => {
+            submitForm(e);
+          }}
+          variant="text"
+          size="large"
+          className="btn"
+          sx={{ 
+            borderRadius:0,
+            backgroundColor:theme.palette.primary.main,
+            color:theme.palette.primary.contrastText,
+          }}
+        >
+          Select Destination
+        </Button>
+      </CardActions>
     </Box>
   );
 }
