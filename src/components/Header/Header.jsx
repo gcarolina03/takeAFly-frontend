@@ -18,6 +18,10 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const settings = [
     {
+      label: 'Home',
+      link: '/dashboard'
+    },
+    {
       label: 'Profile',
       link: '/profile'
     },

@@ -1,9 +1,9 @@
-import { Box, Avatar, Typography, Grid, IconButton } from '@mui/material'
-import { ArrowCircleLeft } from '@mui/icons-material';
+import { Box, Avatar, Typography, Grid } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import MiniList from '../../components/MiniList/MiniList';
 import { GetMyTravelsAPI, GetProfileAPI } from '../../services/user.services';
 import { useEffect, useState } from 'react';
+import Header from '../../components/Header/Header';
 
 function UserProfile() {
   const [user, setUser] = useState("");
@@ -40,6 +40,8 @@ function UserProfile() {
   };
 
   return (
+  <>
+    <Header />
     <Box
       sx={{
         display: 'flex',
@@ -49,13 +51,6 @@ function UserProfile() {
         alignItems: 'center',
       }}
     >
-      <IconButton
-        sx={{ position: "absolute", top:0, p: "0 !important", m: 1 }}
-        href="/dashboard"
-      >
-        <ArrowCircleLeft className="btn-back" />
-      </IconButton>
-
       <Grid
         item
         xs={12}
@@ -120,6 +115,8 @@ function UserProfile() {
         </Grid>
       </Grid>
     </Box>
+  </>
+    
   );
 }
 
