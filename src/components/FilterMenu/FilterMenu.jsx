@@ -2,7 +2,7 @@ import { useTheme } from "@emotion/react";
 import { useState } from 'react';
 import { Button, Menu, MenuItem, TextField } from '@mui/material';
 import { Widgets } from "@mui/icons-material";
-
+import './FilterMenu.css'
 
 function FilterMenu() {
     const theme= useTheme();
@@ -53,45 +53,22 @@ const handleButtonClick = (event) => {
   };
 
   return (
-    <div>
-      <Button
-        onClick={handleButtonClick}
-        sx={{
-          height:'48px',
-          width: '78px',
-          marginRigth: "8px",
-          marginLeft: "0px",
-          marginTop: "12px",
-          color: theme.palette.primary.main,
-          borderRadius: "15px",
-          boxShadow: `0px 0px 2px 0.5px ${theme.palette.primary.main}`,
-        }}
-      >
-        Sort
-      </Button>
+    <div className="filtros">
+    
+      <Button onClick={handleButtonClick}>Sort</Button>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
-        
       >
         <MenuItem>
-          <TextField
-            label="Origin Airport"
-            onChange={handleOrigin}
-          />
+          <TextField label="Origin Airport" onChange={handleOrigin} />
         </MenuItem>
         <MenuItem>
-          <TextField
-            label="Departure Date"
-            onChange={handleDepartureDate}
-          />
+          <TextField label="Departure Date" onChange={handleDepartureDate} />
         </MenuItem>
         <MenuItem>
-          <TextField
-            label="Budget"
-            onChange={handleBudget}
-          />
+          <TextField label="Budget" onChange={handleBudget} />
         </MenuItem>
         <MenuItem>
           <Button onClick={handleFilterSubmit}>Apply Sort</Button>
