@@ -19,7 +19,7 @@ function Categories() {
       {categories.length > 0 &&
         categories.map((category) => (
           <Button
-            style={{ height: "50px", fontSize: "10px", alignItems: "center" }}
+            style={{ fontSize: "12px", alignItems: "center" }}
             sx={{
               color: "black",
               backgroundColor: "lightgrey",

@@ -94,13 +94,14 @@ function CreateTravel() {
 
   // CREATE TRAVEL SERVICE
   const CreateTravelService = async () => {
+    console.log(budget, departureDate, returnDate, airport.id, visibility);
     const res = await CreateTravelAPI(budget, departureDate, returnDate, airport.id, visibility)
     console.log(res)
     if (res === 'error') {
       setErrorMsg('Error! Cannot create travel')
       showErrorMsg()
     } else {
-      navigate('/profile/myTravels')
+      navigate(`/selectDestination/${res.travel.id}`)
     }
   }
 
@@ -117,21 +118,22 @@ function CreateTravel() {
   function submitForm(e) {
     e.preventDefault();
      if (
-      !validateBudget() &&
+      !validateBudget() && 
       !validateDeparture() &&
-      !validateReturn() &&
-      !validateAirport()
-      ) {
+      !validateReturn() && 
+      !validateAirport() 
+    ) {
+      CreateTravelService()
+    } else {
       setErrorMsg('Warning! Some fields are incorrect or empty.')
       showErrorMsg()
-    } else {
-      CreateTravelService()
     }
   }
 
   return (
     <Box className="box1">
       <Grid
+      item
         xs={12}
         sm={12}
         lg={5}
@@ -141,7 +143,7 @@ function CreateTravel() {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          padding: { lg: "60px" },
+          py: { lg: "60px" },
           height: "100%",
         }}
       >
@@ -156,13 +158,13 @@ function CreateTravel() {
           }}
           raised={true}
         >
-          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/">
+          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/dashboard">
             <ArrowCircleLeft className="btn-back"
             />
           </IconButton>
           
           <CardHeader
-            sx={{ marginLeft: "35%", marginTop: "20%", paddingBottom: "40px" }}
+            sx={{ textAlign:'center', pt:'50px' }}
             title="Create a travel"
           />
           {showError && (
@@ -182,7 +184,7 @@ function CreateTravel() {
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     <EuroIcon />
                   </IconButton>
                 ),
@@ -202,7 +204,7 @@ function CreateTravel() {
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     <CalendarMonth />
                   </IconButton>
                 ),
@@ -224,7 +226,7 @@ function CreateTravel() {
               sx={{ marginTop: "20px" }}
               InputProps={{
                 endAdornment: (
-                  <IconButton>
+                  <IconButton disabled>
                     <CalendarMonth />
                   </IconButton>
                 ),
@@ -241,7 +243,6 @@ function CreateTravel() {
               value={airport || null}
               onChange={handleAirport}
               error={validateAirport()}
-              helperText={validateAirport() ? "Introduce a valid airport" : ""}
               isOptionEqualToValue={(option, value) => option.id === value.id}
               renderInput={(params) => (
                 <TextField

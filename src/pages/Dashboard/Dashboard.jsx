@@ -1,81 +1,33 @@
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
+
+import CardList from '../../components/CardList/CardList'
 import CategoriesButtonGroup from '../../components/CategoriesButtonGroup/CategoriesButtonGroup'
-import TravelCardList from '../../components/TravelCardList/TravelCardList'
-
-
+import { GetTravelsAPI } from '../../services/travel.services'
 function Dashboard() {
-  const travels = [
-    {
-      travelId: 1,
-      title: 'Viaje 1',
-      imageUrl: 'https://ejemplo.com/imagen1.jpg',
-      dates: '01/01/2023 - 07/01/2023',
-      budget: '$1000',
-      category: 'Beach',
-    },
-    {
-      travelId: 2,
-      title: 'Viaje 2',
-      imageUrl: 'https://ejemplo.com/imagen2.jpg',
-      dates: '15/02/2023 - 22/02/2023',
-      budget: '$1500',
-      category: 'Beach',
-    },
-    {
-      travelId: 3,
-      title: 'Viaje 3',
-      imageUrl: 'https://ejemplo.com/imagen3.jpg',
-      dates: '10/03/2023 - 17/03/2023',
-      budget: '$1200',
-      category: 'City',
-    },
-    {
-      travelId: 4,
-      title: 'Viaje 4',
-      imageUrl: 'https://ejemplo.com/imagen3.jpg',
-      dates: '10/03/2023 - 17/03/2023',
-      budget: '$1200',
-      category: 'Selfcare',
-    }, 
-      {
-      travelId: 5,
-      title: 'Viaje 5',
-      imageUrl: 'https://ejemplo.com/imagen3.jpg',
-      dates: '10/03/2023 - 17/03/2023',
-      budget: '$1200',
-      category: 'City',
-    },
-      {
-      travelId: 6,
-      title: 'Viaje 6',
-      imageUrl: 'https://ejemplo.com/imagen3.jpg',
-      dates: '10/03/2023 - 17/03/2023',
-      budget: '$1200',
-      category: 'Party',
-    },
-      {
-      travelId: 7,
-      title: 'Viaje 7',
-      imageUrl: 'https://ejemplo.com/imagen3.jpg',
-      dates: '10/03/2023 - 17/03/2023',
-      budget: '$1200',
-      category: 'Beach',
-    },
-    
-  ];
+  const [travels, setTravels] = useState('')
   const [activeCategory, setActiveCategory] = useState('All');
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
   };
 
+  const getTravels = async () => {
+    const res = await GetTravelsAPI()
+    setTravels(res)
+  }
+
+  useEffect(() => {
+    getTravels()
+  }, [])
+
+  console.log(travels)
 
   return (
-    <> <Header/>
-    <CategoriesButtonGroup onCategorySelect={handleCategorySelect}/>
-    <TravelCardList travels={ travels } activeCategory={activeCategory}/>
+   <>
+      <Header/>
+      <CategoriesButtonGroup onCategorySelect={handleCategorySelect}/>
+     {travels.length > 0 && <CardList data={travels} activeCategory={activeCategory} type='dashboard'/> } 
   </>
   )
 }

@@ -1,62 +1,104 @@
-import { Box, Avatar, Typography, Grid } from "@mui/material";
+import { Box, Avatar, Typography, Grid, IconButton, CardActions, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { ArrowCircleLeft } from "@mui/icons-material";
-import { grey } from "@mui/material/colors";
-import { Link } from "react-router-dom";
-import './DestinationProfile.css'
+
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import { GetDestinationAPI } from "../../services/destination.services";
+import { UpdateTravelDestinationAPI } from "../../services/travel.services";
 import Categories from "../../components/Categories/Categories";
+import './DestinationProfile.css'
+import { grey } from "@mui/material/colors";
 
 function DestinationProfile() {
+  const theme = useTheme();
+  const { id, travelId } = useParams()
+  const [destination, setDestination] = useState('')
+  const navigate = useNavigate()
+
+  const getDestination = async () => {
+    const res = await GetDestinationAPI(id)
+    setDestination(res)
+  }
+
+  const UpdateDestination = async () => {
+    await UpdateTravelDestinationAPI(travelId, id)
+    
+  }
+
+  useEffect(() => {
+    getDestination()
+  }, [])
+
+  // SUBMIT
+  function submitForm(e) {
+    e.preventDefault();
+    UpdateDestination()
+    navigate('/travelCreated')
+  }
+  
   return (
     <Box
-      className="box1"
+      id="boxDestination"
       sx={{
-        justifyContent: "center",
-        backgroundColor: grey[100],
+        display: "flex",
         height: "100%",
+        width: "100%",
+        alignItems: "center",
+        flexDirection: "column",
+        backgroundColor: grey[100],
       }}
     >
-      <Link to="dashboard">
-        <ArrowCircleLeft
-          sx={{
-            fontSize: "50px",
-            top: 10,
-            left: 10,
-            color: "lightgray",
-            position: "absolute",
-          }}
-        />
-      </Link>
+      <IconButton
+        sx={{ position: "absolute", top: 0, left: 0, p: "0 !important", m: 1 }}
+        href={`/selectDestination/${travelId}`}
+      >
+        <ArrowCircleLeft className="btn-back" />
+      </IconButton>
       <Grid
         item
         xs={12}
         sm={8}
         lg={4}
         sx={{
+          display: "flex",
           flexDirection: "column",
+          alignItems: "center",
+          alignSelf: "center",
           padding: "40px",
           height: "100%",
+          margin: "auto",
         }}
       >
-        <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          item
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Avatar
-            src="https://www.timeoutabudhabi.com/cloud/timeoutabudhabi/2021/11/30/Dreamy-beaches-in-middle-east.jpg"
+            src={destination.imgUrl}
             alt="Destination Avatar"
             sx={{
               width: { xs: 150, sm: 200 },
               height: { xs: 150, sm: 200 },
-              my: 2,
+              my: 1,
             }}
           />
         </Grid>
+
         <Grid item sx={{ mb: 5 }}>
           <Typography variant="h4" align="center">
-            Palma de Mallorca
+            {destination.city}
           </Typography>
           <Typography variant="body1" align="center">
-            España
+            {destination.country}
           </Typography>
         </Grid>
-        <Grid container sx={{ gap: "30px", flexDirection: "column" }}>
+
+        <Grid container sx={{ display: "flex", flexDirection: "column" }}>
           <Grid item>
             <Typography variant="h6" align="left" sx={{ mb: 1 }}>
               Description
@@ -65,19 +107,13 @@ function DestinationProfile() {
               variant="body2"
               align="justify"
               sx={{ fontSize: { xs: "15px", sm: "20px" } }}
+              padding="30px"
+              justifyContent="center"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-              semper odio eget mi iaculis dignissim. Aliquam sollicitudin varius
-              metus, id pulvinar tellus facilisis sed. Duis vitae odio
-              ullamcorper, convallis
+              {destination.description}
             </Typography>
           </Grid>
-          <Typography
-            align="center"
-            variant="h6"
-            sx={{ mb: 1 }}
-            color={grey[600]}
-          >
+          <Typography align="center" variant="h6" sx={{ mb: 1 }}>
             Categories
           </Typography>
           <Grid
@@ -94,6 +130,30 @@ function DestinationProfile() {
             <Categories />
           </Grid>
         </Grid>
+      </Grid>
+      <Grid
+        display="flex"
+        flexDirection="column"
+        margin="auto"
+        width={{ xs: "100%", sm: "35%" }}
+      >
+        <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
+          <Button
+            onClick={(e) => {
+              submitForm(e);
+            }}
+            variant="text"
+            size="large"
+            className="btn"
+            sx={{
+              borderRadius: 0,
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Select Destination
+          </Button>
+        </CardActions>
       </Grid>
     </Box>
   );

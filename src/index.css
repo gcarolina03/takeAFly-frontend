@@ -4,6 +4,10 @@
   --secondary-color: #6d7875
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -19,4 +23,8 @@ a {
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
+}
+
+html, body {
+  margin: 0px;
 }
