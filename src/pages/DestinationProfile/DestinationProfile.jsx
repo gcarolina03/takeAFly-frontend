@@ -9,6 +9,7 @@ import { GetDestinationAPI } from "../../services/destination.services";
 import { UpdateTravelDestinationAPI } from "../../services/travel.services";
 import Categories from "../../components/Categories/Categories";
 import './DestinationProfile.css'
+import { grey } from "@mui/material/colors";
 
 function DestinationProfile() {
   const theme = useTheme();
@@ -41,15 +42,19 @@ function DestinationProfile() {
     <Box
       id="boxDestination"
       sx={{
-        margin: "0",
         display: "flex",
+        height: "100%",
+        width: "100%",
+        alignItems: "center",
         flexDirection: "column",
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: grey[100],
       }}
     >
-      <IconButton  sx={{ p:'0 !important', m:1, alignSelf:'start' }} href={`/selectDestination/${travelId}`} >
-        <ArrowCircleLeft className="btn-back"/>
+      <IconButton
+        sx={{ position: "absolute", top: 0, left: 0, p: "0 !important", m: 1 }}
+        href={`/selectDestination/${travelId}`}
+      >
+        <ArrowCircleLeft className="btn-back" />
       </IconButton>
       <Grid
         item
@@ -59,15 +64,18 @@ function DestinationProfile() {
         sx={{
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
+          alignSelf: "center",
           padding: "40px",
+          height: "100%",
+          margin: "auto",
         }}
       >
         <Grid
           item
           sx={{
             display: "flex",
-            flexDirection: "column",
-            alignItems: 'center'
+            justifyContent: "center",
           }}
         >
           <Avatar
@@ -99,18 +107,13 @@ function DestinationProfile() {
               variant="body2"
               align="justify"
               sx={{ fontSize: { xs: "15px", sm: "20px" } }}
-              padding='30px'
-              justifyContent='center'
+              padding="30px"
+              justifyContent="center"
             >
               {destination.description}
             </Typography>
-            
           </Grid>
-          <Typography
-            align="center"
-            variant="h6"
-            sx={{ mb: 1 }}
-          >
+          <Typography align="center" variant="h6" sx={{ mb: 1 }}>
             Categories
           </Typography>
           <Grid
@@ -128,23 +131,30 @@ function DestinationProfile() {
           </Grid>
         </Grid>
       </Grid>
-      <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
-        <Button
-          onClick={(e) => {
-            submitForm(e);
-          }}
-          variant="text"
-          size="large"
-          className="btn"
-          sx={{ 
-            borderRadius:0,
-            backgroundColor:theme.palette.primary.main,
-            color:theme.palette.primary.contrastText
-          }}
-        >
-          Select Destination
-        </Button>  
-      </CardActions>
+      <Grid
+        display="flex"
+        flexDirection="column"
+        margin="auto"
+        width={{ xs: "100%", sm: "35%" }}
+      >
+        <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
+          <Button
+            onClick={(e) => {
+              submitForm(e);
+            }}
+            variant="text"
+            size="large"
+            className="btn"
+            sx={{
+              borderRadius: 0,
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Select Destination
+          </Button>
+        </CardActions>
+      </Grid>
     </Box>
   );
 }
