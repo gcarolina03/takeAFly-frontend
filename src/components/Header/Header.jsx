@@ -5,20 +5,16 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import Logo from "../../assets/logo/white.png";
 import { Link } from "react-router-dom";
 
 
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+ 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const settings = [
     {
@@ -39,34 +35,27 @@ function Header() {
     }
   ]
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   return (
-    <AppBar position="static" sx={{ maxHeight: "8%" }}>
+    <AppBar position="static" elevation={12} sx={{width: '100%', maxHeight: "9%", maxWidth: 'xl', diplay:'flex', justifyContent:'space-evenly'}}>
       <Toolbar
         disableGutters
-        sx={{height: '100%'}}
+        sx={{height: '100%' , padding: '8px', width: '100%'}}
       >
         
         <Box
           display="flex"
-          justifyContent="center"
+          justifyContent="space-between"
           alignItems="center"
-          flexGrow={1}
-          textAlign={{ xs: "center" }}
+          textAlign={{ xs: "center", width: '100%', }}
         >
           <IconButton
             size="large"
@@ -79,18 +68,20 @@ function Header() {
           </IconButton>
           <Typography
             variant="h5"
-            noWrap
+            Wrap
             component="a"
             href=""
             sx={{
               mr: 2,
-              display: { xs: "flex" },
+              display: "flex",
+              justifyContent:'center',
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              fontSize: "calc(4px + 0.8vw)",
             }}
           >
             Join the Travel Revolution
@@ -102,7 +93,7 @@ function Header() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px" }}
+              sx={{ mt: "45px", maxHeight:'80vh', backdropFilter: 'blur(2px)' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
