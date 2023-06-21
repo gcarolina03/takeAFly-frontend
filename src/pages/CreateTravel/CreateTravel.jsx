@@ -132,6 +132,7 @@ function CreateTravel() {
   return (
     <Box className="box1">
       <Grid
+      item
         xs={12}
         sm={12}
         lg={5}
@@ -141,7 +142,7 @@ function CreateTravel() {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          padding: { lg: "60px" },
+          py: { lg: "60px" },
           height: "100%",
         }}
       >
@@ -162,7 +163,7 @@ function CreateTravel() {
           </IconButton>
           
           <CardHeader
-            sx={{ marginLeft: "35%", marginTop: "20%", paddingBottom: "40px" }}
+            sx={{ textAlign:'center', pt:'50px' }}
             title="Create a travel"
           />
           {showError && (
@@ -241,7 +242,6 @@ function CreateTravel() {
               value={airport || null}
               onChange={handleAirport}
               error={validateAirport()}
-              helperText={validateAirport() ? "Introduce a valid airport" : ""}
               isOptionEqualToValue={(option, value) => option.id === value.id}
               renderInput={(params) => (
                 <TextField

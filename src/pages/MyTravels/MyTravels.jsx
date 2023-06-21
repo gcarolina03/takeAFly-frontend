@@ -1,9 +1,10 @@
-import { Card, CardHeader, IconButton } from '@mui/material';
+import { Card, CardHeader, IconButton, Typography} from '@mui/material';
 import { ArrowCircleLeft } from '@mui/icons-material';
 
 import { useEffect, useState  } from 'react';
 
 import CardList from '../../components/CardList/CardList';
+import Header from '../../components/Header/Header'
 import { GetMyTravelsAPI } from '../../services/user.services';
 
 
@@ -22,19 +23,11 @@ function MyTravels() {
   }, [])
 
   return (
-      <Card 
-      >
-        <IconButton  sx={{ position: "sticky", p:'0 !important', m:1 }} href={`${back}`} >
-          <ArrowCircleLeft className="btn-back"/>
-        </IconButton>
-        
-        <CardHeader
-          sx={{ textAlign:'center', pt:0, mt:0, paddingBottom: "10px" }}
-          title="My Travels"
-        />
-    
-        {travels.length > 0 && <CardList data={travels} type='travel'/> } 
-      </Card>
+    <>
+      <Header />
+      <Typography textAlign='center' variant='h5' sx={{ my:3, width:'100%' }}>My Travels </Typography>
+      {travels.length > 0 && <CardList data={travels} type='travel'/> } 
+    </>
   );
 }
 

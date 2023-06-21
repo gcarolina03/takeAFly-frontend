@@ -1,26 +1,42 @@
 import { useEffect, useState } from 'react'
-import { ListAirportsAPI } from '../services/airport.services'
-import { Typography } from '@mui/material'
+import { ListFlightsAPI } from '../services/fly.services'
+import { Grid, Typography } from '@mui/material'
 
 function Test() {
-const [airports, setAirports] = useState([])
+const [flights, setFlights] = useState([])
+const [carriers, setCarriers] = useState([])
 
-    const ListAirports = async () => {
-        const res = await ListAirportsAPI() 
-        setAirports(res)
+    const listFly = async () => {
+      const res = await ListFlightsAPI('LPA', 'MAD', '2023-12-03', '2023-12-10') 
+      setFlights(res.data)
+      setCarriers(res.dictionaries.carriers)
     }
 
+    console.log(carriers)
+
     useEffect(() => {
-        ListAirports()
+        listFly()
     }, [])
 
-    console.log(airports)
+    console.log(flights)
 
   return (
     <div>
-      {airports.length > 0 && (
-        airports.map((airport) => (
-          <Typography key={airport.iata_code}>{airport.name}</Typography>
+      {flights.length > 0 && (
+        flights.map((flight) => (
+          <Grid key={flight.id}>
+            {flight.itineraries.map((itinerarie) => (
+              <>
+                <Typography>duracion: {itinerarie.duration}</Typography>
+                <Typography>aerolinea: {carriers[itinerarie.segments[0].carrierCode]} - {carriers[itinerarie.segments[0].operating.carrierCode]}</Typography>
+                <Typography>origen: {itinerarie.segments[0].departure.iataCode}</Typography>
+                <Typography>origen salida hora: {itinerarie.segments[0].departure.at}</Typography>
+                <Typography>destino{itinerarie.segments[0].arrival.iataCode}</Typography>
+                <Typography>destino llegada hora:{itinerarie.segments[0].arrival.at}</Typography>
+              </>
+            ))}
+            <Typography>total: {flight.price.total}</Typography>
+          </Grid>
         ))
       )}
     </div>

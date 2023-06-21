@@ -8,11 +8,22 @@
   box-shadow: 3px 4px 12px 1px rgba(0, 0, 0, 0.3);
 }
 
+.travel-done {
+  filter: brightness(50%);
+}
+
 .favorite {
   border: solid green 1px;
 }
 
 .start {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  color: rgb(204, 183, 0);
+}
+
+.completed {
   position: absolute;
   top: 5px;
   right: 8px;
@@ -41,14 +52,14 @@
 }
 
 .travel-info {
-  font-weight: 600;
-  font-size: 1.35em;
+  font-weight: 600 !important;
+  font-size: 1.2em !important;
   text-align: left;
-  margin: 0 10px;
+  margin: 0 10px !important;
 }
 
 .travel-destination {
   text-align: center;
   font-style: italic;
-  font-size: 30px;
+  font-size: 20px !important;
 }
