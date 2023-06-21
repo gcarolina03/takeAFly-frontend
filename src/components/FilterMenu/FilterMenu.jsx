@@ -40,7 +40,7 @@ const handleButtonClick = (event) => {
         }
         return true;
       });
-      setFilteredTravels(filteredTravels);
+      setFilterTravels(filteredTravels);
       handleMenuClose();
   };
 

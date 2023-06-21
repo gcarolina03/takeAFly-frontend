@@ -74,7 +74,7 @@ function Header() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px", maxHeight:'80%' }}
+              sx={{ mt: "45px", maxHeight:'80vh', backdropFilter: 'blur(2px)' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -90,7 +90,7 @@ function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu} sx= {{}}>
+                <MenuItem key={setting} onClick={handleCloseUserMenu} sx= {{flexGrow: 2}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

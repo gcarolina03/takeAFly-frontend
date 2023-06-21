@@ -30,7 +30,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
           alignContent: 'center', }}
           aria-label="scrollable auto tabs example"
 
-        >
+        >   
           {categories.map((category, index) => (
             <Tab
               key={index}

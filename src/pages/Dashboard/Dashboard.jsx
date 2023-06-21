@@ -13,6 +13,7 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen1.jpg',
       dates: '01/01/2023 - 07/01/2023',
       budget: '$1000',
+      category: 'Beach',
     },
     {
       travelId: 2,
@@ -20,6 +21,7 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen2.jpg',
       dates: '15/02/2023 - 22/02/2023',
       budget: '$1500',
+      category: 'Beach',
     },
     {
       travelId: 3,
@@ -27,6 +29,7 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen3.jpg',
       dates: '10/03/2023 - 17/03/2023',
       budget: '$1200',
+      category: 'City',
     },
     {
       travelId: 4,
@@ -34,6 +37,7 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen3.jpg',
       dates: '10/03/2023 - 17/03/2023',
       budget: '$1200',
+      category: 'Selfcare',
     }, 
       {
       travelId: 5,
@@ -41,6 +45,7 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen3.jpg',
       dates: '10/03/2023 - 17/03/2023',
       budget: '$1200',
+      category: 'City',
     },
       {
       travelId: 6,
@@ -48,6 +53,7 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen3.jpg',
       dates: '10/03/2023 - 17/03/2023',
       budget: '$1200',
+      category: 'Party',
     },
       {
       travelId: 7,
@@ -55,10 +61,11 @@ function Dashboard() {
       imageUrl: 'https://ejemplo.com/imagen3.jpg',
       dates: '10/03/2023 - 17/03/2023',
       budget: '$1200',
+      category: 'Beach',
     },
     
   ];
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('All');
 
   const handleCategorySelect = (category) => {
     setActiveCategory(category);
