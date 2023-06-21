@@ -28,6 +28,7 @@ export const GetTravelsAPI = async () => {
 
 export const GetTravelAPI = async (id) => {
   try {
+    console.log('id')
     const { data } = await api.get(`/travels/${id}`,  {
         headers: {
         token: localStorage.getItem('token')

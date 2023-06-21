@@ -49,7 +49,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" elevation={12} sx={{width: '100%', maxHeight: "9%", maxWidth: 'xl', diplay:'flex', justifyContent:'space-evenly'}}>
+    <AppBar position="static" elevation={12} sx={{width: '100%', maxHeight: "9%", diplay:'flex', justifyContent:'space-evenly'}}>
       <Toolbar
         disableGutters
         sx={{height: '100%' , padding: '8px', width: '100%'}}

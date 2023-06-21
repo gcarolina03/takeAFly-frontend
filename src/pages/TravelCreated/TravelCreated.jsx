@@ -52,7 +52,7 @@ function TravelCreated() {
               alt="Destination Avatar"
               variant="square"
               sx={{
-                width: { xs: 210, sm: 600 },
+                width: { xs: 210, sm: 800 },
                 height: { xs: 120, sm: 200 },
                 my: 1,
               }}
