@@ -41,7 +41,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
         variant="scrollable"
         scrollButtons="auto"
         sx={{  display: 'flex',
-        width: '90%',
+        width: 'auto',
         justifyContent: 'center',
         alignContent: 'center', }}
         aria-label="scrollable auto tabs example"

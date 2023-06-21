@@ -131,173 +131,176 @@ function CreateTravel() {
   }
 
   return (
-    <Box className="box1">
-      <Grid
-      item
-        xs={12}
-        sm={12}
-        lg={5}
-        sx={{
-          position: "absolute",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          py: { lg: "60px" },
-          height: "100%",
-        }}
-      >
-        <Card
+    <Grid container sx={{height:'100vh', width:'100vw'}}>
+      <Box className="box1">
+        <Grid
+        item
+          xs={12}
+          sm={12}
+          lg={5}
           sx={{
-            position: "relative",
+            position: "absolute",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "space-around",
-            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
             width: "100%",
+            py: { lg: "60px" },
+            height: "100%",
           }}
-          raised={true}
         >
-          <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/dashboard">
-            <ArrowCircleLeft className="btn-back"
+          <Card
+            sx={{
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "space-around",
+              height: "100%",
+              width: "100%",
+            }}
+            raised={true}
+          >
+            <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/dashboard">
+              <ArrowCircleLeft className="btn-back"
+              />
+            </IconButton>
+            
+            <CardHeader
+              sx={{ textAlign:'center', pt:'50px' }}
+              title="Create a travel"
             />
-          </IconButton>
-          
-          <CardHeader
-            sx={{ textAlign:'center', pt:'50px' }}
-            title="Create a travel"
-          />
-          {showError && (
-            <ErrorMsgComp errorMsg={errorMsg} show={showError} hideErrorMsg={hideErrorMsg} />
-          )}
-          <CardContent>
-            <TextField
-              fullWidth
-              margin="dense"
-              label="Budget"
-              error={validateBudget() && budget !== ''}
-              helperText={validateBudget()  && budget !== '' ? "Introduce valid budget" : ""}
-              variant="standard"
-              type="number"
-              placeholder="30"
-              required
-              sx={{ marginTop: "20px" }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton disabled>
-                    <EuroIcon />
-                  </IconButton>
-                ),
-              }}
-              value={budget}
-              onChange={handleBudget}
-            ></TextField>
-            <TextField
-              fullWidth
-              margin="dense"
-              variant="standard"
-              label="Departure Date"
-              type="date"
-              required
-              error={validateDeparture()}
-              helperText={validateDeparture() ? "Introduce valid departure date" : ""}
-              sx={{ marginTop: "20px" }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton disabled>
-                    <CalendarMonth />
-                  </IconButton>
-                ),
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={departureDate}
-              onChange={handleDeparture}
-            ></TextField>
-            <TextField
-              fullWidth
-              margin="dense"
-              variant="standard"
-              label="Return Date"
-              error={validateReturn()}
-              helperText={validateReturn() ? "Return date must be greater than departure date" : ""}
-              type="date"
-              sx={{ marginTop: "20px" }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton disabled>
-                    <CalendarMonth />
-                  </IconButton>
-                ),
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={returnDate}
-              onChange={handleReturn}
-            ></TextField>
-            <Autocomplete
-              options={airports}
-              getOptionLabel={(option) => `${option.name} (${option.code})`}
-              value={airport || null}
-              onChange={handleAirport}
-              error={validateAirport()}
-              isOptionEqualToValue={(option, value) => option.id === value.id}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Origin Airport"
-                  variant="standard"
-                  sx={{ marginTop: "20px" }}
-                />
-              )}
-          />
-            <div style={{ marginTop: "20px" }}>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                value={visibility}
-                onChange={handleVisibility}
-              >
-                <FormControlLabel
-                  value="private"
-                  control={<Radio />}
-                  label="Private"
-                  checked={visibility === "private"}
-                />
-                <FormControlLabel
-                  value="public"
-                  control={<Radio />}
-                  label="Public"
-                  checked={visibility === "public"}
-                />
-              </RadioGroup>
-            </div>
-          </CardContent>
-          <Box sx={{position:'absolute', width:'100%',
-        bottom:0}}>
-            <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
-              <Button
-                onClick={(e) => {
-                  submitForm(e);
+            {showError && (
+              <ErrorMsgComp errorMsg={errorMsg} show={showError} hideErrorMsg={hideErrorMsg} />
+            )}
+            <CardContent>
+              <TextField
+                fullWidth
+                margin="dense"
+                label="Budget"
+                error={validateBudget() && budget !== ''}
+                helperText={validateBudget()  && budget !== '' ? "Introduce valid budget" : ""}
+                variant="standard"
+                type="number"
+                placeholder="30"
+                required
+                sx={{ marginTop: "20px" }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton disabled>
+                      <EuroIcon />
+                    </IconButton>
+                  ),
                 }}
-                variant="text"
-                size="large"
-                className="btn"
-                sx={{ 
-                  borderRadius:0,
-                  backgroundColor:theme.palette.primary.main,
-                  color:theme.palette.primary.contrastText,
+                value={budget}
+                onChange={handleBudget}
+              ></TextField>
+              <TextField
+                fullWidth
+                margin="dense"
+                variant="standard"
+                label="Departure Date"
+                type="date"
+                required
+                error={validateDeparture()}
+                helperText={validateDeparture() ? "Introduce valid departure date" : ""}
+                sx={{ marginTop: "20px" }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton disabled>
+                      <CalendarMonth />
+                    </IconButton>
+                  ),
                 }}
-              >
-                Create
-              </Button>
-            </CardActions>
-          </Box>
-        </Card>
-      </Grid>
-    </Box>
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={departureDate}
+                onChange={handleDeparture}
+              ></TextField>
+              <TextField
+                fullWidth
+                margin="dense"
+                variant="standard"
+                label="Return Date"
+                error={validateReturn()}
+                helperText={validateReturn() ? "Return date must be greater than departure date" : ""}
+                type="date"
+                sx={{ marginTop: "20px" }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton disabled>
+                      <CalendarMonth />
+                    </IconButton>
+                  ),
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={returnDate}
+                onChange={handleReturn}
+              ></TextField>
+              <Autocomplete
+                options={airports}
+                getOptionLabel={(option) => `${option.name} (${option.code})`}
+                value={airport || null}
+                onChange={handleAirport}
+                error={validateAirport()}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Origin Airport"
+                    variant="standard"
+                    sx={{ marginTop: "20px" }}
+                  />
+                )}
+            />
+              <div style={{ marginTop: "20px" }}>
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={visibility}
+                  onChange={handleVisibility}
+                >
+                  <FormControlLabel
+                    value="private"
+                    control={<Radio />}
+                    label="Private"
+                    checked={visibility === "private"}
+                  />
+                  <FormControlLabel
+                    value="public"
+                    control={<Radio />}
+                    label="Public"
+                    checked={visibility === "public"}
+                  />
+                </RadioGroup>
+              </div>
+            </CardContent>
+            <Box sx={{position:'absolute', width:'100%',
+          bottom:0}}>
+              <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
+                <Button
+                  onClick={(e) => {
+                    submitForm(e);
+                  }}
+                  variant="text"
+                  size="large"
+                  className="btn"
+                  sx={{ 
+                    borderRadius:0,
+                    backgroundColor:theme.palette.primary.main,
+                    color:theme.palette.primary.contrastText,
+                  }}
+                >
+                  Create
+                </Button>
+              </CardActions>
+            </Box>
+          </Card>
+        </Grid>
+      </Box>
+    </Grid>
+    
   );
 }
 

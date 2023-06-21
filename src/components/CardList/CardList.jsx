@@ -8,7 +8,7 @@ function CardList({ data, type, travel, activeCategory }) {
   const filterPublicTravel = (arr) => {
     return arr
       .filter((travel) => travel.destination.categories.some((category) => category.id == activeCategory))
-      .filter((travel) => {
+      /* .filter((travel) => {
         if (
           filterValue.originAirport &&
           travel.originAirport !== filterValue.originAirport
@@ -25,7 +25,7 @@ function CardList({ data, type, travel, activeCategory }) {
           return false;
         }
         return true;
-      })
+      }) */
   }
 
   const filterDestinations = (arr) => {

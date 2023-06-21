@@ -55,7 +55,7 @@ const handleButtonClick = (event) => {
   return (
     <div className="filtros">
     
-      <Button onClick={handleButtonClick}>Sort</Button>
+      <Button onClick={handleButtonClick} sx={{color:'white'}}>Sort</Button>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

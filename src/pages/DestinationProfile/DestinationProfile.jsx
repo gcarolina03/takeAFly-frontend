@@ -37,6 +37,7 @@ function DestinationProfile() {
     UpdateDestination()
     navigate('/travelCreated')
   }
+  console.log(destination)
   
   return (
     <Box
@@ -127,7 +128,7 @@ function DestinationProfile() {
               flexDirection: "row",
             }}
           >
-            <Categories />
+            <Categories data={destination.categories}s/>
           </Grid>
         </Grid>
       </Grid>
