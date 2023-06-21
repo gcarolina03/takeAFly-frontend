@@ -8,24 +8,33 @@ function CardList({ data, type, travel, activeCategory }) {
   console.log(data)
   
   const showAll = () => {
-    if(activeCategory === 'All') {
+    if(type === 'dashboard') {
+      if(activeCategory === 'All') {
+        return (
+          <Grid className='cardlist-container' container>
+            {data.map((item) => {
+              <CardTravel type={type} data={item} key={item.id} />
+            })}
+          </Grid>
+        )
+      } else {
+        <Grid className='cardlist-container' container>
+          {data
+            .filter((travel) =>  travel.category === activeCategory )
+            .map((item) => {
+              <CardTravel type={type} data={item} key={item.id} />
+          })}
+        </Grid>
+      }
+    } else {
       return (
         <Grid className='cardlist-container' container>
           {data.map((item) => {
-            if (type === 'travel' || type === 'dashboard' ) return <CardTravel type={type} data={item} key={item.id} />
+            if (type === 'travel' ) return <CardTravel type={type} data={item} key={item.id} />
             if (type === 'destination') return <CardDestination data={item} travel={travel} key={item.id} />
           })}
         </Grid>
       )
-    } else {
-      <Grid className='cardlist-container' container>
-        {data
-          .filter((travel) =>  travel.category === activeCategory )
-          .map((item) => {
-            if (type === 'travel' || type === 'dashboard' ) return <CardTravel type={type} data={item} key={item.id} />
-            if (type === 'destination') return <CardDestination data={item} travel={travel} key={item.id} />
-        })}
-      </Grid>
     }
   }
 
@@ -35,6 +44,7 @@ function CardList({ data, type, travel, activeCategory }) {
     </>
   )
 }
+
 
 // props validations
 CardList.propTypes = {
