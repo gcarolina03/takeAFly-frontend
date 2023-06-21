@@ -18,26 +18,30 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const settings = [
     {
-      label: 'Home',
-      link: '/dashboard'
+      label: "Home",
+      link: "/dashboard",
     },
     {
-      label: 'Profile',
-      link: '/profile'
+      label: "Profile",
+      link: "/profile",
     },
     {
-      label: 'Plan a Travel',
-      link: '/createTravel'
+      label: "Plan a Travel",
+      link: "/createTravel",
     },
     {
-      label: 'Wishlist',
-      link: '/wishlist'
+      label: "Wishlist",
+      link: "/wishlist",
     },
     {
-      label: 'My Travels',
-      link: '/myTravels'
-    }
-  ]
+      label: "My Travels",
+      link: "/myTravels",
+    },
+    {
+      label: "Log Out",
+      link: "/logout",
+    },
+  ];
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);

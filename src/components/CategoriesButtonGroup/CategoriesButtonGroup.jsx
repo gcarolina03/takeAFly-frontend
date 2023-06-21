@@ -28,14 +28,15 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary', display:'flex', justifyContent:'center' , marginTop: '20px'}}>
+    <Box sx={{ bgcolor: 'primary', display:'flex', flexDirection:'row' , justifyContent:'center' , alignItems:'center', marginTop: '20px'}}>
       <Tabs
         value={value}
         onChange={handleChange}
         variant="scrollable"
         scrollButtons="auto"
         sx={{  display: 'flex',
-        width: '90%',
+        width: '80%',
+        margin: '4px',
         justifyContent: 'center',
         alignContent: 'center', }}
         aria-label="scrollable auto tabs example"
