@@ -6,7 +6,26 @@ import { Grid } from '@mui/material';
 
 function CardList({ data, type, travel, activeCategory }) {
   const filterPublicTravel = (arr) => {
-    return arr.filter((travel) => travel.destination.categories.some((category) => category.id == activeCategory))
+    return arr
+      .filter((travel) => travel.destination.categories.some((category) => category.id == activeCategory))
+      .filter((travel) => {
+        if (
+          filterValue.originAirport &&
+          travel.originAirport !== filterValue.originAirport
+        ) {
+          return false;
+        }
+        if (
+          filterValue.departureDate &&
+          travel.departureDate !== filterValue.departureDate
+        ) {
+          return false;
+        }
+        if (filterValue.budget && travel.budget !== filterValue.budget) {
+          return false;
+        }
+        return true;
+      })
   }
 
   const filterDestinations = (arr) => {
