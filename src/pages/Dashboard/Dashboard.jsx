@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header'
 import CardList from '../../components/CardList/CardList'
 import CategoriesButtonGroup from '../../components/CategoriesButtonGroup/CategoriesButtonGroup'
 import { GetTravelsAPI } from '../../services/travel.services'
+
 function Dashboard() {
   const [travels, setTravels] = useState('')
   const [activeCategory, setActiveCategory] = useState('All');
@@ -20,8 +21,6 @@ function Dashboard() {
   useEffect(() => {
     getTravels()
   }, [])
-
-  console.log(travels)
 
   return (
    <>

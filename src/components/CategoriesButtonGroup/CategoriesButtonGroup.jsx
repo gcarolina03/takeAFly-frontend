@@ -1,14 +1,20 @@
 import { Box, Tabs, Tab } from "@mui/material";
 import { useTheme } from "@emotion/react";
+
 import { useEffect, useState } from "react";
-import FilterMenu from '../FilterMenu/FilterMenu'
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types'
+
+import FilterMenu from '../FilterMenu/FilterMenu'
 import { GetCategoriesAPI } from "../../services/category.service";
 
 const CategoriesButtonGroup = ( { onCategorySelect } ) => {
   const theme = useTheme();
+  const location = useLocation();
+  const path = location.pathname
   const [categories, setCategories] = useState([])
   const [value, setValue] = useState(0);
+  console.log(path)
 
   const listCategories = async () => {
       const res = await GetCategoriesAPI() 
@@ -28,7 +34,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary', margin: '10px', display:'flex', justifyContent:'center', maxWidth:'95%'  }}>
+    <Box sx={{ bgcolor: 'primary', margin: '10px', display:'flex', justifyContent:'center', width:'100%'  }}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -59,7 +65,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
           <Tab
             key={index}
             label={category.title}
-            onClick={() => handleFilter(category)}
+            onClick={() => handleFilter(category.id)}
             sx={{
               margin:'8px',
               color: theme.palette.primary.main,
@@ -72,14 +78,14 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
           />
         ))}
       </Tabs>
-            <FilterMenu/>
+        {path === '/dashboard' && <FilterMenu/>}
     </Box>
   );
 }
 
   // props validations
 CategoriesButtonGroup.propTypes = {
-  onCategorySelect: PropTypes.object,
+  onCategorySelect: PropTypes.func,
 }
 
 

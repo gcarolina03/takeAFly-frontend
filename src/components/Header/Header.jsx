@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 
 
 function Header() {
- 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const settings = [
     {
@@ -49,7 +48,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" elevation={12} sx={{width: '100%', maxHeight: "9%", maxWidth: 'xl', diplay:'flex', justifyContent:'space-evenly'}}>
+    <AppBar position="static" elevation={12} sx={{width: '100%', maxHeight: "9%", diplay:'flex', justifyContent:'space-evenly'}}>
       <Toolbar
         disableGutters
         sx={{height: '100%' , padding: '8px', width: '100%'}}
@@ -61,7 +60,7 @@ function Header() {
           alignItems="center"
           textAlign={{ xs: "center", width: '100%', }}
         >
-          <IconButton
+          <IconButton disabled
             size="large"
             aria-label="account of current user"
             aria-controls="menu-appbar"
@@ -72,7 +71,6 @@ function Header() {
           </IconButton>
           <Typography
             variant="h5"
-            Wrap
             component="a"
             href=""
             sx={{

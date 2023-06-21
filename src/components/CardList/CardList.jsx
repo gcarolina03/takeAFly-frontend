@@ -5,26 +5,51 @@ import './CardList.css'
 import { Grid } from '@mui/material';
 
 function CardList({ data, type, travel, activeCategory }) {
-  console.log(data)
-  
+  const filterPublicTravel = (arr) => {
+    return arr.filter((travel) => travel.destination.categories.some((category) => category.id == activeCategory))
+  }
+
+  const filterDestinations = (arr) => {
+    return arr.filter((destination) => destination.categories.some((category) => category.id == activeCategory))
+  }
+
   const showAll = () => {
     if(type === 'dashboard') {
       if(activeCategory === 'All') {
         return (
           <Grid className='cardlist-container' container>
-            {data.map((item) => {
-              return <CardTravel type={type} data={item} key={item.id} />
-            })}
+            {data.map((item) => (
+              <CardTravel type={type} data={item} key={item.id} />
+            ))}
           </Grid>
         )
       } else {
-        <Grid className='cardlist-container' container>
-          {data
-            .filter((travel) =>  travel.category === activeCategory )
-            .map((item) => {
-              return <CardTravel type={type} data={item} key={item.id} />
-          })}
-        </Grid>
+        return (
+          <Grid className='cardlist-container' container>
+            {filterPublicTravel(data).map((item) => (
+                <CardTravel type={type} data={item} key={item.id} />
+            ))}
+          </Grid>
+        )
+        
+      }
+    } else if (type === 'destination') {
+      if(activeCategory === 'All') {
+        return (
+          <Grid className='cardlist-container' container>
+            {data.map((item) => (
+              <CardDestination data={item} travel={travel} key={item.id} />
+            ))}
+          </Grid>
+        )
+      } else {
+        return (
+          <Grid className='cardlist-container' container>
+            {filterDestinations(data).map((item) => (
+                <CardDestination data={item} travel={travel} key={item.id} />
+            ))}
+          </Grid>
+        )
       }
     } else {
       return (

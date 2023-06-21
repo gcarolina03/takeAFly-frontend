@@ -5,17 +5,16 @@ import { useNavigate } from 'react-router-dom'
 import { CheckCircle } from '@mui/icons-material'
 
 function CardTravel({data}) {
-
+  const navigate = useNavigate()
   function travelDone() {
     const today = new Date();
     const date = new Date(data.return_date)
     return (date < today)
   }
-  
-  const navigate = useNavigate()
+
   console.log(data)
   return (
-    <Grid key={data.id} className='travel blackLayer' onClick={() => (navigate(`/travelResume/${data.id}`))}>
+    <Grid key={data.id} className='travel' onClick={() => (navigate(`/travelResume/${data.id}`))}>
       <Grid className="travel-wrapper" sx={{flexDirection:'column'}}>
         <Grid className={`img-container ${travelDone() && 'travel-done'}`} sx={{backgroundImage:`url(${data.destination.imgUrl})`, backgroundPosition:'center', backgroundSize:'cover'}}>
         </Grid>

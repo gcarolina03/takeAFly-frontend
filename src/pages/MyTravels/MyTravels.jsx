@@ -1,5 +1,4 @@
-import { Card, CardHeader, IconButton, Typography} from '@mui/material';
-import { ArrowCircleLeft } from '@mui/icons-material';
+import { Typography} from '@mui/material';
 
 import { useEffect, useState  } from 'react';
 
@@ -10,8 +9,6 @@ import { GetMyTravelsAPI } from '../../services/user.services';
 
 function MyTravels() {
   const [travels, setTravels] = useState('')
-  const previousPathname = sessionStorage.getItem('previousPathname');
-  const back = (previousPathname === '/profile') ? '/profile' : '/dashboard'
  
   const GetTravels = async () => {
     const res = await GetMyTravelsAPI()
