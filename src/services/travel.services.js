@@ -26,6 +26,19 @@ export const GetTravelsAPI = async () => {
   }
 }
 
+export const GetTravelAPI = async (id) => {
+  try {
+    const { data } = await api.get(`/travels/${id}`,  {
+        headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+    return data
+  } catch (error) {
+    console.error('Cannot get travels', error)
+  }
+}
+
 export const UpdateTravelDestinationAPI = async (travelId, destinationId) => {
   try {
     console.log(travelId, destinationId)

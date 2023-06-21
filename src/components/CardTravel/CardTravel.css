@@ -4,8 +4,8 @@
   margin: 20px 40px;
   min-width: 350px;
   height: 400px;
-  border-radius: 10px;
-  box-shadow: 3px 4px 12px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  box-shadow: 2px 1px 3px 1px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease-in-out, box-shadow 0.2 ease-in-out;
 }
 
@@ -47,8 +47,8 @@
   position: relative;
   height: 300px;
   min-height: 200px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .content-text {

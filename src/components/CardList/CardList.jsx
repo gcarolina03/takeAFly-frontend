@@ -13,7 +13,7 @@ function CardList({ data, type, travel, activeCategory }) {
         return (
           <Grid className='cardlist-container' container>
             {data.map((item) => {
-              <CardTravel type={type} data={item} key={item.id} />
+              return <CardTravel type={type} data={item} key={item.id} />
             })}
           </Grid>
         )
@@ -40,7 +40,7 @@ function CardList({ data, type, travel, activeCategory }) {
               return true;
             })
             .map((item) => {
-              <CardTravel type={type} data={item} key={item.id} />
+              return <CardTravel type={type} data={item} key={item.id} />
           })}
         </Grid>
       }

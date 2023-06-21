@@ -1,13 +1,23 @@
 import { Box, Tabs, Tab } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterMenu from '../FilterMenu/FilterMenu'
 import PropTypes from 'prop-types'
+import { GetCategoriesAPI } from "../../services/category.service";
 
 const CategoriesButtonGroup = ( { onCategorySelect } ) => {
   const theme = useTheme();
-  const categories = ['All','Relax', 'Mountain Break', 'Beach', 'City', 'Party', 'Historical', 'Foodie', 'Adventure', 'Photography', 'Romantic', 'Selfcare']; // Array de categorías
+  const [categories, setCategories] = useState([])
   const [value, setValue] = useState(0);
+
+  const listCategories = async () => {
+      const res = await GetCategoriesAPI() 
+      setCategories(res)
+  }
+
+  useEffect(() => {
+      listCategories()
+  }, [])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -31,10 +41,24 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
         aria-label="scrollable auto tabs example"
 
       >   
+      <Tab
+        key='all'
+        label='All'
+        onClick={() => handleFilter('All')}
+        sx={{
+          margin:'8px',
+          color: theme.palette.primary.main,
+          borderRadius: '15px',
+          boxShadow: `0px 0px 2px 0.5px ${theme.palette.primary.main}`,
+          '& .MuiTab-wrapper': {
+              textDecoration: 'none',
+          },
+        }}
+      />
         {categories.map((category, index) => (
           <Tab
             key={index}
-            label={category}
+            label={category.title}
             onClick={() => handleFilter(category)}
             sx={{
               margin:'8px',

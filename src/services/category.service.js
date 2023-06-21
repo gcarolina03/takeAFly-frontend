@@ -9,7 +9,7 @@ export const GetCategoriesAPI = async () => {
     })
     return data
   } catch (error) {
-    console.error('Cannot Sign up', error)
+    console.error('Cannot get categories', error)
   }
 }
 
