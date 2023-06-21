@@ -12,7 +12,7 @@ function MiniList({data}) {
           mt: "10px",
           gap: 8,
         }}
-        cols={8}
+        cols={5}
       >
         {data.map((item) => (
           <ImageListItem key={item.id}>

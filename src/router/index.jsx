@@ -19,27 +19,36 @@ const isAuthenticated = () => (!localStorage.getItem('token'))
 console.log(isAuthenticated())
 
 export const router = createBrowserRouter([
-  { path: '/',
+  {
+    path: "/",
     element: <App />,
-    children:[ 
-      { path: '/', element: <Welcome /> },
-      { path: '/signup', element: <SignUp /> },
-      { path: '/createProfile', 
-        element: isAuthenticated() ? <Navigate to="/login" /> : <CreateProfile />
+    children: [
+      { path: "/", element: <Welcome /> },
+      { path: "/signup", element: <SignUp /> },
+      {
+        path: "/createProfile",
+        element: isAuthenticated() ? (
+          <Navigate to="/login" />
+        ) : (
+          <CreateProfile />
+        ),
       },
-      { path: '/login', element: <Login/> },
-      { path: '/dashboard',
-        element: isAuthenticated() ? <Navigate to="/login" /> : <Dashboard />
+      { path: "/login", element: <Login /> },
+      {
+        path: "/dashboard",
+        element: isAuthenticated() ? <Navigate to="/login" /> : <Dashboard />,
       },
-      { path: '/createTravel', element: <CreateTravel />},
-      { path: '/selectDestination/:travel', element: <SelectDestination />},
-      { path: '/joinTravel', element: <JoinTravel />},
-      { path: '/destinationProfile/:id/:travelId', element: <DestinationProfile />},
-      { path: '/profile', element: <UserProfile />},
-      { path: '/myTravels', element: <MyTravels />},
-      { path: '/travelCreated', element: <TravelCreated />},
-    ]
+      { path: "/createTravel", element: <CreateTravel /> },
+      { path: "/selectDestination/:travel", element: <SelectDestination /> },
+      { path: "/joinTravel", element: <JoinTravel /> },
+      {
+        path: "/destinationProfile/:id/:travelId",
+        element: <DestinationProfile />,
+      },
+      { path: "/profile", element: <UserProfile /> },
+      { path: "/myTravels", element: <MyTravels /> },
+      { path: "/travelCreated", element: <TravelCreated /> },
+    ],
   },
-  { path: '/test', element: <Test />}
-  
-])
+  { path: "/test", element: <Test /> },
+]);

@@ -94,6 +94,7 @@ function CreateTravel() {
 
   // CREATE TRAVEL SERVICE
   const CreateTravelService = async () => {
+    console.log(budget, departureDate, returnDate, airport.id, visibility);
     const res = await CreateTravelAPI(budget, departureDate, returnDate, airport.id, visibility)
     console.log(res)
     if (res === 'error') {
