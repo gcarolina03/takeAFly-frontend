@@ -4,7 +4,6 @@ import ImageListItem from '@mui/material/ImageListItem';
 import PropTypes from 'prop-types'
 
 function MiniList({data}) {
-  console.log(data)
   return (
     <Grid container>
       <ImageList
