@@ -1,9 +1,10 @@
 import { Box, Tabs, Tab } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { useState } from "react";
+import FilterMenu from '../FilterMenu/FilterMenu'
 
 
-const CategoriesButtonGroup = () => {
+const CategoriesButtonGroup = ( { onCategorySelect } ) => {
     const theme = useTheme();
     const categories = ['Relax', 'Mountain Break', 'Beach', 'City', 'Party', 'Historical', 'Foodie', 'Adventure', 'Photography', 'Romantic', 'Selfcare']; // Array de categorías
     const [value, setValue] = useState(0);
@@ -13,8 +14,7 @@ const CategoriesButtonGroup = () => {
     };
   
     const handleFilter = (category) => {
-      // Aquí p implementar la lógica para filtrar el cardlist por la categoría seleccionada
-      console.log(`Filtrar por categoría: ${category}`);
+     onCategorySelect(category);
     };
   
     return (
@@ -48,7 +48,7 @@ const CategoriesButtonGroup = () => {
             />
           ))}
         </Tabs>
-    
+             <FilterMenu/>
       </Box>
     );
   }

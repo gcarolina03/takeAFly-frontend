@@ -1,0 +1,16 @@
+.error-msg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px !important;
+  border: red solid 1px;
+  border-radius: 2%;
+  position: absolute;
+  width: 70%;
+  left: 50%;
+  margin-top: 10px;
+  z-index: 2;
+  transform: translateX(-50%);
+  transition: top 1s ease-in-out;
+}

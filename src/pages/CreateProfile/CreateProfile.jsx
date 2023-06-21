@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { CreateProfileAPI } from "../../services/auth.services";
 
 import {
+  Box,
+  Grid,
   Card,
   CardActions,
   CardContent,
@@ -58,25 +60,41 @@ function CreateProfile() {
   }
 
   return (
-    <Card
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "space-around",
-        height: "100vh",
-        maxWidth: "400px",
-      }}
-      raised={true}
-    >
-      <CardHeader
-        sx={{ textAlign:'center', marginTop: "20%", pb: "10px" }}
-        title="Create Profile"
-      />
-      <CardContent>
-        <IconButton sx={{display:'flex', justifyContent:'center', p:0, mt:2, mb:4, mx:auto, width:'150px', height:'150px', borderRadius:'100%', border:'solid black 5px'}} href="/">
+    <Box className="box">
+      <Grid
+        xs={12}
+        sm={12}
+        lg={5}
+        sx={{
+          position: "absolute",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          padding: { lg: "60px" },
+          height: "100%",
+        }}
+      >
+        <Card
+          sx={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "space-around",
+            height: "100%",
+            width: "100%",
+          }}
+          raised={true}
+        >
+          <CardHeader
+            sx={{ alignSelf:'center', marginTop: {sm:"10%",  xs: '20%'}, paddingBottom: { sm: "10px", xs: '40px' } }}
+            title="Create Profile"
+          />
+          <CardContent>
+        <IconButton sx={{display:'flex', justifyContent:'center', p:0, mt:{ lg:0, xs:2 }, mb:{ lg:0, xs:4}, mx:auto, width:{ lg: "100px", xs: '150px' }, height:{ lg: "100px", xs: '150px' }, borderRadius:'100%', border:'solid black 5px'}} href="/">
           <AddAPhoto 
             sx={{ 
-            fontSize: '100px', 
+            fontSize: { lg: "60px", xs: '100px' }, 
             color:'black',
             m:0,
             p:0
@@ -116,18 +134,7 @@ function CreateProfile() {
         />
       </CardContent>
 
-      <CardActions
-        sx={{
-          width: "100%",
-          position: "fixed",
-          bottom:0,
-          display: "flex",
-          justifyItems: "center",
-          justifyContent: "center",
-          p:0,
-          color:theme.palette.primary.contrastText,
-        }}
-      >
+      <CardActions className="box-btn">
         <Button
           onClick={(e) => {
             submitForm(e);
@@ -160,6 +167,8 @@ function CreateProfile() {
         </Button>
       </CardActions>
     </Card>
+  </Grid>
+</Box>
   );
 }
 
