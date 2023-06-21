@@ -6,11 +6,24 @@ import { Button, Menu, MenuItem, TextField } from '@mui/material';
 function FilterMenu() {
     const theme= useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filterValue, setFilterValue] = useState({ 
-    originAirport: '',
-    departureDate: '',
-    budget:''});
+  const [filterValue, setFilterValue] = useState('');
+  const [origin, setOrigin] = useState('')
+  const [departureDate, setDepartureDate] = useState('')
+  const [budget, setBudget] = useState('');
 
+
+  const handleOrigin = (e) => {
+    setOrigin(e.target.value)
+  }
+  console.log(origin)
+   const handleDepartureDate = (e) => {
+     setDepartureDate(e.target.value);
+   };
+  console.log(departureDate)
+    const handleBudget = (e) => {
+      setBudget(e.target.value);
+    };
+    console.log(budget)
 const handleButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -19,15 +32,9 @@ const handleButtonClick = (event) => {
     setAnchorEl(null);
   };
 
-  const handleFilterChange =(event) => {
-    const { name, value } = event.target;
-    setFilterValue((prevFilterValues) => ({
-      ...prevFilterValues,
-      [name]: value
-    }));
-  };
+  
 
-  const handleFilterSubmit = () => {
+  const handleFilterSubmit = (travels) => {
     const filteredTravels = travels.filter((travel) => {
         if (filterValue.originAirport && travel.originAirport !== filterValue.originAirport) {
           return false;
@@ -40,46 +47,46 @@ const handleButtonClick = (event) => {
         }
         return true;
       });
-      setFilterTravels(filteredTravels);
+      setFilterValue(filteredTravels);
       handleMenuClose();
   };
 
   return (
     <div>
-      <Button onClick={handleButtonClick}
-       sx={{marginRigth: '8px',
-       marginLeft: '0px',
-       marginTop:'12px',
-       color: theme.palette.primary.main,
-       borderRadius: '15px',
-       boxShadow: `0px 0px 2px 0.5px ${theme.palette.primary.main}`}}>
+      <Button
+        onClick={handleButtonClick}
+        sx={{
+          marginRigth: "8px",
+          marginLeft: "0px",
+          marginTop: "12px",
+          color: theme.palette.primary.main,
+          borderRadius: "15px",
+          boxShadow: `0px 0px 2px 0.5px ${theme.palette.primary.main}`,
+        }}
+      >
         Sort
-        </Button>
+      </Button>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
-       
       >
         <MenuItem>
           <TextField
             label="Origin Airport"
-            value={filterValue}
-            onChange={handleFilterChange}
+            onChange={handleOrigin}
           />
         </MenuItem>
         <MenuItem>
           <TextField
             label="Departure Date"
-            value={filterValue}
-            onChange={handleFilterChange}
+            onChange={handleDepartureDate}
           />
         </MenuItem>
         <MenuItem>
           <TextField
             label="Budget"
-            value={filterValue}
-            onChange={handleFilterChange}
+            onChange={handleBudget}
           />
         </MenuItem>
         <MenuItem>

@@ -45,22 +45,55 @@ function TravelCardList({ travels, activeCategory }) {
     )
     } else {
       return (
-
-        <Grid container spacing={1} >
-        {selectedTravels.filter((travel) =>  travel.category === activeCategory ).map((travel) => (
-          <Grid sx={{display: 'flex', flexDirection:'row', justifyContent: 'center', marginTop:'20px'}}  item xs={12} sm={6} md={4} lg={3} xl={3} key={travel.travelId}>
-          <TravelCard
-          key={travel.travelId}
-          title={travel.title}
-          imageUrl={travel.imageUrl}
-          dates={travel.dates}
-          budget={travel.budget}
-          travelId={travel.travelId}/>
-          </Grid>
-        ))}
+        <Grid container spacing={1}>
+          {selectedTravels
+            .filter((travel) => travel.category === activeCategory)
+            .filter((travel) => {
+              if (
+                filterValue.originAirport &&
+                travel.originAirport !== filterValue.originAirport
+              ) {
+                return false;
+              }
+              if (
+                filterValue.departureDate &&
+                travel.departureDate !== filterValue.departureDate
+              ) {
+                return false;
+              }
+              if (filterValue.budget && travel.budget !== filterValue.budget) {
+                return false;
+              }
+              return true;
+            })
+            .map((travel) => (
+              <Grid
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={3}
+                key={travel.travelId}
+              >
+                <TravelCard
+                  key={travel.travelId}
+                  title={travel.title}
+                  imageUrl={travel.imageUrl}
+                  dates={travel.dates}
+                  budget={travel.budget}
+                  travelId={travel.travelId}
+                />
+              </Grid>
+            ))}
         </Grid>
-  
-    )
+      );
     }
   }
   return (

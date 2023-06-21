@@ -12,7 +12,7 @@ import JoinTravel from "../pages/JoinTravel/JoinTravel";
 import DestinationProfile from "../pages/DestinationProfile/DestinationProfile";
 import Test from "../pages/test";
 
-const isAuthenticated = () => (!localStorage.getItem('token'))
+const isAuthenticated = () => (localStorage.getItem('token'))
 console.log(isAuthenticated())
 
 export const router = createBrowserRouter([

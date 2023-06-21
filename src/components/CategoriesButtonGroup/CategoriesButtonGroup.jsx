@@ -6,7 +6,7 @@ import FilterMenu from '../FilterMenu/FilterMenu'
 
 const CategoriesButtonGroup = ( { onCategorySelect } ) => {
     const theme = useTheme();
-    const categories = ['Relax', 'Mountain Break', 'Beach', 'City', 'Party', 'Historical', 'Foodie', 'Adventure', 'Photography', 'Romantic', 'Selfcare']; // Array de categorías
+    const categories = ['Relax', 'Mountain Break', 'Beach', 'City', 'Party', 'Historical', 'Foodie', 'Adventure', 'Photography', 'Romantic', 'Selfcare']; 
     const [value, setValue] = useState(0);
   
     const handleChange = (event, newValue) => {
@@ -18,7 +18,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
     };
   
     return (
-      <Box sx={{ bgcolor: 'primary', margin: '10px', display:'flex', justifyContent:'center', maxWidth:'95%'  }}>
+      <Box sx={{ bgcolor: 'primary', margin: '10px', display:'flex', justifyContent:'center', maxWidth:'100%'  }}>
         <Tabs
           value={value}
           onChange={handleChange}
