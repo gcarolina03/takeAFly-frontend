@@ -28,14 +28,14 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary', margin: '10px', display:'flex', justifyContent:'center', maxWidth:'95%'  }}>
+    <Box sx={{ bgcolor: 'primary', display:'flex', justifyContent:'center' , marginTop: '20px'}}>
       <Tabs
         value={value}
         onChange={handleChange}
         variant="scrollable"
         scrollButtons="auto"
         sx={{  display: 'flex',
-        width: '80%',
+        width: '90%',
         justifyContent: 'center',
         alignContent: 'center', }}
         aria-label="scrollable auto tabs example"
@@ -48,7 +48,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
         sx={{
           margin:'8px',
           color: theme.palette.primary.main,
-          borderRadius: '15px',
+          borderRadius: '18px',
           boxShadow: `0px 0px 2px 0.5px ${theme.palette.primary.main}`,
           '& .MuiTab-wrapper': {
               textDecoration: 'none',
@@ -61,7 +61,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
             label={category.title}
             onClick={() => handleFilter(category)}
             sx={{
-              margin:'8px',
+              margin:'10px',
               color: theme.palette.primary.main,
               borderRadius: '15px',
               boxShadow: `0px 0px 2px 0.5px ${theme.palette.primary.main}`,

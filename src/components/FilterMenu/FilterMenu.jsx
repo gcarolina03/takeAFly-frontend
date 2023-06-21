@@ -1,6 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { useState } from 'react';
 import { Button, Menu, MenuItem, TextField } from '@mui/material';
+import { Widgets } from "@mui/icons-material";
 
 
 function FilterMenu() {
@@ -56,6 +57,8 @@ const handleButtonClick = (event) => {
       <Button
         onClick={handleButtonClick}
         sx={{
+          height:'48px',
+          width: '78px',
           marginRigth: "8px",
           marginLeft: "0px",
           marginTop: "12px",
@@ -70,6 +73,7 @@ const handleButtonClick = (event) => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
+        
       >
         <MenuItem>
           <TextField

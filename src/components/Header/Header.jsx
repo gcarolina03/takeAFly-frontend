@@ -49,7 +49,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" elevation={12} sx={{width: '100%', maxHeight: "9%", diplay:'flex', justifyContent:'space-evenly'}}>
+    <AppBar position="static" elevation={15} sx={{width: '100%', maxHeight: "9%", diplay:'flex', justifyContent:'space-evenly'}}>
       <Toolbar
         disableGutters
         sx={{height: '100%' , padding: '8px', width: '100%'}}
@@ -97,7 +97,7 @@ function Header() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "45px", maxHeight:'80vh', backdropFilter: 'blur(2px)' }}
+              sx={{ mt: "70px", height:'80%', width:'455px', backdropFilter: 'blur(2px)' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
