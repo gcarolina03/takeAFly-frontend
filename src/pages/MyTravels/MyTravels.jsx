@@ -26,7 +26,7 @@ function MyTravels() {
     <>
       <Header />
       <Typography textAlign='center' variant='h5' sx={{ my:3, width:'100%' }}>My Travels </Typography>
-      {travels.length > 0 && <CardList data={travels} type='travel'/> } 
+      {travels.length > 0 && <CardList data={travels} activeCategory='All' type='travel'/> } 
     </>
   );
 }
