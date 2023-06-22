@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 
 import FilterMenu from '../FilterMenu/FilterMenu'
 import { GetCategoriesAPI } from "../../services/category.service";
+import ErrorCard from "../ErrorCard/ErrorCard";
 
 const CategoriesButtonGroup = ( { onCategorySelect, onFilters } ) => {
   const theme = useTheme();

@@ -16,8 +16,8 @@ return(
             boxShadow: '0 0 8px rgba(255, 255, 255, 0.3)',
             fontSize: 'calc(0.8vw + 19px)',
             fontWeight: 'bold',
-            textShadow: '2px 2px 4px rgba(255, 255, 255, 0.5)'}}>
-            Sorry, this page is under constructuion! Try again later :)!
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}>
+            Sorry, we are working on this page! Try again later :)!
         </Typography>
     </Box>
     <Footer/>

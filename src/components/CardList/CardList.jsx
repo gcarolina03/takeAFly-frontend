@@ -3,6 +3,7 @@ import CardTravel from '../CardTravel/CardTravel'
 import CardDestination from '../CardDestination/CardDestination';
 import './CardList.css'
 import { Grid } from '@mui/material';
+import ErrorCard from '../ErrorCard/ErrorCard';
 
 function CardList({ data, seeDestination, type, activeCategory, filters }) {
   const filterPublicTravel = () => {
@@ -47,20 +48,37 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
   const showAll = () => {
     if(type === 'dashboard') {
       return (
-        <Grid className='cardlist-container' container>
-          {filterPublicTravel().map((item) => (
-              <CardTravel type={type} data={item} key={item.id} />
-          ))}
-        </Grid>
-      )
+        <>
+          {filterPublicTravel().length === 0 ? (
+            <ErrorCard />
+          ) : (
+            <Grid className="cardlist-container" container>
+              {filterPublicTravel().map((item) => (
+                <CardTravel type={type} data={item} key={item.id} />
+              ))}
+            </Grid>
+          )}
+        </>
+      );
     } else if (type === 'destination') {
+      
         return (
-          <Grid className='cardlist-container' container>
-            {filterDestinations().map((item) => (
-                <CardDestination data={item} seeDestination={seeDestination} key={item.id} />
-            ))}
-          </Grid>
-        )
+          <>
+            {filterDestinations().length === 0 ? 
+              <ErrorCard />
+             : 
+              <Grid className="cardlist-container" container>
+                {filterDestinations().map((item) => (
+                  <CardDestination
+                    data={item}
+                    seeDestination={seeDestination}
+                    key={item.id}
+                  />
+                ))}
+              </Grid>
+            }
+          </>
+        );
     } else {
       return (
         <Grid className='cardlist-container' container>
