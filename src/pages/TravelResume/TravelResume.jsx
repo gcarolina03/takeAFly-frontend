@@ -20,6 +20,7 @@ import { DeleteTravelAPI, GetTravelAPI, JoinTravelAPI, RemoveTravelAPI } from ".
 import { GetProfileAPI } from "../../services/user.services";
 import Footer from '../../components/Footer/Footer'
 import "./TravelResume.css";
+import Header from "../../components/Header/Header";
 
 function TravelResume() {
   const isDesktop = useMediaQuery('(min-width:1200px)');
@@ -102,6 +103,7 @@ function TravelResume() {
   }
   
   return (
+    
     <Box
       id="boxDestination"
       sx={{
@@ -115,7 +117,6 @@ function TravelResume() {
     >
       <Box
         sx={{
-          backgroundColor: "grey[100]",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -123,8 +124,7 @@ function TravelResume() {
           height: "85%",
           marginTop: "65px",
           borderRadius: "10px",
-          border: "5px solid rgba(0, 0, 0, 0.5)",
-          boxShadow: "0 0 18px rgba(0, 0, 0, 8)",
+          boxShadow: "2px 1px 3px 1px rgba(0, 0, 0, 0.3)"
         }}
       >
         <Grid
