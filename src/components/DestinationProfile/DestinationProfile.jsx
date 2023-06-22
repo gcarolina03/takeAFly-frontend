@@ -1,51 +1,20 @@
 import { Box, Avatar, Typography, Grid, IconButton, CardActions, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { ArrowCircleLeft } from "@mui/icons-material";
+import PropTypes from 'prop-types'
 
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-
-import { GetDestinationAPI } from "../../services/destination.services";
-import { UpdateTravelDestinationAPI } from "../../services/travel.services";
-import Categories from "../../components/Categories/Categories";
+import Categories from "../Categories/Categories";
 import './DestinationProfile.css'
 import { grey } from "@mui/material/colors";
 
-function DestinationProfile() {
+function DestinationProfile({data, hide, create}) {
   const theme = useTheme();
-  const { id, travelId } = useParams()
-  const [destination, setDestination] = useState('')
-  const navigate = useNavigate()
-
-  const getDestination = async () => {
-    const res = await GetDestinationAPI(id)
-    setDestination(res)
-  }
-
-  const UpdateDestination = async () => {
-    await UpdateTravelDestinationAPI(travelId, id)
-    
-  }
-
-  useEffect(() => {
-    getDestination()
-  }, [])
-
-  // SUBMIT
-  function submitForm(e) {
-    e.preventDefault();
-    UpdateDestination()
-    navigate('/travelCreated')
-  }
-  console.log(destination)
+  console.log(data)
   
   return (
     <Box
-      id="boxDestination"
+      className="boxDestination"
       sx={{
-        display: "flex",
-        height: "100%",
-        width: "100%",
         alignItems: "center",
         flexDirection: "column",
         backgroundColor: grey[100],
@@ -53,7 +22,7 @@ function DestinationProfile() {
     >
       <IconButton
         sx={{ position: "absolute", top: 0, left: 0, p: "0 !important", m: 1 }}
-        href={`/selectDestination/${travelId}`}
+        onClick={() => hide()}
       >
         <ArrowCircleLeft className="btn-back" />
       </IconButton>
@@ -80,7 +49,7 @@ function DestinationProfile() {
           }}
         >
           <Avatar
-            src={destination.imgUrl}
+            src={data.imgUrl}
             alt="Destination Avatar"
             sx={{
               width: { xs: 150, sm: 200 },
@@ -92,15 +61,15 @@ function DestinationProfile() {
 
         <Grid item sx={{ mb: 5 }}>
           <Typography variant="h4" align="center">
-            {destination.city}
+            {data.city}
           </Typography>
           <Typography variant="body1" align="center">
-            {destination.country}
+            {data.country}
           </Typography>
         </Grid>
 
-        <Grid container sx={{ display: "flex", flexDirection: "column" }}>
-          <Grid item>
+        <Grid container sx={{ display: "flex", flexDirection: "column", alignItems:'center' }}>
+          <Grid item width={{ xs: "100%", lg: "35%" }}>
             <Typography variant="h6" align="left" sx={{ mb: 1 }}>
               Description
             </Typography>
@@ -111,24 +80,24 @@ function DestinationProfile() {
               padding="30px"
               justifyContent="center"
             >
-              {destination.description}
+              {data.description}
             </Typography>
           </Grid>
           <Typography align="center" variant="h6" sx={{ mb: 1 }}>
             Categories
           </Typography>
           <Grid
+            item
+            width={{ xs: "100%", lg: "35%" }}
             sx={{
-              osition: "absolute",
               display: "flex",
               gap: 1.5,
               flexWrap: "wrap",
               alignItems: "flex-start",
-              width: "100%",
               flexDirection: "row",
             }}
           >
-            <Categories data={destination.categories}s/>
+            <Categories data={data.categories}s/>
           </Grid>
         </Grid>
       </Grid>
@@ -136,17 +105,18 @@ function DestinationProfile() {
         display="flex"
         flexDirection="column"
         margin="auto"
-        width={{ xs: "100%", sm: "35%" }}
+        width={{ xs: "100%", lg: "35%" }}
       >
         <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
           <Button
-            onClick={(e) => {
-              submitForm(e);
+            onClick={() => {
+              create()
             }}
             variant="text"
             size="large"
             className="btn"
             sx={{
+              width:'100%',
               borderRadius: 0,
               backgroundColor: theme.palette.primary.main,
               color: theme.palette.primary.contrastText,
@@ -158,6 +128,13 @@ function DestinationProfile() {
       </Grid>
     </Box>
   );
+}
+
+// props validations
+DestinationProfile.propTypes = {
+  data: PropTypes.object,
+  hide: PropTypes.func,
+  create: PropTypes.func,
 }
 
 export default DestinationProfile;

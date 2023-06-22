@@ -1,6 +1,5 @@
 import { Box, Avatar, Typography, Grid, Button } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import "./TravelCreated.css";
 
 function TravelCreated() {
   const theme = useTheme();
@@ -65,7 +64,7 @@ function TravelCreated() {
                 padding="30px"
                 justifyContent="center"
               >
-                Congratulations on creating your travel itinerary with Take A Fly! Get ready to embark on an unforgettable adventure filled with breathtaking landscapes, vibrant cultures, and cherished memories. We can&apos;t wait to be a part of your travel story!
+                We are delighted to inform you that you have successfully joined our travel expedition with Wanderlust Travels! Prepare yourself for an extraordinary journey filled with awe-inspiring landscapes, captivating cultures, and unforgettable moments. We&pos;re thrilled to have you as part of our travel family!
               </Typography>
             </Grid>
 
@@ -92,7 +91,7 @@ function TravelCreated() {
           }}
         >
           <Button
-            href="/profile/myTravels"
+            href="/dashboard"
             variant="text"
             size="large"
             className="btn"
@@ -104,7 +103,7 @@ function TravelCreated() {
               padding: "0 !important",
             }}
           >
-            Go to my travels
+            Back to dashboard
           </Button>
         </Grid>
     </Box>

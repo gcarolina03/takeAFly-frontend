@@ -1,31 +1,58 @@
-import { useTheme } from "@emotion/react";
-import { useState } from 'react';
-import { Button, Menu, MenuItem, TextField } from '@mui/material';
-import { Widgets } from "@mui/icons-material";
+import { Autocomplete, Button, IconButton, Menu, MenuItem, TextField } from '@mui/material';
+import EuroIcon from "@mui/icons-material/Euro";
+import { CalendarMonth } from "@mui/icons-material";
+
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types'
+
+import { ListAirportsAPI } from "../../services/airport.services";
 import './FilterMenu.css'
 
-function FilterMenu() {
-    const theme= useTheme();
+function FilterMenu({onFilters}) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filterValue, setFilterValue] = useState('');
-  const [origin, setOrigin] = useState('')
-  const [departureDate, setDepartureDate] = useState('')
   const [budget, setBudget] = useState('');
+  const [departureDate, setDepartureDate] = useState('')
+  const [airports, setAirports] = useState("");
+  const [airport, setAirport] = useState('');
 
-
-  const handleOrigin = (e) => {
-    setOrigin(e.target.value)
+  const getAirports= async () => {
+    const res = await ListAirportsAPI()
+    setAirports(res)
   }
-  console.log(origin)
-   const handleDepartureDate = (e) => {
-     setDepartureDate(e.target.value);
-   };
-  console.log(departureDate)
-    const handleBudget = (e) => {
-      setBudget(e.target.value);
-    };
-    console.log(budget)
-const handleButtonClick = (event) => {
+
+  useEffect(() => {
+    getAirports()
+  }, [])
+
+  // BUDGET
+  function handleBudget(e) {
+    setBudget(e.target.value);
+  }
+
+  function validateBudget() {
+    return budget <= 0
+  }
+
+  // DATE DEPARTURE
+  function handleDeparture(e) {
+    setDepartureDate(e.target.value);
+  }
+
+  // AIRPORT
+  function handleAirport(e, value) {
+    setAirport(value)
+  }
+
+  function validateAirport() {
+    return airport === ''
+  }
+
+  // FILTER
+  const handleMoreFilters = (filter) => {
+    onFilters(filter);
+  };
+
+  const handleButtonClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -33,49 +60,99 @@ const handleButtonClick = (event) => {
     setAnchorEl(null);
   };
 
-  
 
-  const handleFilterSubmit = (travels) => {
-    const filteredTravels = travels.filter((travel) => {
-        if (filterValue.originAirport && travel.originAirport !== filterValue.originAirport) {
-          return false;
-        }
-        if (filterValue.departureDate && travel.departureDate !== filterValue.departureDate) {
-          return false;
-        }
-        if (filterValue.budget && travel.budget !== filterValue.budget) {
-          return false;
-        }
-        return true;
-      });
-      setFilterValue(filteredTravels);
+ const handleFilterSubmit = () => {
+      handleMoreFilters({budget, departureDate, airport})
       handleMenuClose();
-  };
+  }
+
+  const cleanFilters = () => {
+      setAirport('')
+      setBudget('')
+      setDepartureDate('')
+      handleMoreFilters({budget, departureDate, airport})
+      handleMenuClose();
+  }
 
   return (
     <div className="filtros">
-    
-      <Button onClick={handleButtonClick} sx={{color:'white'}}>Sort</Button>
+      <Button onClick={handleButtonClick} sx={{color:'white'}}>Filters</Button>
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
         <MenuItem>
-          <TextField label="Origin Airport" onChange={handleOrigin} />
+          <TextField
+            fullWidth
+            margin="dense"
+            label="Budget"
+            error={validateBudget() && budget !== ''}
+            helperText={validateBudget()  && budget !== '' ? "Introduce valid budget" : ""}
+            variant='outlined'
+            type="number"
+            placeholder="0"
+            InputProps={{
+              endAdornment: (
+                <IconButton disabled>
+                  <EuroIcon />
+                </IconButton>
+              ),
+            }}
+            value={budget}
+            onChange={handleBudget}
+          ></TextField>
         </MenuItem>
         <MenuItem>
-          <TextField label="Departure Date" onChange={handleDepartureDate} />
+          <TextField
+            fullWidth
+            margin="dense"
+            variant="outlined"
+            label="Departure Date"
+            type="date"
+            InputProps={{
+              endAdornment: (
+                <IconButton disabled>
+                  <CalendarMonth />
+                </IconButton>
+              ),
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={departureDate}
+            onChange={handleDeparture}
+          ></TextField>
         </MenuItem>
-        <MenuItem>
-          <TextField label="Budget" onChange={handleBudget} />
-        </MenuItem>
-        <MenuItem>
-          <Button onClick={handleFilterSubmit}>Apply Sort</Button>
+        <Autocomplete
+        sx={{mx:2}}
+          options={airports}
+          getOptionLabel={(option) => `${option.name} (${option.code})`}
+          value={airport || null}
+          onChange={handleAirport}
+          error={validateAirport()}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Origin Airport"
+              variant="outlined"
+            />
+          )}
+        />
+        <MenuItem sx={{justifyContent:'space-between'}}>
+          <Button onClick={handleFilterSubmit}>Apply Filters</Button>
+          <Button sx={{color:'red'}} onClick={cleanFilters}>clean</Button>
+          
         </MenuItem>
       </Menu>
     </div>
   );
+}
+
+  // props validations
+FilterMenu.propTypes = {
+  onFilters: PropTypes.func,
 }
 
 export default FilterMenu;

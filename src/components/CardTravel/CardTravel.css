@@ -70,3 +70,19 @@
   font-style: italic;
   font-size: 20px !important;
 }
+
+/* --------------TABLET */
+@media screen and (min-width:600px) {}
+
+.travel {
+  margin: 20px 30px;
+}
+
+/* --------------DESKTOP */
+@media screen and (min-width:1200px) {
+  .travel {
+    min-width: 350px;
+    height: 350px;
+    margin: 20px 40px;
+  }
+}

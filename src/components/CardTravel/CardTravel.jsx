@@ -12,7 +12,6 @@ function CardTravel({data}) {
     return (date < today)
   }
 
-  console.log(data)
   return (
     <Grid key={data.id} className='travel' onClick={() => (navigate(`/travelResume/${data.id}`))}>
       <Grid className="travel-wrapper" sx={{flexDirection:'column'}}>

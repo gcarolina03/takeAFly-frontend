@@ -8,13 +8,12 @@ import PropTypes from 'prop-types'
 import FilterMenu from '../FilterMenu/FilterMenu'
 import { GetCategoriesAPI } from "../../services/category.service";
 
-const CategoriesButtonGroup = ( { onCategorySelect } ) => {
+const CategoriesButtonGroup = ( { onCategorySelect, onFilters } ) => {
   const theme = useTheme();
   const location = useLocation();
   const path = location.pathname
   const [categories, setCategories] = useState([])
   const [value, setValue] = useState(0);
-  console.log(path)
 
   const listCategories = async () => {
       const res = await GetCategoriesAPI() 
@@ -78,7 +77,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
           />
         ))}
       </Tabs>
-        {path === '/dashboard' && <FilterMenu/>}
+        {path === '/dashboard' && <FilterMenu onFilters={onFilters} />}
     </Box>
   );
 }
@@ -86,6 +85,7 @@ const CategoriesButtonGroup = ( { onCategorySelect } ) => {
   // props validations
 CategoriesButtonGroup.propTypes = {
   onCategorySelect: PropTypes.func,
+  onFilters: PropTypes.func,
 }
 
 

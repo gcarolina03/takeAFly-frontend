@@ -10,12 +10,14 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../../assets/logo/white.png";
 import { Link } from "react-router-dom";
-
-
+import { useNavigate } from 'react-router-dom'
+import { Divider } from "@mui/material";
+import { Logout } from "@mui/icons-material";
 
 function Header() {
+  const navigate = useNavigate()
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const settings = [
+  const menu = [
     {
       label: 'Home',
       link: '/dashboard'
@@ -26,7 +28,7 @@ function Header() {
     },
     {
       label: 'Plan a Travel',
-      link: '/createTravel'
+      link: '/dashboard/createTravel'
     },
     {
       label: 'Wishlist',
@@ -34,7 +36,7 @@ function Header() {
     },
     {
       label: 'My Travels',
-      link: '/myTravels'
+      link: '/profile/myTravels'
     }
   ]
 
@@ -46,6 +48,12 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+
+  const logOut = () => {
+    localStorage.removeItem('token')
+    navigate('/')
+  }
 
   return (
     <AppBar position="static" elevation={15} sx={{width: '100%', maxHeight: "9%", diplay:'flex', justifyContent:'space-evenly', alignItems:'center'}}>
@@ -95,7 +103,7 @@ function Header() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "70px", height:'80%', width:'455px', backdropFilter: 'blur(2px)' }}
+              sx={{ mt: "70px", height:'100%', width:'100%', backdropFilter: 'blur(2px)' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -110,13 +118,17 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.label}>
-                  <Link to={setting.link}>
-                    <Typography textAlign="center">{setting.label}</Typography>
+              {menu.map((item) => (
+                <MenuItem key={item.label}>
+                  <Link to={item.link}>
+                    <Typography textAlign="center">{item.label}</Typography>
                   </Link>
                 </MenuItem>
               ))}
+              <Divider variant="middle" />
+                <MenuItem>
+                  <Typography onClick={() => logOut()} textAlign="center" color='red' sx={{display:'flex', alignItems:'center'}}>Log out &nbsp;<Logout fontSize="small"/> </Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Box>

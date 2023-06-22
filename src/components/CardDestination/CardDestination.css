@@ -3,7 +3,7 @@
   position: relative;
   margin: 20px 40px;
   min-width: 350px;
-  height: 400px;
+  height: 350px;
   border-radius: 5px;
   box-shadow: 2px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
@@ -17,21 +17,23 @@
 
 .destination-img-container {
   position: relative;
-  height: 150px;
+  height: 300px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
 .destination-name {
-  margin-top: 5px;
+  margin-top: 10px;
   text-align: center;
   font-style: italic;
-  font-size: 18px;
+  font-size: 25px !important;
 }
 
 /* --------------TABLET */
 @media screen and (min-width:600px) {}
-
+.destination {
+  margin: 20px 30px;
+}
 /* --------------DESKTOP */
 @media screen and (min-width:1200px) {
   .destination {

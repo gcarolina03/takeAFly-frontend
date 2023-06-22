@@ -3,7 +3,6 @@ import { Typography} from '@mui/material';
 import { useEffect, useState  } from 'react';
 
 import CardList from '../../components/CardList/CardList';
-import Header from '../../components/Header/Header'
 import { GetMyTravelsAPI } from '../../services/user.services';
 
 
@@ -21,7 +20,6 @@ function MyTravels() {
 
   return (
     <>
-      <Header />
       <Typography textAlign='center' variant='h5' sx={{ my:3, width:'100%' }}>My Travels </Typography>
       {travels.length > 0 && <CardList data={travels} activeCategory='All' type='travel'/> } 
     </>
