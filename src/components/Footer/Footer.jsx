@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import { BottomNavigation, BottomNavigationAction, Divider } from '@mui/material';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import InfoIcon from '@mui/icons-material/Info';
@@ -27,11 +28,11 @@ function Footer() {
           }
         `}
       </style>
-      <BottomNavigationAction showLabel label="Contact Us" icon={<ContactMailIcon style={{ color: 'white' }} />} />
+      <BottomNavigationAction component={Link} to='/error' showLabel label="Contact Us" icon={<ContactMailIcon style={{ color: 'white' }} />} />
       <Divider />
-      <BottomNavigationAction showLabel label="About Us" icon={<InfoIcon style={{ color: 'white' }}  />} />
+      <BottomNavigationAction component={Link} to='/error' showLabel label="About Us" icon={<InfoIcon style={{ color: 'white' }} />} />
       <Divider />
-      <BottomNavigationAction showLabel label="Legal Warning" icon={<PolicyIcon style={{ color: 'white' }}  />} />
+      <BottomNavigationAction component={Link} to='/error' showLabel label="Legal Warning" icon={<PolicyIcon style={{ color: 'white' }}  />} />
       <Divider />
     </BottomNavigation>
     </footer>

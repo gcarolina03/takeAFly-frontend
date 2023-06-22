@@ -15,6 +15,7 @@ import MyTravels from "../pages/MyTravels/MyTravels";
 import TravelResume from "../pages/TravelResume/TravelResume";
 import Landing from "../pages/Landing/Landing";
 import ShowProfile from "../pages/ShowProfile/ShowProfile";
+import ConstructionPage from "../pages/Construction/Construction";
 
 const isAuthenticated = () => (!localStorage.getItem('token'))
 
@@ -47,4 +48,5 @@ export const router = createBrowserRouter([
     ] 
   },
   { path: "/test", element: <Test /> },
+  { path: "/error", element: <ConstructionPage /> },
 ]);

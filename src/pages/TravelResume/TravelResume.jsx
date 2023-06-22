@@ -75,14 +75,17 @@ function TravelResume() {
           </IconButton>
             <Grid display="flex" flexDirection="column" justifyContent="center">
             <div>
-              <h2>Travel Destination</h2> {travel.destination.city}
+              <h2>Travel Destination</h2>{" "}
             </div>
+              <div className="information"> {travel.destination.city} </div>
             <div>
-              <h2>Travel Date</h2> {travel.departure_date}
+              <h2>Travel Date</h2>{" "}
             </div>
+              <div className="information">{travel.departure_date}</div>
             <div>
-              <h2>Travel Return Date</h2> {travel.return_date}
+              <h2>Travel Return Date</h2>{" "}
             </div>
+              <div className="information">{travel.return_date}</div>
             <div>
               <h2>Budget:</h2> {travel.budget}€
             </div>

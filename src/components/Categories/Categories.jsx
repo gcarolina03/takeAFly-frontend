@@ -1,20 +1,7 @@
-import { useEffect, useState } from 'react'
-import { GetCategoriesAPI } from '../../services/category.service'
 import { Button } from '@mui/material'
+import PropTypes from 'prop-types'
 
 function Categories({ data }) {
-    const [categories, setCategories] = useState([])
-
-    
-    const listCategories = async () => {
-        const res = await GetCategoriesAPI() 
-        setCategories(res)
-    }
-
-    useEffect(() => {
-        listCategories()
-    }, [])
-
   return (
     <>
       {data.length > 0 &&
@@ -34,6 +21,11 @@ function Categories({ data }) {
         ))}
     </>
   );
+}
+
+// props validations
+Categories.propTypes = {
+  data: PropTypes.object,
 }
 
 export default Categories
