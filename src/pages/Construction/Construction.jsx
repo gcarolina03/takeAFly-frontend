@@ -2,8 +2,8 @@ import { Box, Typography } from "@mui/material";
 import {useTheme} from "@mui/material";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-
-let image = '../../assets/img/Lost.jpg'
+import './Construction.css'
+let image = '../../assets/img/travel.jpg'
 function ConstructionPage() {
 const theme = useTheme();
 
@@ -11,28 +11,28 @@ return (
   <>
     <Header />
     <Box
+      className="body"
       sx={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
         width: "100vw",
         height: "100vh",
         marginTop: "0px",
-        backgroundImage:`url(${image})`
       }}
     >
-      <Box
-      >
+      <Box>
         <Typography
+          className="message"
           variant="h2"
           sx={{
-            color: theme.palette.primary.main,
-            fontSize: "calc(0.8vw + 19px)",
+            marginTop:{ xs: "200px", md: "500px" },
+            marginLeft:{xs: '50px'},
+            fontSize: "calc(0.8vw + 15px)",
             fontWeight: "bold",
-            textShadow: "0.1px 0.1px 12px rgba(200, 200, 200, 10)",
           }}
         >
-          Sorry, we are working on this page! Try again later :)!
+          We've taken a detour on this journey. Stay tuned for an exciting
+          destination!
         </Typography>
       </Box>
     </Box>
