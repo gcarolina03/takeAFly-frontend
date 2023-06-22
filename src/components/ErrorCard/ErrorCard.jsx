@@ -5,7 +5,7 @@ import { useTheme } from "@emotion/react";
 function ErrorCard() {
   const theme = useTheme();
   return (
-    <Box display='flex' justifyContent='center'>
+    <Box display='flex' justifyContent='center' marginTop= '135px' height='100vh'  >
       <Typography variant='h2'
        sx={{
           color: theme.palette.primary.main, padding: '1',

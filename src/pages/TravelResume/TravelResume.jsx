@@ -15,6 +15,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { DeleteTravelAPI, GetTravelAPI, JoinTravelAPI, RemoveTravelAPI } from "../../services/travel.services";
 import "./TravelResume.css";
+import Footer from '../../components/Footer/Footer'
 import { useEffect, useState } from "react";
 import { ArrowCircleLeft } from "@mui/icons-material";
 import { GetProfileAPI } from "../../services/user.services";
@@ -96,7 +97,7 @@ function TravelResume() {
       <CircularProgress />;
     }
   }
-
+  
   return (
     <Box
       id="boxDestination"
@@ -109,117 +110,133 @@ function TravelResume() {
         backgroundColor: grey[100],
       }}
     >
-      <Grid
-        item
-        xs={12}
-        sm={8}
-        lg={4}
+      <Box
         sx={{
+          backgroundColor: "grey[100]",
           display: "flex",
           flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
-          alignSelf: "center",
-          padding: "40px",
-          height: "100%",
-          margin: "auto",
+          height: "85%",
+          marginTop: "65px",
+          borderRadius: "10px",
+          border: "5px solid rgba(0, 0, 0, 0.5)",
+          boxShadow: "0 0 18px rgba(0, 0, 0, 8)",
         }}
       >
         <Grid
           item
+          xs={12}
+          sm={8}
+          lg={4}
           sx={{
             display: "flex",
-            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+            alignSelf: "center",
+            padding: "40px",
+            height: "100%",
+            margin: "auto",
           }}
         >
-          <Avatar
-            src="https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?cs=srgb&dl=pexels-oleksandr-pidvalnyi-3278215.jpg&fm=jpg"
-            alt="Destination Avatar"
-            variant="square"
-            sx={{
-              width: { xs: 300, sm: 800 },
-              height: { xs: 150, sm: 200 },
-              my: 1,
-            }}
-          />
-        </Grid>
-        <Typography paddingTop="10px" paddingBottom="20px">
-          <h1>Resume</h1>
-        </Typography>
-        <Grid container sx={{ display: "flex", flexDirection: "column" }}>
           <Grid
+            item
             sx={{
-              osition: "absolute",
               display: "flex",
-              gap: 1.5,
-              flexWrap: "wrap",
-              alignItems: "flex-start",
-              width: "100%",
-              flexDirection: "row",
+              justifyContent: "center",
             }}
           >
-            <Typography>
-              {showData()}
-            </Typography>
+            <Avatar
+              src="https://images.pexels.com/photos/3278215/pexels-photo-3278215.jpeg?cs=srgb&dl=pexels-oleksandr-pidvalnyi-3278215.jpg&fm=jpg"
+              alt="Destination Avatar"
+              variant="square"
+              sx={{
+                width: { xs: 300, sm: 800 },
+                height: { xs: 150, sm: 200 },
+                my: 1,
+              }}
+            />
+          </Grid>
+          <Typography paddingTop="10px" paddingBottom="25px">
+            <h1>Resume</h1>
+          </Typography>
+          <Grid container sx={{ display: "flex", flexDirection: "column" }}>
+            <Grid
+              sx={{
+                osition: "absolute",
+                display: "flex",
+                gap: 1.5,
+                flexWrap: "wrap",
+                alignItems: "flex-start",
+                width: "100%",
+                flexDirection: "row",
+              }}
+            >
+              <Typography>{showData()}</Typography>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid
-        display="flex"
-        flexDirection="column"
-        margin="auto"
-        width={{ xs: "100%", sm: "35%" }}
-      >
-       
-        <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
-          {travel !== '' && !userInTravel(user.id) && user.id !== travel.userId && 
-            <Button
-              onClick={() => JoinTravel()}
-              variant="text"
-              size="large"
-              className="btn"
-              sx={{
-                borderRadius: 0,
-                backgroundColor: theme.palette.primary.main,
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              Join a travel
-            </Button>
-          }
-          {travel !== '' && user.id === travel.userId && 
-            <Button
-              onClick={() => DeleteTravel()}
-              variant="text"
-              size="large"
-              className="btn"
-              sx={{
-                borderRadius: 0,
-                backgroundColor: 'red',
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              Delete travel
-            </Button>
-          }
-          {travel !== '' && userInTravel(user.id) && user.id !== travel.userId &&
-            <Button
-              onClick={() => RemoveTravel()}
-              variant="text"
-              size="large"
-              className="btn"
-              sx={{
-                borderRadius: 0,
-                backgroundColor: theme.palette.secondary.main,
-                color: theme.palette.primary.contrastText,
-              }}
-            >
-              Leave Travel
-            </Button>
-          }
-
-          
-        </CardActions>
-      </Grid>
+        <Grid
+          display="flex"
+          flexDirection="column"
+          margin="auto"
+          width={{ xs: "100%", sm: "35%" }}
+        >
+          <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
+            {travel !== "" &&
+              !userInTravel(user.id) &&
+              user.id !== travel.userId && (
+                <Button
+                  onClick={() => JoinTravel()}
+                  variant="text"
+                  size="large"
+                  className="btn"
+                  sx={{
+                    borderRadius: 0,
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.primary.contrastText,
+                  }}
+                >
+                  Join a travel
+                </Button>
+              )}
+            {travel !== "" && user.id === travel.userId && (
+              <Button
+                onClick={() => DeleteTravel()}
+                variant="text"
+                size="large"
+                className="btn"
+                sx={{
+                  width: "100%",
+                  borderRadius: 0,
+                  backgroundColor: "red",
+                  color: theme.palette.primary.contrastText,
+                }}
+              >
+                Delete travel
+              </Button>
+            )}
+            {travel !== "" &&
+              userInTravel(user.id) &&
+              user.id !== travel.userId && (
+                <Button
+                  onClick={() => RemoveTravel()}
+                  variant="text"
+                  size="large"
+                  className="btn"
+                  sx={{
+                    borderRadius: 0,
+                    backgroundColor: theme.palette.secondary.main,
+                    color: theme.palette.primary.contrastText,
+                  }}
+                >
+                  Leave Travel
+                </Button>
+              )}
+          </CardActions>
+        </Grid>
+      </Box>
+      <Footer />
     </Box>
   );
 }

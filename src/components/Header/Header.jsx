@@ -32,7 +32,7 @@ function Header() {
     },
     {
       label: "Wishlist",
-      link: "/wishlist",
+      link: "/error",
     },
     {
       label: 'My Travels',
