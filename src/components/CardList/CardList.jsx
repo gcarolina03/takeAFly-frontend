@@ -33,7 +33,13 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
   console.log(data)
   console.log(filters)
   const filterDestinations = () => {
-    return data.filter((destination) => destination.categories.some((category) => category.id == activeCategory))
+    let dataFilter = data 
+
+    if(activeCategory !== 'All') {
+      dataFilter = dataFilter.filter((travel) => travel.destination.categories.some((category) => category.id == activeCategory))
+    }
+
+    return dataFilter
   }
 
   const showAll = () => {
@@ -46,15 +52,6 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
         </Grid>
       )
     } else if (type === 'destination') {
-      if(activeCategory === 'All') {
-        return (
-          <Grid className='cardlist-container' container>
-            {data.map((item) => (
-              <CardDestination data={item} seeDestination={seeDestination} key={item.id} />
-            ))}
-          </Grid>
-        )
-      } else {
         return (
           <Grid className='cardlist-container' container>
             {filterDestinations().map((item) => (
@@ -62,7 +59,6 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
             ))}
           </Grid>
         )
-      }
     } else {
       return (
         <Grid className='cardlist-container' container>
