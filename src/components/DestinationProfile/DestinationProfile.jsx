@@ -39,6 +39,7 @@ function DestinationProfile({data, hide, create}) {
           padding: "40px",
           height: "100%",
           margin: "auto",
+          border:'solid green'
         }}
       >
         <Grid
@@ -68,8 +69,8 @@ function DestinationProfile({data, hide, create}) {
           </Typography>
         </Grid>
 
-        <Grid container sx={{ display: "flex", flexDirection: "column", alignItems:'center' }}>
-          <Grid item width={{ xs: "100%", lg: "35%" }}>
+        <Grid container sx={{ display: "flex", flexDirection: "column", alignItems:'center', border:'solid blue' }}>
+          <Grid item width={{ xs: "100%", lg: "35%" }} sx={{border:'solid red'}}>
             <Typography variant="h6" align="left" sx={{ mb: 1 }}>
               Description
             </Typography>

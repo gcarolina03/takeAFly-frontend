@@ -16,7 +16,7 @@ import TravelResume from "../pages/TravelResume/TravelResume";
 import Landing from "../pages/Landing/Landing";
 import ShowProfile from "../pages/ShowProfile/ShowProfile";
 
-const isAuthenticated = () => (localStorage.getItem('token'))
+const isAuthenticated = () => (!localStorage.getItem('token'))
 
 export const router = createBrowserRouter([
   {

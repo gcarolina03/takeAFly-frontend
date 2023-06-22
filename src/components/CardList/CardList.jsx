@@ -32,11 +32,13 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
 
   console.log(data)
   console.log(filters)
+
   const filterDestinations = () => {
     let dataFilter = data 
+    console.log('data:'+dataFilter)
 
     if(activeCategory !== 'All') {
-      dataFilter = dataFilter.filter((travel) => travel.destination.categories.some((category) => category.id == activeCategory))
+      dataFilter = dataFilter.filter((travel) => travel.categories.some((category) => category.id == activeCategory))
     }
 
     return dataFilter
