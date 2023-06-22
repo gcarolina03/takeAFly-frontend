@@ -24,6 +24,7 @@ function TravelCreated() {
             display: "flex",
             flexDirection: "column",
             padding: "40px",
+            width:{ xs: '100%', sm: '60%' , lg: '35%'},
           }}
         >
           <Grid
@@ -85,11 +86,10 @@ function TravelCreated() {
           </Grid>
         </Grid>
         <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: { xs: "100%", sm: "30%" },
-          }}
+          display="flex"
+          flexDirection="column"
+          width={{ xs: "100%", lg: "35%" }}
+          sx={{m:'0 !important', position:{xs: 'relative', sm:'absolute'}, bottom:0}}
         >
           <Button
             href="/profile/travels"

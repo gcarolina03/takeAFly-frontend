@@ -72,12 +72,6 @@ function TravelResume() {
     if(travel !== '' && user !== '') {
       return (
         <>
-          <IconButton
-            sx={{ position: "absolute", top: 0, left: 0, p: "0 !important", m: 1 }}
-            href="/dashboard"
-          >
-          <ArrowCircleLeft className="btn-back" />
-          </IconButton>
             <Grid display="flex" flexDirection="column" justifyContent="center">
             <div>
               <h2>Travel Destination</h2>{" "}
@@ -112,9 +106,14 @@ function TravelResume() {
         width: "100%",
         alignItems: "center",
         flexDirection: "column",
-        backgroundColor: grey[100],
       }}
     >
+      <IconButton
+        sx={{ position: "absolute", left: 0, p: "0 !important", m: 1 }}
+        href="/dashboard"
+      >
+        <ArrowCircleLeft className="btn-back" />
+      </IconButton>
       <Box
         sx={{
           display: "flex",

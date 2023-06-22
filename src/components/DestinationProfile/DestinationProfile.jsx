@@ -35,7 +35,7 @@ function DestinationProfile({data, hide, create}) {
           alignItems: "center",
           my: "40px",
           mx:'20px',
-          width:{ xs: '100%', sm: '60%' },
+          width:{ xs: '100%', sm: '60%' , lg: '35%'},
         }}
       >
         <Grid

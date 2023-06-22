@@ -9,14 +9,13 @@
 /* --------------TABLET */
 @media screen and (min-width:600px) {
   .boxDestination {
-    height: 90vh;
+    height: 93.5vh;
   }
 }
 
 /* --------------DESKTOP */
 @media screen and (min-width:1200px) {
-
   .boxDestination {
-      height: 100vh;
-    }
+    height: 92vh;
+  }
 }
