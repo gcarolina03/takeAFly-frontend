@@ -125,17 +125,12 @@ function TravelForm({handle, handleData}) {
     <Box className="create-travel-container">
         <Grid
         item
-          xs={12}
-          sm={12}
-          lg={5}
           sx={{
-            position: "absolute",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             width: "100%",
-            py: { lg: "60px" },
-            height: "100%",
+            height:{xs: '100%'}
           }}
         >
           <Card
@@ -144,10 +139,9 @@ function TravelForm({handle, handleData}) {
               display: "flex",
               flexDirection: "column",
               alignItems: "space-around",
-              height: "100%",
               width: "100%",
+              height:{xs: '100%'}
             }}
-            raised={true}
           >
             
             <CardHeader
@@ -168,7 +162,6 @@ function TravelForm({handle, handleData}) {
                 type="number"
                 placeholder="30"
                 required
-                sx={{ marginTop: "20px" }}
                 InputProps={{
                   endAdornment: (
                     <IconButton disabled>
@@ -179,51 +172,55 @@ function TravelForm({handle, handleData}) {
                 value={budget}
                 onChange={handleBudget}
               ></TextField>
-              <TextField
-                fullWidth
-                margin="dense"
-                variant="standard"
-                label="Departure Date"
-                type="date"
-                required
-                error={validateDeparture()}
-                helperText={validateDeparture() ? "Introduce valid departure date" : ""}
-                sx={{ marginTop: "20px" }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton disabled>
-                      <CalendarMonth />
-                    </IconButton>
-                  ),
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={departureDate}
-                onChange={handleDeparture}
-              ></TextField>
-              <TextField
-                fullWidth
-                margin="dense"
-                variant="standard"
-                label="Return Date"
-                error={validateReturn()}
-                helperText={validateReturn() ? "Return date must be greater than departure date" : ""}
-                type="date"
-                sx={{ marginTop: "20px" }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton disabled>
-                      <CalendarMonth />
-                    </IconButton>
-                  ),
-                }}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                value={returnDate}
-                onChange={handleReturn}
-              ></TextField>
+              <Grid sx={{display:'flex', flexDirection:'row', mt: {xs: "20px", sm:'10px', lg:'5px'}, gap:2}}>
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  variant="standard"
+                  label="Departure Date"
+                  type="date"
+                  required
+                  error={validateDeparture()}
+                  helperText={validateDeparture() ? "Introduce valid departure date" : ""}
+                  sx={{ marginTop: "20px" }}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton disabled>
+                        <CalendarMonth />
+                      </IconButton>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={departureDate}
+                  onChange={handleDeparture}
+                ></TextField>
+                <TextField
+                  fullWidth
+                  margin="dense"
+                  variant="standard"
+                  label="Return Date"
+                  error={validateReturn()}
+                  helperText={validateReturn() ? "Return date must be greater than departure date" : ""}
+                  type="date"
+                  required
+                  sx={{ marginTop: "20px" }}
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton disabled>
+                        <CalendarMonth />
+                      </IconButton>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={returnDate}
+                  onChange={handleReturn}
+                ></TextField>
+              </Grid>
+              
               <Autocomplete
                 options={airports}
                 getOptionLabel={(option) => `${option.name} (${option.code})`}
@@ -262,9 +259,7 @@ function TravelForm({handle, handleData}) {
                 </RadioGroup>
               </div>
             </CardContent>
-            <Box sx={{position:'absolute', width:'100%',
-          bottom:0}}>
-              <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
+              <CardActions sx={{width:'100%', mt:2, padding:'0 !important', position:{xs: 'absolute', sm:'relative'}, bottom:0}} >
                 <Button
                   onClick={(e) => {
                     submitForm(e);
@@ -281,7 +276,6 @@ function TravelForm({handle, handleData}) {
                   Create
                 </Button>
               </CardActions>
-            </Box>
           </Card>
         </Grid>
       </Box>

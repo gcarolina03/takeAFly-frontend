@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom'
 import { Divider } from "@mui/material";
 import { Logout } from "@mui/icons-material";
+import MenuIcon from '@mui/icons-material/Menu';
 
 function Header() {
   const navigate = useNavigate()
@@ -29,10 +30,6 @@ function Header() {
     {
       label: 'Plan a Travel',
       link: '/dashboard/createTravel'
-    },
-    {
-      label: "Wishlist",
-      link: "/wishlist",
     },
     {
       label: 'My Travels',
@@ -97,9 +94,9 @@ function Header() {
             Join the Travel Revolution
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Tooltip title="Open menu">
+              <IconButton onClick={handleOpenUserMenu} sx={{ py: 0 }}>
+                <MenuIcon sx={{color:'white', fontSize:'35px'}} />
               </IconButton>
             </Tooltip>
             <Menu

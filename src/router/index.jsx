@@ -15,6 +15,7 @@ import MyTravels from "../pages/MyTravels/MyTravels";
 import TravelResume from "../pages/TravelResume/TravelResume";
 import Landing from "../pages/Landing/Landing";
 import ShowProfile from "../pages/ShowProfile/ShowProfile";
+import EditProfile from "../pages/EditProfile/EditProfile";
 
 const isAuthenticated = () => (!localStorage.getItem('token'))
 
@@ -40,10 +41,11 @@ export const router = createBrowserRouter([
     ]
   },
   { path: "/profile",
-    element: <UserProfile />,
+    element: isAuthenticated() ? <Navigate to="/login" /> : <UserProfile />,
     children: [
       { path: "/profile/", element: <ShowProfile /> },
       { path: "/profile/myTravels", element: <MyTravels /> },
+      { path: "/profile/edit", element: <EditProfile /> },
     ] 
   },
   { path: "/test", element: <Test /> },

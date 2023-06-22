@@ -101,21 +101,24 @@ function CreateProfile() {
             }} 
           />
         </IconButton>
-        <TextField
-          fullWidth
-          margin="dense"
-          label="First Name"
-          variant="standard"
-          onChange={handleFirstName}
-        />
-        <TextField
-          fullWidth
-          margin="dense"
-          label="Last Name"
-          variant="standard"
-          sx={{ marginTop: "20px" }}
-          onChange={handleLastName}
-        />
+        <Grid sx={{display:'flex', flexDirection:'row', gap:2}}>
+          <TextField
+            fullWidth
+            margin="dense"
+            label="First Name"
+            sx={{ width:'40%' }}
+            variant="filled"
+            onChange={handleFirstName}
+          />
+          <TextField
+            fullWidth
+            margin="dense"
+            label="Last Name"
+            sx={{ width:'60%' }}
+            variant="filled"
+            onChange={handleLastName}
+          />
+        </Grid>
         <TextField
           fullWidth
           margin="dense"

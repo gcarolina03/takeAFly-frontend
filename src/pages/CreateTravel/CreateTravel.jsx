@@ -71,7 +71,7 @@ function CreateTravel() {
   }
   console.log(showDestination)
   return (
-    <Grid sx={{position:'relative', }}>
+    <Grid sx={{position:'relative'}}>
       {(created && !showDestination) &&
       <>
         <Typography  textAlign='center' variant='h5' sx={{my:3, width:'100%' }}>Select a Destination</Typography>

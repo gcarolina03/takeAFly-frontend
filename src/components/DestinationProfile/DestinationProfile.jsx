@@ -29,17 +29,13 @@ function DestinationProfile({data, hide, create}) {
       <Grid
         item
         xs={12}
-        sm={8}
-        lg={4}
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          alignSelf: "center",
-          padding: "40px",
-          height: "100%",
-          margin: "auto",
-          border:'solid green'
+          my: "40px",
+          mx:'20px',
+          width:{ xs: '100%', sm: '60%' },
         }}
       >
         <Grid
@@ -69,9 +65,9 @@ function DestinationProfile({data, hide, create}) {
           </Typography>
         </Grid>
 
-        <Grid container sx={{ display: "flex", flexDirection: "column", alignItems:'center', border:'solid blue' }}>
-          <Grid item width={{ xs: "100%", lg: "35%" }} sx={{border:'solid red'}}>
-            <Typography variant="h6" align="left" sx={{ mb: 1 }}>
+        <Grid container sx={{ display: "flex", flexDirection: "column", alignItems:'center'}}>
+          <Grid item width={{ xs: "100%" }}>
+            <Typography variant="h6" align="left" sx={{ mb: 1, pl:{xs: '30px', sm: 0} }}>
               Description
             </Typography>
             <Typography
@@ -89,9 +85,10 @@ function DestinationProfile({data, hide, create}) {
           </Typography>
           <Grid
             item
-            width={{ xs: "100%", lg: "35%" }}
+            width={{ xs: "100%" }}
             sx={{
               display: "flex",
+              px:'30px',
               gap: 1.5,
               flexWrap: "wrap",
               alignItems: "flex-start",
@@ -105,10 +102,10 @@ function DestinationProfile({data, hide, create}) {
       <Grid
         display="flex"
         flexDirection="column"
-        margin="auto"
         width={{ xs: "100%", lg: "35%" }}
+        sx={{m:'0 !important', position:'absolute', bottom:0}}
       >
-        <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
+        <CardActions sx={{ width: "100%", m: 0, padding: "0 !important" }}>
           <Button
             onClick={() => {
               create()

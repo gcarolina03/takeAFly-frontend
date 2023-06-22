@@ -154,8 +154,6 @@ function SignUp() {
     }
   }
 
-  // GOOGLE
-
   return (
     <Box className="box">
       <Grid
@@ -278,6 +276,7 @@ function SignUp() {
               sx={{ mt: {xs: "20px", sm:'10px', lg:'5px'} }}
               onChange={handleEmail}
               error={emailVerification() && email !== ""}
+              helperText={emailVerification() && email !== "" ? 'Introduce a valid email' : ''}
               InputProps={{
                 endAdornment: (
                   <IconButton disabled>
@@ -294,6 +293,7 @@ function SignUp() {
               type="date"
               sx={{ mt: {xs: "20px", sm:'10px', lg:'5px'} }}
               onChange={handleBirth}
+              helperText={!validateAge() && birth !== "" ? 'Introduce a valid date' : ''}
               error={!validateAge() && birth !== ""}
               InputProps={{
                 endAdornment: (

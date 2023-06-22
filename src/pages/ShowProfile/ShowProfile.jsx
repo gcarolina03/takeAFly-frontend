@@ -1,8 +1,9 @@
-import { Box, Avatar, Typography, Grid } from '@mui/material'
+import { Avatar, Typography, Grid, IconButton } from '@mui/material'
 import { grey } from '@mui/material/colors'
 import MiniList from '../../components/MiniList/MiniList';
 import { GetMyTravelsAPI, GetProfileAPI } from '../../services/user.services';
 import { useEffect, useState } from 'react';
+import { Edit } from '@mui/icons-material';
 
 function ShowProfile() {
   const [user, setUser] = useState("");
@@ -40,31 +41,15 @@ function ShowProfile() {
 
   return (
   <>
-    <Box
-      sx={{
-        display: 'flex',
-        backgroundColor: grey[100],
-        height: "100%",
-        width: "100%",
-        alignItems: 'center',
-      }}
-    >
       <Grid
-        item
-        xs={12}
-        sm={8}
-        lg={4}
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          alignSelf: 'center',
           padding: "40px",
-          height: "100%",
-          margin: 'auto'
         }}
       >
-        <Grid item sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid sx={{ display: "flex", justifyContent: "center" }}>
           <Avatar
             src="https://www.w3schools.com/w3images/avatar2.png"
             alt="User Avatar"
@@ -75,16 +60,29 @@ function ShowProfile() {
             }}
           />
         </Grid>
-        <Grid item sx={{ mb: 5 }}>
+
+        <Grid sx={{ mb: 5 }}>
+          <Grid sx={{ display:'flex', flexDirection:'row', position:'relative'}}>
           <Typography variant="h4" align="center">
-            {user.username}
+            {user.first_name}&nbsp;{user.last_name}
+          </Typography>
+          <IconButton
+              sx={{ p: "0 !important", m: 0, position:'absolute', right:-30, top:'50%', transform:'translateY(-50%)' }}
+              href='/profile/edit'
+            >
+              <Edit className="btn-back" sx={{color:`grey`, fontSize:'25px !important'}}/>
+            </IconButton>
+          </Grid>
+          <Typography variant="h6" align="center">
+            {user.username} 
           </Typography>
           <Typography variant="body1" align="center">
             {calculateAge(user.birth_date)} years.
           </Typography>
         </Grid>
-        <Grid container sx={{ gap: "30px", flexDirection: "column" }}>
-          <Grid item>
+
+        <Grid sx={{ gap: "30px", flexDirection: "column" }}>
+          <Grid>
             <Typography variant="h6" align="left" sx={{ mb: 1 }}>
               Description
             </Typography>
@@ -98,21 +96,14 @@ function ShowProfile() {
                 : "no description :("}
             </Typography>
           </Grid>
-          <Grid item alignSelf="center">
+          <Grid alignSelf="center">
             <Typography variant="h6" align="center" color={grey[600]}>
               Your Travels
             </Typography>
             {travels.length > 0 && <MiniList data={travels} />}
           </Grid>
-          {/* <Grid item sx={{mt:2}} alignSelf='center' >
-            <Typography variant="h6" align="center" color={grey[600]}>
-              Wishlist
-            </Typography>
-            <MiniList />
-          </Grid> */}
         </Grid>
       </Grid>
-    </Box>
   </>
     
   );

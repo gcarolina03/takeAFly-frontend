@@ -1,4 +1,4 @@
-.create-travel-container {
+.edit-profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,16 +6,9 @@
   position: absolute;
 }
 
-/* --------------MOVIL */
-@media screen and (max-width:599px) {
-  .create-travel-container {
-    height: 90vh;
-  }
-}
-
 /* --------------TABLET */
 @media screen and (min-width:600px) {
-  .create-travel-container {
+  .edit-profile-container {
     justify-content: center;
     width: 80%;
     left: 50%;
@@ -26,7 +19,7 @@
 
 /* --------------DESKTOP */
 @media screen and (min-width:1200px) {
-  .create-travel-container {
+  .edit-profile-container {
     width: 500px;
   }
 }

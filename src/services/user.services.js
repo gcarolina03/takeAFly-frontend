@@ -25,3 +25,16 @@ export const GetMyTravelsAPI = async () => {
     console.error('Cannot get my travels', error)
   }
 }
+
+export const UpdateProfileAPI = async (obj) => {
+  try {
+    const { data } = await api.put('/profile/', obj,  {
+        headers: {
+        token: localStorage.getItem('token')
+      }
+    })
+    return data
+  } catch (error) {
+    console.error('Cannot update profile', error)
+  }
+}
