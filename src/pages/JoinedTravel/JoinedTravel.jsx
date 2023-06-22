@@ -1,5 +1,6 @@
 import { Box, Avatar, Typography, Grid, Button } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import Footer from "../../components/Footer/Footer";
 
 function TravelCreated() {
   const theme = useTheme();
@@ -13,7 +14,7 @@ function TravelCreated() {
         alignItems: "center",
         margin: "auto",
       }}
-    >
+      >
       <Box
         sx={{
           backgroundColor: "grey[100]",
@@ -21,11 +22,12 @@ function TravelCreated() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          height: "85%",
+          width:"85%",
           marginTop: "65px",
           borderRadius: "10px",
-          border: "5px solid rgba(0, 0, 0, 0.5)",
-          boxShadow: "0 0 18px rgba(0, 0, 0, 8)",
+          border: "2px solid rgba(0, 0, 0, 0.5)",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 5)",
+          padding:'19px',
         }}
       >
         {" "}
@@ -126,7 +128,9 @@ function TravelCreated() {
           </Button>
         </Grid>
       </Box>
+      <Footer/>
     </Box>
+    
   );
 }
 

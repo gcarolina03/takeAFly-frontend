@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography,Box } from '@mui/material';
 import { useEffect, useState  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CategoriesButtonGroup from '../../components/CategoriesButtonGroup/CategoriesButtonGroup'
@@ -7,6 +7,9 @@ import { CreateTravelAPI } from '../../services/travel.services';
 import CardList from '../../components/CardList/CardList';
 import TravelForm from '../../components/TravelForm/TravelForm';
 import DestinationProfile from '../../components/DestinationProfile/DestinationProfile';
+import { Height } from '@mui/icons-material';
+import Footer from '../../components/Footer/Footer'
+
 
 
 function CreateTravel() {
@@ -71,17 +74,35 @@ function CreateTravel() {
   }
   console.log(showDestination)
   return (
-    <Grid sx={{position:'relative'}}>
-      {(created && !showDestination) &&
-      <>
-        <Typography  textAlign='center' variant='h5' sx={{my:3, width:'100%' }}>Select a Destination</Typography>
-        <CategoriesButtonGroup onCategorySelect={handleCategorySelect}/>
-        {destinations.length > 0 && <CardList data={destinations} activeCategory={activeCategory} seeDestination={seeDestination} type='destination'/> }
-      </>
-      }
-      {!created && <TravelForm handle={handleCreated} handleData={handleData} /> }
-      {showDestination && handleShowDestination()}
-    </Grid>
+    <div >
+      <Grid  sx={{ position: "relative"}}>
+        {created && !showDestination && (
+          <div>
+            <Typography
+              textAlign="center"
+              variant="h5"
+              sx={{ my: 3, width: "100%" }}
+            >
+              Select a Destination
+            </Typography>
+            <CategoriesButtonGroup onCategorySelect={handleCategorySelect} />
+            {destinations.length > 0 && (
+              <CardList
+                data={destinations}
+                activeCategory={activeCategory}
+                seeDestination={seeDestination}
+                type="destination"
+              />
+            )}
+          </div>
+        )}
+        {!created && (
+          <TravelForm handle={handleCreated} handleData={handleData} />
+        )}
+        {showDestination && handleShowDestination()}
+      </Grid>
+      <Footer/>
+    </div>
   );
 }
 

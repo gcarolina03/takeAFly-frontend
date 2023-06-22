@@ -88,7 +88,7 @@ function Header() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
-              fontSize: "calc(4px + 0.8vw)",
+              fontSize: "calc(10px + 0.8vw)",
             }}
           >
             Join the Travel Revolution
