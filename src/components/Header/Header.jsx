@@ -19,20 +19,20 @@ function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const menu = [
     {
-      label: 'Home',
-      link: '/dashboard'
+      label: "Home",
+      link: "/dashboard",
     },
     {
-      label: 'Profile',
-      link: '/profile'
+      label: "Profile",
+      link: "/profile",
     },
     {
       label: 'Plan a Travel',
       link: '/dashboard/createTravel'
     },
     {
-      label: 'Wishlist',
-      link: '/wishlist'
+      label: "Wishlist",
+      link: "/wishlist",
     },
     {
       label: 'My Travels',

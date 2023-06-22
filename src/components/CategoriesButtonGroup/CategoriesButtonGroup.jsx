@@ -33,7 +33,7 @@ const CategoriesButtonGroup = ( { onCategorySelect, onFilters } ) => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary', display:'flex', justifyContent:'center' , marginTop: '20px'}}>
+    <Box sx={{ bgcolor: 'primary', display:'flex', flexDirection:'row' , justifyContent:'center' , alignItems:'center', marginTop: '20px'}}>
       <Tabs
         value={value}
         onChange={handleChange}
