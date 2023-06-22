@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { GetCategoriesAPI } from '../../services/category.service'
 import { Button } from '@mui/material'
 
-function Categories({data}) {
+function Categories({ data }) {
     const [categories, setCategories] = useState([])
 
     
