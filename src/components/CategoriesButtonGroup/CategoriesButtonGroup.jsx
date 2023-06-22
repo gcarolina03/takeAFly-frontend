@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 
 import FilterMenu from '../FilterMenu/FilterMenu'
 import { GetCategoriesAPI } from "../../services/category.service";
+import ErrorCard from "../ErrorCard/ErrorCard";
 
 const CategoriesButtonGroup = ( { onCategorySelect, onFilters } ) => {
   const theme = useTheme();
@@ -33,7 +34,7 @@ const CategoriesButtonGroup = ( { onCategorySelect, onFilters } ) => {
   };
 
   return (
-    <Box sx={{ bgcolor: 'primary', display:'flex', flexDirection:'row' , justifyContent:'center' , alignItems:'center', marginTop: '20px'}}>
+    <Box sx={{ bgcolor: 'primary', display:'flex', flexDirection:'row' , justifyContent:'center' , marginTop: '15px'}}>
       <Tabs
         value={value}
         onChange={handleChange}

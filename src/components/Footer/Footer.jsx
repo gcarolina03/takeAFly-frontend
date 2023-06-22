@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import { BottomNavigation, BottomNavigationAction, Divider } from '@mui/material';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import InfoIcon from '@mui/icons-material/Info';
@@ -14,14 +15,27 @@ function Footer() {
   };
 
   return (
-    <BottomNavigation value={value} onChange={handleChange} sx={{backgroundColor: theme.palette.primary.main, color:'white', width: '100%',}} >
-      <BottomNavigationAction label="Contact Us" icon={<ContactMailIcon />} />
+    <footer  style={{ position: 'fixed', bottom: 0, left: 0, width: '100%', zIndex: 100 }}>
+    <BottomNavigation value={value} onChange={handleChange} sx={{
+      backgroundColor: theme.palette.primary.main,
+      width: '100%',
+      padding:'2px'}} >
+            <style>
+        {`
+          .MuiBottomNavigationAction-label,
+          .MuiBottomNavigationAction-icon {
+            color: white;
+          }
+        `}
+      </style>
+      <BottomNavigationAction component={Link} to='/error' showLabel label="Contact Us" icon={<ContactMailIcon style={{ color: 'white' }} />} />
       <Divider />
-      <BottomNavigationAction label="About Us" icon={<InfoIcon />} />
+      <BottomNavigationAction component={Link} to='/error' showLabel label="About Us" icon={<InfoIcon style={{ color: 'white' }} />} />
       <Divider />
-      <BottomNavigationAction label="Legal Warning" icon={<PolicyIcon />} />
+      <BottomNavigationAction component={Link} to='/error' showLabel label="Legal Warning" icon={<PolicyIcon style={{ color: 'white' }}  />} />
       <Divider />
     </BottomNavigation>
+    </footer>
   );
 }
 

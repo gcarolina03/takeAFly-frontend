@@ -9,6 +9,7 @@ function Landing() {
   const [filters, setFilters] = useState('');
 
   const handleCategorySelect = (category) => {
+    console.log(category)
     setActiveCategory(category);
   };
 

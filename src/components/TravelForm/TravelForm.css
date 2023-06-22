@@ -28,5 +28,6 @@
 @media screen and (min-width:1200px) {
   .create-travel-container {
     width: 500px;
+    padding: 30px 0;
   }
 }

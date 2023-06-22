@@ -14,6 +14,21 @@ function TravelCreated() {
         margin: "auto",
       }}
     >
+      <Box
+        sx={{
+          backgroundColor: "grey[100]",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "85%",
+          marginTop: "65px",
+          borderRadius: "10px",
+          border: "5px solid rgba(0, 0, 0, 0.5)",
+          boxShadow: "0 0 18px rgba(0, 0, 0, 8)",
+        }}
+      >
+        {" "}
         <Grid
           item
           xs={12}
@@ -64,7 +79,11 @@ function TravelCreated() {
                 padding="30px"
                 justifyContent="center"
               >
-                We are delighted to inform you that you have successfully joined our travel expedition with Wanderlust Travels! Prepare yourself for an extraordinary journey filled with awe-inspiring landscapes, captivating cultures, and unforgettable moments. We&pos;re thrilled to have you as part of our travel family!
+                We are delighted to inform you that you have successfully joined
+                our travel expedition with Wanderlust Travels! Prepare yourself
+                for an extraordinary journey filled with awe-inspiring
+                landscapes, captivating cultures, and unforgettable moments.
+                We&pos;re thrilled to have you as part of our travel family!
               </Typography>
             </Grid>
 
@@ -106,6 +125,7 @@ function TravelCreated() {
             Back to dashboard
           </Button>
         </Grid>
+      </Box>
     </Box>
   );
 }
