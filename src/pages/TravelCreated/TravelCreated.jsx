@@ -92,7 +92,7 @@ function TravelCreated() {
           }}
         >
           <Button
-            href="/profile/myTravels"
+            href="/profile/travels"
             variant="text"
             size="large"
             className="btn"

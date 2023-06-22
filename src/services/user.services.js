@@ -28,6 +28,7 @@ export const GetMyTravelsAPI = async () => {
 
 export const UpdateProfileAPI = async (obj) => {
   try {
+    console.log('api:'+obj)
     const { data } = await api.put('/profile/', obj,  {
         headers: {
         token: localStorage.getItem('token')

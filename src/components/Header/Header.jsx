@@ -29,11 +29,11 @@ function Header() {
     },
     {
       label: 'Plan a Travel',
-      link: '/dashboard/createTravel'
+      link: '/travel'
     },
     {
       label: 'My Travels',
-      link: '/profile/myTravels'
+      link: '/profile/travels'
     }
   ]
 

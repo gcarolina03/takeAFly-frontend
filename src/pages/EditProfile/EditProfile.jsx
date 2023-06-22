@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { ArrowCircleLeft, CalendarMonth, Done, Email, Person, Visibility, VisibilityOff } from "@mui/icons-material";
 
-import ErrorMsgComp from "../../components/ErrorMsg/ErrorMsg";
 import "./EditProfile.css";
 import { useEffect, useState } from "react";
 import { GetProfileAPI, UpdateProfileAPI } from "../../services/user.services";
@@ -35,9 +34,6 @@ function EditProfile() {
   const [isPassVisible, setIPassVisible] = useState(false);
   const [isPassRepVisible, setIPasRepVisible] = useState(false);
   const [birth, setBirth] = useState('');
-  // ERROR DATA
-  const [errorMsg, setErrorMsg] = useState('')
-  const [showError, setShowError] = useState(false)
 
   const getUser = async () => {
     const res = await GetProfileAPI()
@@ -122,7 +118,6 @@ function EditProfile() {
   function handleClickPassRep() {
     setIPasRepVisible(!isPassRepVisible);
   }
-
   
   // BIRTH
   function handleBirth(e) {
@@ -148,15 +143,6 @@ function EditProfile() {
     return calculateAge(birth) > 18;
   }
 
-  // ERROR 
-  const showErrorMsg = () => {
-    setShowError(true)
-    setTimeout(() => { setShowError(false) }, 4000);
-  }
-
-  const hideErrorMsg = () => {
-    setShowError(false)
-  }
 
   //HANDLE DATA TO SEND
   const dataToSend = () => {
@@ -169,13 +155,9 @@ function EditProfile() {
     if(birth !== user.birth_date && birth !== '' && validateAge()) data.birth_date = birth
     if(repeatPasswordVerification()) data.password = password
 
-    console.log(data)
     return data
   }
-
-  const data = dataToSend()
   
-  console.log(data)
   // SIGN UP SERVICE
   const UpdateProfileService = async () => {
     const data = dataToSend()
@@ -186,7 +168,6 @@ function EditProfile() {
   // SUBMIT
   function submitForm(e) {
     e.preventDefault();
-    console.log()
     UpdateProfileService()
   }
   
@@ -218,9 +199,6 @@ function EditProfile() {
               sx={{ textAlign:'center', pt:'50px' }}
               title="Edit Profile"
             />
-            {showError && (
-              <ErrorMsgComp errorMsg={errorMsg} show={showError} hideErrorMsg={hideErrorMsg} />
-            )}
               <CardContent>
             {user && 
               <>

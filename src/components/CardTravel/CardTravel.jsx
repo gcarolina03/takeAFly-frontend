@@ -13,7 +13,7 @@ function CardTravel({data}) {
   }
 
   return (
-    <Grid key={data.id} className='travel' onClick={() => (navigate(`/travelResume/${data.id}`))}>
+    <Grid key={data.id} className='travel' onClick={() => (navigate(`/travel/resume/${data.id}`))}>
       <Grid className="travel-wrapper" sx={{flexDirection:'column'}}>
         <Grid className={`img-container ${travelDone() && 'travel-done'}`} sx={{backgroundImage:`url(${data.destination.imgUrl})`, backgroundPosition:'center', backgroundSize:'cover'}}>
         </Grid>

@@ -66,7 +66,7 @@ function CreateTravel() {
   const CreateTravelService = async () => {
     const res = await CreateTravelAPI(data.budget, data.departureDate, data.returnDate, data.airportId, data.visibility, destination.id)
     if (res !== 'error') {
-      navigate(`/dashboard/travelCreated`)
+      navigate(`/travel/created`)
     }
   }
   console.log(showDestination)

@@ -1,12 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import {useTheme} from "@mui/material";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import './Construction.css'
-let image = '../../assets/img/travel.jpg'
-function ConstructionPage() {
-const theme = useTheme();
 
+function ConstructionPage() {
 return (
   <>
     <Header />
@@ -31,7 +28,7 @@ return (
             fontWeight: "bold",
           }}
         >
-          We've taken a detour on this journey. Stay tuned for an exciting
+          We&apos;ve taken a detour on this journey. Stay tuned for an exciting
           destination!
         </Typography>
       </Box>

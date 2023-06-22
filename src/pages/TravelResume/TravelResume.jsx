@@ -44,17 +44,17 @@ function TravelResume() {
 
   const JoinTravel = async () => {
     await JoinTravelAPI(id)
-    navigate('/travelJoined')
+    navigate('/travel/joined')
   }
 
   const RemoveTravel = async () => {
     await RemoveTravelAPI(id)
-    navigate('/profile/myTravels')
+    navigate('/profile/travels')
   }
 
   const DeleteTravel = async () => {
     await DeleteTravelAPI(id)
-    navigate('/profile/myTravels')
+    navigate('/profile/travels')
   }
 
   const userInTravel = (uId) => {

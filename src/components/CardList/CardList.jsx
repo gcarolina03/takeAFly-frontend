@@ -13,30 +13,23 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
     }
 
     if (filters && filters.airport !== '') {
-      console.log('airport')
       dataFilter = dataFilter.filter((travel) => travel.airportId === filters.airport.id )
     }
     console.log(dataFilter)
     
     if(filters && filters.budget > 0) {
-      console.log('budget')
       dataFilter = dataFilter.filter((travel) => travel.budget <= filters.budget)
     }
     
     if(filters && filters.departureDate !== '') {
-      console.log('departure')
       dataFilter = dataFilter.filter((travel) => new Date(travel.departure_date) === new Date(filters.departureDate))
     } 
     
     return dataFilter 
   }
 
-  console.log(data)
-  console.log(filters)
-
   const filterDestinations = () => {
     let dataFilter = data 
-    console.log('data:'+dataFilter)
 
     if(activeCategory !== 'All') {
       dataFilter = dataFilter.filter((travel) => travel.categories.some((category) => category.id == activeCategory))
@@ -61,7 +54,6 @@ function CardList({ data, seeDestination, type, activeCategory, filters }) {
         </>
       );
     } else if (type === 'destination') {
-      
         return (
           <>
             {filterDestinations().length === 0 ? 
