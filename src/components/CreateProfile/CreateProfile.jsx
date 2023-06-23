@@ -60,34 +60,19 @@ function CreateProfile() {
   }
 
   return (
-    <Box className="box">
-      <Grid
-        xs={12}
-        sm={12}
-        lg={5}
+    <Card
         sx={{
-          position: "absolute",
+          position: "relative",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          padding: { lg: "60px" },
+          flexDirection: "column",
+          alignItems: "space-around",
           height: "100%",
+          width: "100%",
         }}
+        raised={true}
       >
-        <Card
-          sx={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "space-around",
-            height: "100%",
-            width: "100%",
-          }}
-          raised={true}
-        >
           <CardHeader
-            sx={{ alignSelf:'center', marginTop: {sm:"10%",  xs: '20%'}, paddingBottom: { sm: "10px", xs: '40px' } }}
+            sx={{ alignSelf:'center', mt: {sm:"10%",  xs: '20%'}, pb: { sm: "10px", xs: '40px' } }}
             title="Create Profile"
           />
           <CardContent>
@@ -101,21 +86,21 @@ function CreateProfile() {
             }} 
           />
         </IconButton>
-        <Grid sx={{display:'flex', flexDirection:'row', gap:2}}>
+        <Grid sx={{display:'flex', flexDirection:'row', gap:2, mt:'20px'}}>
           <TextField
             fullWidth
             margin="dense"
             label="First Name"
-            sx={{ width:'40%' }}
-            variant="filled"
+            sx={{ width:'50%' }}
+            variant="standard"
             onChange={handleFirstName}
           />
           <TextField
             fullWidth
             margin="dense"
             label="Last Name"
-            sx={{ width:'60%' }}
-            variant="filled"
+            sx={{ width:'50%' }}
+            variant="standard"
             onChange={handleLastName}
           />
         </Grid>
@@ -132,12 +117,14 @@ function CreateProfile() {
           margin="dense"
           label="Description"
           variant="standard"
-          sx={{ marginTop: "20px" }}
+          sx={{ my: "20px" }}
           onChange={handleDescription}
         />
       </CardContent>
-
-      <CardActions className="box-btn">
+      
+      <Box textAlign='center' sx={{position:{xs:'absolute', sm:'relative'} , width:'100%', 
+        bottom:0}}>
+          <CardActions className="box-btn" >
         <Button
           onClick={(e) => {
             submitForm(e);
@@ -169,9 +156,9 @@ function CreateProfile() {
           Skip
         </Button>
       </CardActions>
+      </Box>
+      
     </Card>
-  </Grid>
-</Box>
   );
 }
 

@@ -80,23 +80,7 @@ function Login() {
   }
 
   return (
-    <Box className="box">
-      <Grid
-      item
-        xs={12}
-        sm={12}
-        lg={5}
-        sx={{
-          position: "absolute",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          padding: { lg: "60px" },
-          height: "100%",
-        }}
-      >
-      <Card
+    <Card
         sx={{
           position: "relative",
           display: "flex",
@@ -107,10 +91,6 @@ function Login() {
         }}
         raised={true}
       >
-        <IconButton  sx={{ position: "fixed", p:'0 !important', m:1 }} href="/">
-          <ArrowCircleLeft className="btn-back"
-          />
-        </IconButton>
         <CardHeader 
         sx={{
           textAlign:'center',
@@ -160,14 +140,8 @@ function Login() {
           </Typography>
           
         </CardContent>
-        <Box textAlign='center' sx={{position:'absolute', width:'100%',
+        <Box textAlign='center' sx={{position:{xs:'absolute', sm:'relative'} , width:'100%',
         bottom:0}}>
-          <Typography sx={{color:theme.palette.secondary.light}}>
-            <span>Don&apos;t have an account? </span>
-            <Link to= '/signup'>
-              <span style={{color:theme.palette.primary.dark}}>Sign Up</span>
-            </Link>
-          </Typography>
           <CardActions sx={{width:'100%', mt:2, padding:'0 !important'}} >
             <Button
               onClick={(e) => {
@@ -187,8 +161,6 @@ function Login() {
           </CardActions>
         </Box>
       </Card>
-    </Grid>
-    </Box>
   )
 }
 

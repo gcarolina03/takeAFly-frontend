@@ -2,9 +2,6 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import App from "../App";
 import Welcome from "../pages/Welcome/Welcome";
-import SignUp from "../pages/SignUp/SignUp";
-import CreateProfile from "../pages/CreateProfile/CreateProfile";
-import Login from "../pages/Login/Login";
 
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Landing from "../pages/Landing/Landing";
@@ -31,21 +28,19 @@ export const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Welcome /> },
-      { path: "/signup", element: <SignUp /> },
-      { path: "/createProfile", element: isAuthenticated() ? <Navigate to="/login" /> : <CreateProfile /> },
-      { path: "/login", element: <Login /> },
-      
+      { path: "/signup", element: <Welcome /> },
+      { path: "/createProfile", element: isAuthenticated() ? <Navigate to="/" /> : <Welcome /> },
     ],
   },
   { path: '/dashboard', 
-    element: isAuthenticated() ? <Navigate to="/login" /> : <Dashboard />,
+    element: isAuthenticated() ? <Navigate to="/" /> : <Dashboard />,
     children: [
       { path: '/dashboard/', element: <Landing /> },
     ]
   },
   {
     path: '/travel',
-    element: isAuthenticated() ? <Navigate to='/login' /> : <Travel />,
+    element: isAuthenticated() ? <Navigate to='/' /> : <Travel />,
     children: [
       { path: "/travel/", element: <CreateTravel /> },
       { path: "/travel/resume/:id", element: <TravelResume /> },
@@ -54,7 +49,7 @@ export const router = createBrowserRouter([
     ]
   },
   { path: "/profile",
-    element: isAuthenticated() ? <Navigate to="/login" /> : <UserProfile />,
+    element: isAuthenticated() ? <Navigate to="/" /> : <UserProfile />,
     children: [
       { path: "/profile/", element: <ShowProfile /> },
       { path: "/profile/travels", element: <MyTravels /> },

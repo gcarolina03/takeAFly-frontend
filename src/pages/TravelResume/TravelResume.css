@@ -1,0 +1,22 @@
+.boxResume {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  width: 80%;
+  height: 91vh;
+}
+
+/* --------------TABLET */
+@media screen and (min-width:600px) {
+  .boxResume {
+    height: 93.5vh;
+  }
+}
+
+/* --------------DESKTOP */
+@media screen and (min-width:1200px) {
+  .boxResume {
+    height: 89vh;
+  }
+}

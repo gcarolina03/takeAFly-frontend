@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
-import { Button, Grid, Typography } from "@mui/material"
-import { useTheme } from '@mui/material/styles'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { Grid, Typography } from "@mui/material"
 
 import Splash from "../../components/Splash/Splash"
 import './Welcome.css'
+import SignUp from '../../components/SignUp/SignUp';
+import Login from '../../components/Login/Login';
+import CreateProfile from '../../components/CreateProfile/CreateProfile';
 
 function Welcome() {
-  const theme = useTheme();
+  const location = useLocation();
+  const path = location.pathname
   const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
@@ -26,27 +28,37 @@ function Welcome() {
           <Typography variant='h4'>
             <span className='welcome-msg'>Let&apos;s Get Started</span>
           </Typography>
-          <Grid item >
-            <Button 
-              href="/signup"
-              variant="text"
-              sx={{
-                backgroundColor:`${theme.palette.primary.main}`,
-                color:`${theme.palette.primary.contrastText}`,
-                px:6, py:2, gap:2,
-                fontSize:`calc(10px + 0.5vw), 25px)`,
-              }}
-            >
-              <PersonAddIcon/>Create Account
-            </Button>
+          <Grid item 
+            xs={12}
+            sm={12}
+            lg={3}
+          > 
+            {path === '/signup' && <SignUp /> }
+            {path === '/' && <Login /> }
+            {path === '/createProfile' && <CreateProfile /> }
           </Grid>
           <Grid item className='login-banner'>
-            <Typography>
-              <span className='account-msg'>Already have an account?</span>
-            </Typography>
-            <Typography>
-              <span className='sign-in-msg'><Link to='/login'>Sign in</Link></span>
-            </Typography>
+            {path === '/' && 
+            <>
+              <Typography>
+                <span className='account-msg'>Don&apos;t have an account?</span>
+              </Typography>
+              <Typography>
+                <span className='sign-in-msg'><Link to='/signup'>Sign up</Link></span>
+              </Typography>
+            </>
+            }
+
+            {path === '/signup' && 
+            <>
+              <Typography>
+                <span className='account-msg'>Have an account already?</span>
+              </Typography>
+              <Typography>
+                <span className='sign-in-msg'><Link to='/'>Log in</Link></span>
+              </Typography>
+            </>
+            }
           </Grid>
       </Grid>
       <Splash hidden={showSplash}/>
