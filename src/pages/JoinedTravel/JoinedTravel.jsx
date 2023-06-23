@@ -14,21 +14,6 @@ function TravelCreated() {
         margin: "auto",
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "grey[100]",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "85%",
-          marginTop: "65px",
-          borderRadius: "10px",
-          border: "5px solid rgba(0, 0, 0, 0.5)",
-          boxShadow: "0 0 18px rgba(0, 0, 0, 8)",
-        }}
-      >
-        {" "}
         <Grid
           item
           xs={12}
@@ -38,6 +23,7 @@ function TravelCreated() {
             display: "flex",
             flexDirection: "column",
             padding: "40px",
+            width:{ xs: '100%', sm: '60%' , lg: '35%'},
           }}
         >
           <Grid
@@ -103,14 +89,13 @@ function TravelCreated() {
           </Grid>
         </Grid>
         <Grid
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            width: { xs: "100%", sm: "30%" },
-          }}
+          display="flex"
+          flexDirection="column"
+          width={{ xs: "100%", lg: "35%" }}
+          sx={{m:'0 !important', position:{xs: 'relative', sm:'absolute'}, bottom:0}}
         >
           <Button
-            href="/dashboard"
+            href="/profile/travels"
             variant="text"
             size="large"
             className="btn"
@@ -126,7 +111,6 @@ function TravelCreated() {
           </Button>
         </Grid>
       </Box>
-    </Box>
   );
 }
 

@@ -9,7 +9,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
 import { useMediaQuery } from '@mui/material'
 import { ArrowCircleLeft } from "@mui/icons-material";
 
@@ -20,7 +19,6 @@ import { DeleteTravelAPI, GetTravelAPI, JoinTravelAPI, RemoveTravelAPI } from ".
 import { GetProfileAPI } from "../../services/user.services";
 import Footer from '../../components/Footer/Footer'
 import "./TravelResume.css";
-import Header from "../../components/Header/Header";
 
 function TravelResume() {
   const isDesktop = useMediaQuery('(min-width:1200px)');
@@ -182,22 +180,16 @@ function TravelResume() {
           display="flex"
           flexDirection="column"
           margin="auto"
-          width={{ xs: "100%", sm: "35%" }}
+          width={{ xs: "100%" }}
         >
           <CardActions sx={{ width: "100%", mt: 2, padding: "0 !important" }}>
-            {travel !== "" &&
-              !userInTravel(user.id) &&
-              user.id !== travel.userId && (
+            {travel !== "" && !userInTravel(user.id) && user.id !== travel.userId && (
                 <Button
                   onClick={() => JoinTravel()}
                   variant="text"
                   size="large"
                   className="btn"
-                  sx={{
-                    borderRadius: 0,
-                    backgroundColor: theme.palette.primary.main,
-                    color: theme.palette.primary.contrastText,
-                  }}
+                  sx={{ borderRadius: 0, backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText }}
                 >
                   Join a travel
                 </Button>
@@ -208,29 +200,18 @@ function TravelResume() {
                 variant="text"
                 size="large"
                 className="btn"
-                sx={{
-                  width: "100%",
-                  borderRadius: 0,
-                  backgroundColor: "red",
-                  color: theme.palette.primary.contrastText,
-                }}
+                sx={{ borderRadius: 0, backgroundColor: "red", color: theme.palette.primary.contrastText }}
               >
                 Delete travel
               </Button>
             )}
-            {travel !== "" &&
-              userInTravel(user.id) &&
-              user.id !== travel.userId && (
+            {travel !== "" && userInTravel(user.id) && user.id !== travel.userId && (
                 <Button
                   onClick={() => RemoveTravel()}
                   variant="text"
                   size="large"
                   className="btn"
-                  sx={{
-                    borderRadius: 0,
-                    backgroundColor: theme.palette.secondary.main,
-                    color: theme.palette.primary.contrastText,
-                  }}
+                  sx={{ borderRadius: 0, backgroundColor: theme.palette.secondary.main, color: theme.palette.primary.contrastText }}
                 >
                   Leave Travel
                 </Button>
